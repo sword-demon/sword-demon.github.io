@@ -12,11 +12,11 @@ export default hopeTheme({
 
     iconAssets: 'iconfont',
 
-    logo: '/logo.svg',
+    logo: 'https://sword-demon.github.io/vue-blog/logo.jpg',
 
-    repo: 'vuepress-theme-hope/vuepress-theme-hope',
+    repo: 'sword-demon/sword-demon.github.io',
 
-    docsDir: 'demo/src',
+    docsDir: 'docs',
 
     // navbar
     navbar: navbar,

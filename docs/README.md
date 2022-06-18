@@ -3,7 +3,7 @@ home: true
 layout: Blog
 icon: home
 title: 主页
-heroImage: /logo.svg
+# heroImage: https://sword-demon.github.io/vue-blog/logo.jpg
 heroText: licrone
 heroFullScreen: true
 tagline: 纯粹的浪荡人士与抱定决心干大事的人，面相是截然不同的。
@@ -38,5 +38,5 @@ projects:
       desc: 自定义详细介绍
       link: https://你的自定义链接
 
-footer: 自定义你的页脚文字
+footer: 无解的游戏
 ---

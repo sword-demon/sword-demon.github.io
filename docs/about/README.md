@@ -14,7 +14,7 @@ star: true
 
 ## Mr.Hope 介绍
 
-![wxvirus](/logo.svg)
+![wxvirus](https://sword-demon.github.io/vue-blog/logo.jpg)
 
 ---
 
