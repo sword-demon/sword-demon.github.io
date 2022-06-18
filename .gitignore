@@ -5,3 +5,5 @@ node_modules/
 .temp/
 .vscode
 .idea
+
+docs/.vuepress/dist/
