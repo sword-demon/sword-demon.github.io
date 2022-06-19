@@ -8,3 +8,4 @@ comment: false
 ## 目录
 
 -   [MySQL 事务并发问题](mysql-dtm.md)
+-   [vscode 生成自己的代码片段](vscode-generate-code.md)

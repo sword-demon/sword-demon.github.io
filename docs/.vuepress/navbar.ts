@@ -31,6 +31,10 @@ export default navbar([
                 text: 'Go-zero',
                 children: ['/views/go-zero/'],
             },
+            {
+                text: '运维技术',
+                children: ['/views/deploy/'],
+            },
         ],
     },
     // {
@@ -40,12 +44,19 @@ export default navbar([
     //     children: [],
     // },
     {
-        text: '随笔',
-        link: '/posts/',
+        text: 'Linux C Core',
+        link: '/views/c-core/',
     },
     {
-        text: 'Google',
-        prefix: '/posts/',
-        link: 'https://www.google.com',
+        text: '网络编程',
+        link: '/views/socket/',
+    },
+    {
+        text: '数据结构与算法',
+        link: '/views/data-struct/',
+    },
+    {
+        text: '随笔',
+        link: '/posts/',
     },
 ])
