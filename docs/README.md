@@ -4,7 +4,7 @@ layout: Blog
 icon: home
 title: 主页
 # heroImage: https://www.wjstar.top/img/avatar.jpeg
-heroText: licrone
+heroText: licorne
 heroFullScreen: false
 tagline: 纯粹的浪荡人士与抱定决心干大事的人，面相是截然不同的。
 projects:
