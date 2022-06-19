@@ -32,6 +32,10 @@ projects:
       name: 林阿三
       desc: 一个前端大佬
       link: https://www.linasan.cn/
+    - icon: friend
+      name: 又见月
+      desc: 转Java开发的Python脚本小子
+      link: https://jykcc.github.io/coding/
 
 footer: 无解的游戏
 ---
