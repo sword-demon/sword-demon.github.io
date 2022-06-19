@@ -4,12 +4,12 @@ export default navbar([
     '/',
     // '/home',
     {
-        text: '后端',
+        text: '后端笔记',
         icon: 'creative',
         link: '/views/',
         children: [
             {
-                text: '后端笔记',
+                text: '后端学习',
                 icon: 'code',
                 link: '/views/',
                 activeMatch: '^/code/$',
