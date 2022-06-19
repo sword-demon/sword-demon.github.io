@@ -6,3 +6,8 @@ index: false
 category:
     - Go-zero
 ---
+
+## 目录
+
+-   [go-zero 环境搭建](go-zero环境搭建.md)
+-   [go-zero 模型操作](go-zero模型操作.md)
