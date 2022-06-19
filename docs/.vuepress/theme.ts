@@ -1,6 +1,6 @@
 import { hopeTheme } from 'vuepress-theme-hope'
 import navbar from './navbar'
-import sidebar from './sidebar'
+import { mySidebarConfig } from './sidebar'
 
 export default hopeTheme({
     hostname: 'https://sword-demon.github.io',
@@ -22,7 +22,7 @@ export default hopeTheme({
     navbar: navbar,
 
     // sidebar
-    sidebar: sidebar,
+    sidebar: mySidebarConfig,
 
     footer: '默认页脚',
 
