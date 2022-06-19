@@ -1,15 +1,13 @@
 ---
-title: Go学习
-icon: flower
-category: go
-tag:
-    - go
+title: Go语言学习
+index: false
+icon: creative
+article: false
+category:
+    - Go
 ---
 
-::: tip 介绍
+## 目录
 
-学习 Go 语言
-
-:::
-
-<!-- more -->
+-   [基础学习](base.md)
+-   [并发安全与锁](go并发安全与锁.md)

@@ -37,7 +37,7 @@ export default hopeTheme({
             Gitee: 'https://gitee.com/wxvirus',
             GitHub: 'https://github.com/sword-demon',
         },
-        avatar: 'https://sword-demon.github.io/vue-blog/logo.jpg',
+        avatar: 'https://www.wjstar.top/img/avatar.jpeg',
         roundAvatar: true,
     },
 
@@ -64,10 +64,10 @@ export default hopeTheme({
              * Using Giscus
              */
             provider: 'Giscus',
-            repo: 'vuepress-theme-hope/giscus-discussions',
-            repoId: 'R_kgDOG_Pt2A',
+            repo: 'sword-demon/image_store',
+            repoId: 'R_kgDOGPk2RA',
             category: 'Announcements',
-            categoryId: 'DIC_kwDOG_Pt2M4COD69',
+            categoryId: 'DIC_kwDOGPk2RM4CPwQc',
 
             /**
              * Using Twikoo

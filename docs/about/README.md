@@ -6,6 +6,8 @@ tag:
     - 个人介绍
 timeline: false
 star: true
+article: false
+comment: false
 ---
 
 @slidestart

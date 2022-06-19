@@ -3,40 +3,35 @@ home: true
 layout: Blog
 icon: home
 title: 主页
-# heroImage: https://sword-demon.github.io/vue-blog/logo.jpg
+# heroImage: https://www.wjstar.top/img/avatar.jpeg
 heroText: licrone
-heroFullScreen: true
+heroFullScreen: false
 tagline: 纯粹的浪荡人士与抱定决心干大事的人，面相是截然不同的。
 projects:
-    - icon: project
-      name: 项目名称
-      desc: 项目详细描述
-      link: https://你的项目链接
+    # - icon: project
+    #   name: 项目名称
+    #   desc: 项目详细描述
+    #   link: https://你的项目链接
 
-    - icon: link
-      name: 链接名称
-      desc: 链接详细描述
-      link: https://链接地址
+    # - icon: link
+    #   name: 链接名称
+    #   desc: 链接详细描述
+    #   link: https://链接地址
 
-    - icon: book
-      name: 书籍名称
-      desc: 书籍详细描述
-      link: https://你的书籍链接
+    # - icon: book
+    #   name: 书籍名称
+    #   desc: 书籍详细描述
+    #   link: https://你的书籍链接
 
-    - icon: article
-      name: 文章名称
-      desc: 文章详细描述
-      link: https://你的文章链接
+    # - icon: article
+    #   name: 文章名称
+    #   desc: 文章详细描述
+    #   link: https://你的文章链接
 
     - icon: friend
-      name: 伙伴名称
-      desc: 伙伴详细介绍
-      link: https://你的伙伴链接
-
-    - icon: /logo.svg
-      name: 自定义项目
-      desc: 自定义详细介绍
-      link: https://你的自定义链接
+      name: 林阿三
+      desc: 一个前端大佬
+      link: https://www.linasan.cn/
 
 footer: 无解的游戏
 ---

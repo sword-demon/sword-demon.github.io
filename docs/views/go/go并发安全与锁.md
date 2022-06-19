@@ -1,7 +1,7 @@
 ---
 title: 并发安全与锁
 date: 2021-09-27 21:33:15
-category: go
+category: Go
 tag:
     - goroutine
     - channel
