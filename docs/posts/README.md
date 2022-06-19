@@ -1,6 +1,10 @@
 ---
-title: 文章随笔
+title: 随笔
 date: 2022-06-19
-sidebar: heading
 article: false
+comment: false
 ---
+
+## 目录
+
+-   [MySQL 事务并发问题](mysql-dtm.md)

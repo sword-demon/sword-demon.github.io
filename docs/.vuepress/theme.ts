@@ -24,7 +24,7 @@ export default hopeTheme({
     // sidebar
     sidebar: mySidebarConfig,
 
-    footer: '默认页脚',
+    footer: '无解的游戏',
 
     displayFooter: true,
 

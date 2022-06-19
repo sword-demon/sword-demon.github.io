@@ -1,6 +1,6 @@
 ---
 title: go包管理
-date: 2021-09-23 21:48
+date: 2021-09-23
 category: Go
 tag:
     - package

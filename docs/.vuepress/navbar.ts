@@ -16,7 +16,16 @@ export default navbar([
             },
             {
                 text: 'Go',
-                children: ['/views/go/'],
+                children: [
+                    {
+                        text: 'go语言基础',
+                        link: '/views/go/',
+                    },
+                    {
+                        text: 'go核心',
+                        link: '/views/go-core/',
+                    },
+                ],
             },
             {
                 text: 'Go-zero',
@@ -31,9 +40,8 @@ export default navbar([
     //     children: [],
     // },
     {
-        text: '百度',
-        prefix: '/posts/',
-        link: 'https://www.baidu.com',
+        text: '随笔',
+        link: '/posts/',
     },
     {
         text: 'Google',
