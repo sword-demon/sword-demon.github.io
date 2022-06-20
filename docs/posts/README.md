@@ -9,3 +9,5 @@ comment: false
 
 -   [MySQL 事务并发问题](mysql-dtm.md)
 -   [vscode 生成自己的代码片段](vscode-generate-code.md)
+-   [分布式事务](distributed-dtm.md)
+-   [策略模式](strategy.md)

@@ -10,3 +10,5 @@ comment: false
 
 -   [算法基础学习](algo-base.md)
 -   [递归和斐波那契数列](algo-recursive.md)
+-   [查找算法](algo-search.md)
+-   [排序算法](algo-sort.md)
