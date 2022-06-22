@@ -12,3 +12,4 @@ comment: false
 -   [递归和斐波那契数列](algo-recursive.md)
 -   [查找算法](algo-search.md)
 -   [排序算法](algo-sort.md)
+-   [leetcode 算法题加 1](leetcode-plusone.md)

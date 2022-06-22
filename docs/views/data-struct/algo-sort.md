@@ -76,7 +76,19 @@ public class Bubble {
 
 ```
 
-## 简单版选择排序代码
+## 选择排序思路
+
+1. 先从列表中遍历得到一个最小的，拿出来备用
+2. 再在剩下的列表里再继续遍历得到一个最小的，依次拿出来，但是存放在哪里呢，可以放到一个新的列表
+
+### 关键步骤
+
+-   一趟排序记录最小的数，放到第一个位置
+-   再一趟排序记录列表无序区最小的数，放到第二个位置
+-   。。。依次类推
+-   算法的关键点：有序区和无序区、无序区最小数的位置
+
+### 简单版选择排序
 
 ```Python
 def select_sort_simple(li):
@@ -103,7 +115,7 @@ print(select_sort_simple(li))
     -   这里可不是 `On` 的复杂度，因为这里还使用了`min` 和`remove` 方法，两个方法都会去遍历一次列表，所以`min` 本身就是`On` ，`remove` 也是`On`
     -   随意最终复杂度是：`On²`
 
-## 比较好的代码
+### 比较好的代码
 
 ```Python
 [3, 2, 4, 1, 7, 8, 87, 76]
@@ -125,13 +137,17 @@ def select_sort(li):
         li[i], li[min_loc] = li[min_loc], li[i]
 ```
 
-## 复杂度
+### 复杂度
 
 ```
 On²
 ```
 
-## Go 语言实现的选择排序
+:::tabs
+
+@tab:active Go
+
+### Go 语言实现的选择排序
 
 ```go
 package main
@@ -157,7 +173,9 @@ func main() {
 }
 ```
 
-## C 语言实现选择排序
+@tab C
+
+### C 语言实现选择排序
 
 ```c
 //
@@ -188,3 +206,21 @@ int main() {
     }
 }
 ```
+
+@tab Python
+
+```python
+def select_sort(li):
+    for i in range(len(li) - 1):
+        # 记录最小值的位置
+        # 假定最小值的位置就是第一个,后面进行比较进行交换
+        min_loc = i
+        # 偷一次懒，下面没必要从i开始，从i+1开始，自己和自己没必要比
+        for j in range(i + 1, len(li)):
+            if li[j] < li[min_loc]:
+                # 得到新的最小值的下标
+                min_loc = j
+        li[i], li[min_loc] = li[min_loc], li[i]
+```
+
+:::

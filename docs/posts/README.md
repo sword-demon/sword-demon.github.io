@@ -11,3 +11,5 @@ comment: false
 -   [vscode 生成自己的代码片段](vscode-generate-code.md)
 -   [分布式事务](distributed-dtm.md)
 -   [策略模式](strategy.md)
+-   [MySQL 生命周期](sql-lifecycle.md)
+-   [数据库的权限](sql-auth.md)
