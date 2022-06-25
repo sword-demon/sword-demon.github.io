@@ -29,6 +29,7 @@ category:
 -   [go 文件操作](go-file.md)
 -   [goroutine](go-goroutine.md)
 -   [channel](go-channel.md)
+-   [select 多路复用](go-select.md)
 -   [并发基础](go-concurrent-base.md)
 -   [并发安全与锁](go并发安全与锁.md)
 -   [go 包管理](go-package.md)

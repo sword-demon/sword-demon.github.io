@@ -21,6 +21,7 @@ export const go = arraySidebar([
     'go-file',
     'go-goroutine',
     'go-channel',
+    'go-select',
     'go-concurrent-base',
     'go并发安全与锁',
     'go-package',
