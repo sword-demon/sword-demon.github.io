@@ -9,3 +9,5 @@ comment: false
 ## 目录
 
 -   [socket 网络编程概述](socket-desc.md)
+-   [PHP Socket 练习](socket-base.md)
+-   [IPV4 TCP 套接字服务端](ipv4-learn.md)
