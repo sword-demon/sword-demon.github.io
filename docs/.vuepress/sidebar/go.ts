@@ -23,6 +23,7 @@ export const go = arraySidebar([
     'go-channel',
     'go-select',
     'go-concurrent-base',
+    'go-lock',
     'go并发安全与锁',
     'go-package',
     'go-error',

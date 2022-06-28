@@ -706,6 +706,86 @@ func main() {
 
 ```
 
+## 练习
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func randomData() {
+	// 设置随机因子
+	rand.Seed(time.Now().Unix())
+	v := rand.Int63()
+	fmt.Println(v)
+}
+
+// 2个channel
+// 两个任务：生成随机数的、计算和的
+
+// ProduceRandomData 生产int64的随机数
+func ProduceRandomData() <-chan int64 {
+	var jobChan = make(chan int64, 100)
+	rand.Seed(time.Now().Unix())
+
+	// 在后台一直产生随机数放入通道
+	go func() {
+		// 源源不断的产生随机数
+		for {
+			v := rand.Intn(9999)
+			jobChan <- int64(v)
+		}
+	}()
+
+	// 最后返回通道
+	return jobChan
+}
+
+type result struct {
+	number int64
+	sum    int64
+}
+
+// Sum 从jobChan获取数据,计算和发送到resultChan里
+func Sum(ch <-chan int64, resultChan chan result) {
+	// 循环的从ch取值去计算和
+	for v := range ch{
+		r := result{
+			number: v, // 原始数字记录
+		}
+		var res int64 = 0
+		for v > 0 {
+			res += v % 10
+			v /= 10
+		}
+		// 把算出来的结果记录
+		r.sum = res
+		resultChan <- r
+	}
+}
+
+func main() {
+	resChan := make(chan result, 10)
+	jobChan := ProduceRandomData()
+
+	// 开启24个goroutine干活求和
+	for i := 0; i < 24; i++ {
+		go Sum(jobChan, resChan)
+	}
+
+	// 从 resChan 里接收值，打印结果
+	for res := range resChan {
+		time.Sleep(time.Second)
+		fmt.Printf("数字: %v, 和: %d\n", res.number, res.sum)
+	}
+}
+
+```
+
 ## 总结
 
 `channel`异常情况总结

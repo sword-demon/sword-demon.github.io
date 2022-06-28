@@ -31,6 +31,7 @@ category:
 -   [channel](go-channel.md)
 -   [select 多路复用](go-select.md)
 -   [并发基础](go-concurrent-base.md)
+-   [互斥锁和读写互斥锁](go-lock.md)
 -   [并发安全与锁](go并发安全与锁.md)
 -   [go 包管理](go-package.md)
 -   [go 错误处理](go-error.md)
