@@ -59,4 +59,8 @@ export default navbar([
         text: '随笔',
         link: '/posts/',
     },
+    {
+        text: '面试',
+        link: '/interview/',
+    },
 ])
