@@ -7,7 +7,8 @@ import { sockets } from './socket'
 import { cCore } from './c-core'
 import { deploy } from './deploy'
 import { dataStruct } from './data-struct'
-import { interviewMd } from './interview'
+import { qaSidebar } from './interview'
+import { vueDoc } from './vue3'
 
 export const mySidebarConfig = sidebar({
     '/views/go/': go,
@@ -18,5 +19,6 @@ export const mySidebarConfig = sidebar({
     '/views/c-core/': cCore,
     '/views/deploy/': deploy,
     '/views/data-struct/': dataStruct,
-    '/interivew/': interviewMd,
+    '/interview/': qaSidebar,
+    '/views/vue3/': vueDoc,
 })

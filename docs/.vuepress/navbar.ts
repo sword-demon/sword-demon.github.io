@@ -63,4 +63,8 @@ export default navbar([
         text: '面试',
         link: '/interview/',
     },
+    {
+        text: 'Vue3',
+        link: '/views/vue3/',
+    },
 ])
