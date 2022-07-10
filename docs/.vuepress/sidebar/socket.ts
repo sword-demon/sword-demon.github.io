@@ -10,4 +10,5 @@ export const sockets = arraySidebar([
     'ipv4-udp',
     'unix-socket',
     'stream-socket-api',
+    'go-tcp',
 ])
