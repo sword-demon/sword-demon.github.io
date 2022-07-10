@@ -29,4 +29,5 @@ export const go = arraySidebar([
     'go-error',
     'go-module-unit',
     'go-interview',
+    'grpc-protobuf',
 ])
