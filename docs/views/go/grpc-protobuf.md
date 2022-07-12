@@ -115,3 +115,188 @@ wujie
 ```
 
 这里的`name`属性是编号 1，`\n\x`是一个可变长编码
+
+## python 下使用 gRPC
+
+`grpc_hello/proto/helloworld.proto`
+
+```protobuf
+syntax = "proto3";
+
+package helloworld;
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloReply {
+    string message = 1;
+}
+
+service Greeter {
+    rpc SayHello(HelloRequest) returns (HelloReply);
+}
+```
+
+进入到上面的目录里之后使用命令来生成代码
+
+```bash
+python -m grpc_tools.protoc --python_out=. --grpc_python_out=. -I. Helloworld.proto
+
+```
+
+`server.py`
+
+```python
+# -*- coding: utf8 -*-
+# @Time    : 2022/7/11 22:09
+# @Author  : wxvirus
+# @File    : server.py
+# @Software: PyCharm
+from concurrent import futures
+import grpc
+from grpc_hello.proto import Helloworld_pb2_grpc, Helloworld_pb2
+
+
+class Greeter(Helloworld_pb2_grpc.GreeterServicer):
+
+    def SayHello(self, request, context):
+        return Helloworld_pb2.HelloReply(message=f"ni hao, {request.name}")
+
+
+if __name__ == '__main__':
+    # 启动grpc
+    # 1. 实例化 server
+    # 设置10个线程池
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    # 2. 注册逻辑到server中
+    Helloworld_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
+    # 3. 启动server
+    # 可以不配证书之类的
+    server.add_insecure_port(':50051')
+    server.start()
+    # 必须加上这个，防止别的线程没执行到
+    server.wait_for_termination()
+
+```
+
+客户端
+
+```python
+# -*- coding: utf8 -*-
+# @Time    : 2022/7/11 22:45
+# @Author  : wxvirus
+# @File    : client.py
+# @Software: PyCharm
+import grpc
+from grpc_hello.proto import Helloworld_pb2, Helloworld_pb2_grpc
+
+if __name__ == '__main__':
+    with grpc.insecure_channel("127.0.0.1:12345") as channel:
+        stub = Helloworld_pb2_grpc.GreeterStub(channel)
+        # 返回值指明类型
+        resp: Helloworld_pb2.HelloReply = stub.SayHello(Helloworld_pb2.HelloRequest(name="wxvirus"))
+        # 打印proto定义的返回体的message属性
+        print(resp.message)
+
+```
+
+```bash
+# 运行结果
+ni hao, wxvirus
+```
+
+## go 下 gRPC 开发体验
+
+### 下载`protoc`工具
+
+首先还是得先安装`protoc`可执行文件用来生成代码。
+
+-   Linux, using `apt` or `apt-get`, for example:
+
+    ```sh
+    $ apt install -y protobuf-compiler
+    $ protoc --version  # Ensure compiler version is 3+
+    ```
+
+-   MacOS, using [Homebrew](https://brew.sh/):
+
+    ```sh
+    $ brew install protobuf
+    $ protoc --version  # Ensure compiler version is 3+
+    ```
+
+如果上述操作没有直接给你添加到环境变量 ，还得自己手动去加一下到环境变量里，否则执行`protoc --version`会不成功。
+
+### 下载 go 的依赖包
+
+```bash
+go get github.com/golang/protobuf/protoc-gen-go
+```
+
+### proto 文件
+
+```protobuf
+syntax = "proto3";
+
+package helloworld;
+
+option go_package = ".;proto";
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloReply {
+    string message = 1;
+}
+
+service Greeter {
+    rpc SayHello(HelloRequest) returns (HelloReply);
+}
+```
+
+在当前目录查找当前`xxx.proto`生成文件到当前目录
+
+```bash
+protoc -I ./ --go_out=./ --go-grpc_out=. helloworld.proto
+```
+
+服务端代码
+
+```go
+package server
+
+import (
+	"context"
+	"fmt"
+	"google.golang.org/grpc"
+	"grpc_demo/proto"
+	"net"
+)
+
+type Server struct{
+	proto.UnimplementedGreeterServer
+}
+
+func (s *Server) SayHello(ctx context.Context, req *proto.HelloRequest) (*proto.HelloReply, error) {
+	return &proto.HelloReply{
+		Message: "你好" + req.Name,
+	}, nil
+}
+
+func main()  {
+	g := grpc.NewServer()
+	proto.RegisterGreeterServer(g, &Server{})
+	lis, err := net.Listen("tcp", "0.0.0.0:8080")
+	if err != nil {
+		fmt.Printf("failed to listen: %v", err)
+		return
+	}
+	err = g.Serve(lis)
+	if err != nil {
+		fmt.Printf("failed to serve: %v", err)
+		return
+	}
+}
+```
