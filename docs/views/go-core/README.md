@@ -12,3 +12,5 @@ comment: false
 -   [动态链接](go-dynamically.md)
 -   [ELF 文件结构](go-elf.md)
 -   [Map 的底层原理](go-map-theory.md)
+-   [Map 扩容](map-grow.md)
+-   [解决 map 并发的问题](sync-map.md)
