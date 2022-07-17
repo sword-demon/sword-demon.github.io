@@ -37,15 +37,25 @@ export default navbar([
             },
         ],
     },
-    // {
-    //     text: '博文',
-    //     icon: 'edit',
-    //     prefix: '/posts/',
-    //     children: [],
-    // },
     {
-        text: 'Linux C Core',
-        link: '/views/c-core/',
+        text: 'Linux',
+        link: '/linux/',
+        children: [
+            {
+                text: 'Linux',
+                icon: 'code',
+                link: '/linux/',
+                activeMatch: '^/code/$',
+            },
+            {
+                text: 'Linux C Core',
+                link: '/linux/c-core/',
+            },
+            {
+                text: 'Linux PHP 多进程',
+                link: '/linux/process/',
+            },
+        ],
     },
     {
         text: '网络编程',

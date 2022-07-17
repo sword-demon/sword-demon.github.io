@@ -9,6 +9,7 @@ import { deploy } from './deploy'
 import { dataStruct } from './data-struct'
 import { qaSidebar } from './interview'
 import { vueDoc } from './vue3'
+import { Process } from './process'
 
 export const mySidebarConfig = sidebar({
     '/views/go/': go,
@@ -16,9 +17,10 @@ export const mySidebarConfig = sidebar({
     '/views/go-core': goCore,
     '/posts/': posts,
     '/views/socket/': sockets,
-    '/views/c-core/': cCore,
+    '/linux/c-core/': cCore,
     '/views/deploy/': deploy,
     '/views/data-struct/': dataStruct,
     '/interview/': qaSidebar,
     '/views/vue3/': vueDoc,
+    '/linux/process/': Process,
 })
