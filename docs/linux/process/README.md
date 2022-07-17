@@ -1,6 +1,6 @@
 ---
 title: 多进程编程
-artilce: false
+article: false
 comment: false
 ---
 
