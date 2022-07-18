@@ -14,3 +14,4 @@ comment: false
 -   [MySQL 生命周期](sql-lifecycle.md)
 -   [数据库的权限](sql-auth.md)
 -   [多协程执行收集结果的技巧](multi-goroutine-result.md)
+-   [CURL 远程下载 PDF](curl-pdf.md)
