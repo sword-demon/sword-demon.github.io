@@ -14,4 +14,5 @@ comment: false
 -   [排序算法](algo-sort.md)
 -   [leetcode 算法题加 1](leetcode-plusone.md)
 -   [线性表](line-table.md)
--   [Go回文检测](algo-palindrome.md)
+-   [Go 回文检测](algo-palindrome.md)
+-   [插入排序](algo-insert-sort.md)
