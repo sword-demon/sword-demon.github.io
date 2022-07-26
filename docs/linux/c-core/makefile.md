@@ -260,8 +260,285 @@ ouput.o:output.c
 
 ## 变量
 
+3 种定义格式：
+
+```makefile
+OBJ = xxx
+OBJ := xxx # 一旦这样定义，后面没法改，不能追加
+OBJ += xxx # 追加
+```
+
+取值：`${OBJ}`
+
+上面的`makefile`使用变量之后的优化
+
+```makefile
+OBJ = output.o
+
+# 后面如果换平台编译，只改这边一个就行
+CC := gcc
+
+target:${OBJ}
+	${CC} ${OBJ} -o target
+
+${OBJ}:output.c
+	${CC} output.c -o ${OBJ}
+```
+
+:::tip 注意
+
+`${}`，如果第一次就是有花括号，后面就都得使用一样的格式的，不能前面使用花括号的，后面使用圆括号的。
+
+:::
+
+使用脚本去识别当前系统的平台
+
+```bash
+uname -a
+Linux jb51.net 3.10.0-1160.45.1.el7.x86_64 #1 SMP Wed Oct 13 17:20:51 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+然后自己去修改变量`CC`的编译指令
+
+---
+
+伪目标：
+
+> 仅仅想让下面的进行执行一下，不用去写一些依赖关系，可以使用伪目标
+
+```makefile
+# 定义要编译的目标变量名称
+target := talnet_client
+OBJ = output.o
+# 后面如果换平台编译，只改这边一个就行
+CC := gcc
+
+# 定义变量
+RM := rm -rf
+
+${target}:${OBJ}
+	${CC} ${OBJ} -o ${target}
+
+${OBJ}:output.c
+	${CC} output.c -o ${OBJ}
+
+# 修饰下面的都是伪目标
+.PHONY:
+clean:
+	${RM} ${OBJ} ${target}
+	# 在终端打印表示清除完毕
+	echo "clean up"
+```
+
+> 如何使用？
+
+```bash
+make clean
+```
+
+使用上面命令之后就会先识别到当前目录下的`makefile`文件，然后找到这个伪类修饰的`clean`命令去执行删除目标文件。
+
+> `rm -rf`命令
+
+-   `rm`：删除命令
+-   `-rf`可以分成：`-r -f`
+-   `-r`: 递归删除
+-   `-f`: 强制删除
+
+**谨慎使用！！！**
+
+---
+
+`CFLAGS`：源于`gcc`有很多命令，用于给`gcc`添加参数
+
+```makefile
+DEFPS = -D_POSIX_SOURCE -DDEBUG # 会在你的代码里宏定义一个 _POSIX_SOURCE 和一个 DEBUG的宏定义
+CFLAGS = -g ${DEFS} ${INCLUDE}
+```
+
+-   `-g`：是用于`gdb`调试相关。
+
+-   `-l`选项：我们可能还要加上一个动态链接库
+
+```makefile
+DEFPS = -D_POSIX_SOURCE -DDEBUG # 会在你的代码里宏定义一个 _POSIX_SOURCE 和一个 DEBUG的宏定义
+CFLAGS = -g ${DEFS}
+LIB = -ltermcap # 后面想加什么库，继续往后面加即可
+
+${target}:${OBJ}
+	${CC} ${CFLAGS} ${OBJ} -o ${target} ${LIB}
+```
+
+-   `-I`选项: 是用于头文件的引入比如定义变量：`INCLUDE = xxx.h`，引用: `CFLAGS = -g ${DEFS} ${INCLUDE}`
+
 ## 通配符
+
+-   %: 任意一个
+-   \*: 所有
+-   ?: 不知道，匹配任意字母
+-   $@: 代表目标文件
+-   $^: 代表依赖文件
+-   $<: 代表第一个依赖文件
+
+使用：`*.o`来匹配所有生成的`.o`文件来代替原先的`OBJ`变量
+
+```makefile
+.PHONY:
+clean:
+	${RM} *.o ${target}
+```
+
+使用`$@`代表生成的目标文件，因为它始终就是代表你的目标，这是自动变量。
+
+```makefile
+${target}:${OBJ}
+	${CC} ${CFLAGS} $^ -o $@
+```
+
+潜规则里，`make`编译的时候会帮你识别的。
 
 ## 隐式规则
 
+> 编译器会帮你做一些常规的操作
+
+```makefile
+target := talnet_client
+OBJ = output.o
+CC := gcc
+RM := rm -rf
+DEFPS = -D_POSIX_SOURCE -DDEBUG # 会在你的代码里宏定义一个 _POSIX_SOURCE 和一个 DEBUG的宏定义
+CFLAGS = -g ${DEFS}
+LIB = -ltermcap # 后面想加什么库，继续往后面加即可
+
+${target}:${OBJ}
+	${CC} ${CFLAGS} $^ -o $@
+
+# 隐藏规则：自动匹配所有.c 生成对应的 .o
+%.o:%.c
+	${CC} $^ -o $@
+
+.PHONY:
+clean:
+	${RM} *.o ${target}
+```
+
 ## 函数
+
+用法：`$(函数名 参数1 参数2 参数3 ...)`
+
+:::tip
+
+函数时使用圆括号的！！
+
+:::
+
+上面还有痛点：因为这里我写的 demo 里的`OBJ`变量的`.o`文件很少，可能看不出来，当很多的时候，就会比较麻烦，所以我们使用函数的规则来优化。
+
+-   `wildcard`：取你当前目录下的第一个参数类型的文件列表
+
+```makefile
+SRC = $(wildcard *.c) # SRC 源文件里都是 .c 文件列表
+```
+
+```makefile
+OBJ = $(patsubst %.c,%.o,${SRC})
+```
+
+把你第三个参数列表里的所有的第一个参数替换成第二个参数
+
+即：把`.c`列表里的文件替换成任意一个的`.o`文件
+
+最终的简洁以及通用性代码：
+
+```makefile
+target := talnet_client
+CC := gcc
+RM := rm -rf
+
+SRC = $(wildcard *.c)
+OBJ = $(patsubst %.c,%.o,${SRC})
+
+DEFPS = -D_POSIX_SOURCE -DDEBUG # 会在你的代码里宏定义一个 _POSIX_SOURCE 和一个 DEBUG的宏定义
+CFLAGS = -g ${DEFS}
+LIB = -ltermcap # 后面想加什么库，继续往后面加即可
+
+${target}:${OBJ}
+	${CC} ${CFLAGS} $^ -o $@ ${LIB}
+
+# 隐藏规则：自动匹配所有.c 生成对应的 .o 想加就加，不加就不加
+%.o:%.c
+	${CC} $^ -o $@
+
+.PHONY:
+clean:
+	${RM} *.o ${target}
+```
+
+通杀版：
+
+```makefile
+target := hello
+CC := gcc
+RM := rm -rf
+
+SRC = $(wildcard *.c)
+OBJ = $(patsubst %.c,%.o,${SRC})
+
+DEFS = -D_POSIX_SOURCE
+FLAGS = -g -o
+
+${target}:${OBJ}
+	${CC} ${DEFS} ${FLAGS} $@ $^ ${LIB}
+
+.PHONY:
+clean:
+	${RM} ${OBJ} ${target}
+```
+
+:::tip 后面使用
+
+我们只需要调整：`target`和`DEFS`以及可能会有第三方的库，我们需要加上`LIB`
+
+:::
+
+## 测试
+
+新建目录：`testc`
+
+新建代码：`hello.c`
+
+```c
+#include <stdio.h>
+
+int main()
+{
+        printf("hello world\n");
+        return 0;
+}
+```
+
+将上面的`makefile`添加进去，使用`make`命令进行编译
+
+```bash
+[root@jb51 testc]# ls
+hello.c  makefile
+```
+
+```bash
+[root@jb51 testc]# make
+gcc    -c -o hello.o hello.c
+gcc -D_POSIX_SOURCE -g -o hello hello.o
+[root@jb51 testc]# ls
+hello  hello.c  hello.o  makefile
+[root@jb51 testc]# ./hello
+hello world
+[root@jb51 testc]#
+```
+
+```bash
+[root@jb51 testc]# make clean
+rm -rf hello.o hello
+echo "clean up"
+clean up
+[root@jb51 testc]#
+```
