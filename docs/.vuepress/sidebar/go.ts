@@ -30,4 +30,5 @@ export const go = arraySidebar([
     'go-module-unit',
     'go-interview',
     'grpc-protobuf',
+    'go-context'
 ])
