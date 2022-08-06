@@ -13,3 +13,4 @@ article: false
 -   [Linux 安装 docker](linux-install-docker.md)
 -   [Docker 安装 MySQL](docker-install-mysql.md)
 -   [Docker 安装 Redis](docker-install-redis.md)
+-   [Linux 安装 MySQL8](linux-mysql8.md)
