@@ -8,4 +8,5 @@ export const deploy = arraySidebar([
     'docker-install-mysql',
     'docker-install-redis',
     'linux-mysql8',
+    'linux-install-nginx',
 ])
