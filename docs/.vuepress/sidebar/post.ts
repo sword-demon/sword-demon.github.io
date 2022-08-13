@@ -10,4 +10,5 @@ export const posts = arraySidebar([
     'sql-auth',
     'multi-goroutine-result',
     'curl-pdf',
+    'php-slice-upload',
 ])

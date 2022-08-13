@@ -15,3 +15,4 @@ comment: false
 -   [数据库的权限](sql-auth.md)
 -   [多协程执行收集结果的技巧](multi-goroutine-result.md)
 -   [CURL 远程下载 PDF](curl-pdf.md)
+-   [PHP 分片上传大文件](php-slice-upload.md)
