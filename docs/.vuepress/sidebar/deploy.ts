@@ -9,4 +9,5 @@ export const deploy = arraySidebar([
     'docker-install-redis',
     'linux-mysql8',
     'linux-install-nginx',
+    'linux-install-php-swoole'
 ])
