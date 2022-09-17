@@ -35,6 +35,10 @@ export default navbar([
                 text: '运维技术',
                 children: ['/views/deploy/'],
             },
+            {
+                text: 'Rust',
+                children: ['/views/rust/'],
+            },
         ],
     },
     {

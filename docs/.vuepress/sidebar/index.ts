@@ -10,6 +10,7 @@ import { dataStruct } from './data-struct'
 import { qaSidebar } from './interview'
 import { vueDoc } from './vue3'
 import { Process } from './process'
+import { rust } from './rust'
 
 export const mySidebarConfig = sidebar({
     '/views/go/': go,
@@ -23,4 +24,5 @@ export const mySidebarConfig = sidebar({
     '/interview/': qaSidebar,
     '/views/vue3/': vueDoc,
     '/linux/process/': Process,
+    '/views/rust': rust,
 })
