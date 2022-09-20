@@ -11,4 +11,5 @@ export const posts = arraySidebar([
     'multi-goroutine-result',
     'curl-pdf',
     'php-slice-upload',
+    'mysql-index-b-tree',
 ])
