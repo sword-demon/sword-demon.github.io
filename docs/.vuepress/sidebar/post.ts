@@ -12,4 +12,5 @@ export const posts = arraySidebar([
     'curl-pdf',
     'php-slice-upload',
     'mysql-index-b-tree',
+    'mysql-transiation',
 ])
