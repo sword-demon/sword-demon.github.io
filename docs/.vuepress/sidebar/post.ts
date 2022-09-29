@@ -13,4 +13,7 @@ export const posts = arraySidebar([
     'php-slice-upload',
     'mysql-index-b-tree',
     'mysql-transiation',
+    'redis-cache-struct',
+    'mysql-master-slave',
+    'unique-hash-algom',
 ])

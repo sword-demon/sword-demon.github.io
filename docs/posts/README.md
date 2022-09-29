@@ -18,3 +18,6 @@ comment: false
 -   [PHP 分片上传大文件](php-slice-upload.md)
 -   [MySQL 索引以及 BTree 和 B+Tree](mysql-index-b-tree.md)
 -   [MySQL 事务](mysql-transiation.md)
+-   [redis 缓存原理与设计](redis-cache-struct.md)
+-   [MySQL 主从复制](mysql-master-slave.md)
+-   [MySQL 一致性 Hash 算法](unique-hash-algom.md)
