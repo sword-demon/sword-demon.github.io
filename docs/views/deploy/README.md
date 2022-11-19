@@ -16,3 +16,4 @@ article: false
 -   [Linux 安装 MySQL8](linux-mysql8.md)
 -   [Linux 安装 Nginx 和配置](linux-install-nginx.md)
 -   [Linux 编译安装 PHP7](linux-install-php-swoole.md)
+-   [使用 Rancher 快速安装 K8S 集群](quick-install-k8s)

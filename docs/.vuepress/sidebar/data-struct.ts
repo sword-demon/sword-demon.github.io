@@ -10,4 +10,5 @@ export const dataStruct = arraySidebar([
     'line-table',
     'algo-palindrome',
     'algo-insert-sort',
+    'iterator-designer',
 ])

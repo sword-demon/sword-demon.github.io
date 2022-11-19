@@ -5,8 +5,9 @@ icon: home
 title: 主页
 # heroImage: https://www.wjstar.top/img/avatar.jpeg
 heroText: licorne
-heroFullScreen: false
-tagline: 纯粹的浪荡人士与抱定决心干大事的人，面相是截然不同的。
+heroFullScreen: true
+bgImage: https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/4021/src=http___i0.hdslb.com_bfs_article_ad7600cb9b4845c7bae1d2fa23edffb382614ad4.jpg&refer=http___i0.hdslb.jpeg
+tagline: 人生就是一场无解的游戏
 projects:
     # - icon: project
     #   name: 项目名称

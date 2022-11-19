@@ -16,3 +16,4 @@ comment: false
 -   [线性表](line-table.md)
 -   [Go 回文检测](algo-palindrome.md)
 -   [插入排序](algo-insert-sort.md)
+-   [iterator 模式](iterator-designer.md)

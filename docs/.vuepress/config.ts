@@ -5,7 +5,7 @@ import { searchPlugin } from '@vuepress/plugin-search'
 
 export default defineUserConfig({
     lang: 'zh-CN',
-    title: 'wxvirus',
+    title: '无解的游戏',
     description: 'wxvirus blog and note',
 
     base: '/',
