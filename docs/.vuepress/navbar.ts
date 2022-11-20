@@ -39,6 +39,10 @@ export default navbar([
                 text: 'Rust',
                 children: ['/views/rust/'],
             },
+            {
+                text: 'Java',
+                children: ['/views/java/'],
+            },
         ],
     },
     {

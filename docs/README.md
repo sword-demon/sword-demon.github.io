@@ -6,7 +6,7 @@ title: 主页
 # heroImage: https://www.wjstar.top/img/avatar.jpeg
 heroText: licorne
 heroFullScreen: true
-bgImage: https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/4021/src=http___i0.hdslb.com_bfs_article_ad7600cb9b4845c7bae1d2fa23edffb382614ad4.jpg&refer=http___i0.hdslb.jpeg
+bgImage: https://virusoss.oss-cn-shanghai.aliyuncs.com/images/Fk2mIrJZJPwZpHeN8-3Q4gCa1vfs.jpeg
 tagline: 人生就是一场无解的游戏
 projects:
     # - icon: project
