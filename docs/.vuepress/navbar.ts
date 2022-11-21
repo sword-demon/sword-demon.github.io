@@ -43,6 +43,10 @@ export default navbar([
                 text: 'Java',
                 children: ['/views/java/'],
             },
+            {
+                text: 'Redis',
+                children: ['/views/redis/'],
+            },
         ],
     },
     {

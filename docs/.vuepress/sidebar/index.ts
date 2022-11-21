@@ -12,6 +12,7 @@ import { vueDoc } from './vue3'
 import { Process } from './process'
 import { rust } from './rust'
 import { javas } from './java'
+import { redis } from './redis'
 
 export const mySidebarConfig = sidebar({
     '/views/go/': go,
@@ -27,4 +28,5 @@ export const mySidebarConfig = sidebar({
     '/linux/process/': Process,
     '/views/rust': rust,
     '/views/java': javas,
+    '/views/redis': redis,
 })

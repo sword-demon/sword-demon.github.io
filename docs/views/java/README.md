@@ -9,3 +9,4 @@ comment: false
 ## 目录
 
 -   [MyBatisPlus 自动填充字段](mybatisplus-autofill.md)
+-   [封装公共响应对象](packaging-response.md)
