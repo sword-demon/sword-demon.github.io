@@ -174,3 +174,5 @@ systemctl enable redis
 ```
 
 来设置开机自启。
+
+<BiliBili bvid="BV1cr4y1671t" />

@@ -2,6 +2,7 @@ import { defineUserConfig } from 'vuepress'
 import theme from './theme'
 import { copyrightPlugin } from 'vuepress-plugin-copyright2'
 import { searchPlugin } from '@vuepress/plugin-search'
+import { componentsPlugin } from 'vuepress-plugin-components'
 
 export default defineUserConfig({
     lang: 'zh-CN',
@@ -20,6 +21,11 @@ export default defineUserConfig({
         }),
         searchPlugin({
             // 你的选项
+        }),
+        componentsPlugin({
+            backToTop: true,
+            components: ['Badge', 'CodePen', 'FontIcon', 'PDF', 'StackBlitz', 'YouTube'],
+            iconAssets: 'iconfont',
         }),
     ],
 })
