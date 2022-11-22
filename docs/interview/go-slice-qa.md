@@ -143,7 +143,7 @@ if cap > doublecap {
 
 1. 如果当前所需容量 （`cap`） 大于原先容量的两倍 （`doublecap`），则最终申请容量（`newcap`）为当前所需容量（`cap`）；
 
-2. 如果<Badge text="条件 1" type="tip" /> 不满足，表示当前所需容量（`cap`）不大于原容量的两倍（`doublecap`），则进行如下判断；
+2. 如果==条件 1== 不满足，表示当前所需容量（`cap`）不大于原容量的两倍（`doublecap`），则进行如下判断；
 
 3. 如果原切片长度（`old.len`）小于 1024，则最终申请容量（newcap）等于原容量的两倍（`doublecap`）；
 
