@@ -13,3 +13,4 @@ comment: false
 -   [变量内存地址分析](variable-memory.md)
 -   [C 语言简单代码解析](c-helloworld.md)
 -   [Makefile 修炼](makefile.md)
+-   [ELF 可执行文件的装载与执行](elf-program-load-exec.md)
