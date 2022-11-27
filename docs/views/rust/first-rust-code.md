@@ -209,3 +209,142 @@ fn main() {
 }
 
 ```
+
+## 变量函数和结构体
+
+### 变量
+
+> 定义
+
+-   不可变：`let x: T;`
+-   可变：`let mut x: T;`
+
+:::note 说明
+
+在栈上分配一个类型为 T 的变量，变量名为`x`。当声明为可变变量时，`x`的内容可以被修改，且允许可变引用
+
+:::
+
+:::details 示例
+
+```rust
+let name = "wujie";
+let pi = 3.141592654;
+
+let mut v: Vec<u8> = Vec::new();
+```
+
+:::
+
+### 常量
+
+> 定义
+
+```rust
+const X: T = <value>;
+```
+
+常量是一个右值(rvalue)，它不能被修改。**常量编译后放入可执行文件的数据段**，全局可以访问。
+
+:::details 示例
+
+```rust
+const PI: f64 = 3.141592654;
+```
+
+:::
+
+### 静态变量
+
+> 定义
+
+```rust
+static X: T = T::new();
+static mut X: T = T::new();
+```
+
+静态变量和常量一样全局可以访问，它也被编入可执行文件的数据段中。静态变量可以被声明为可变。
+
+:::tip
+
+在使用静态变量时，由于一些限制，`lazy_static`是一个很好的工具。
+
+:::
+
+:::details 示例
+
+```rust
+// 可以编译通过
+static V: Vec<u8> = Vec::new();
+
+// 无法编译通过，需要使用 lazy_static
+static MAP: HashMap<String, String> = HashMap::new();
+```
+
+:::
+
+### 函数
+
+> 定义
+>
+> ```rust
+> fn x(a1: T1, ...) -> T {}
+> ```
+
+在`Rust`中，函数如果没有返回值，那么其返回值为`unit`，符号是`()`
+
+```rust
+fn valid_email(input: &str) -> bool {
+    // ...
+}
+```
+
+### 结构体
+
+> 定义
+>
+> ```rust
+> struct s {...}
+> ```
+
+结构体有三种形式：
+
+1.  空结构体，不占任何内存空间
+2.  元组结构体，`struct`的每个域都是匿名的，可以通过索引访问
+3.  普通结构体，`struct`的每个域都有名字，可以通过名称访问
+
+```rust
+struct Marker;
+
+struct Color(u8, u8, u8);
+
+struct Person {
+    name: String,
+    age: u8,
+}
+```
+
+### enum
+
+```rust
+enum E {...}
+```
+
+`enum`有两种形式：
+
+1.  标签联合，`enum`可以承载多个不同的数据结构中的一种
+2.  枚举
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+enum Status {
+    Ok = 0,
+    BadName = 1,
+    NotFound = 2,
+    // ...
+}
+```
