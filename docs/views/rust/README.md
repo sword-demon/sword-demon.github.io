@@ -11,3 +11,4 @@ comment: false
 -   [windows 开发环境部署](windows-env-rust)
 -   [rust 第一个程序](first-rust-code)
 -   [Cargo 基本使用](cargo-base-use)
+-   [宏入门](marco-base.md)
