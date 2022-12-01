@@ -12,3 +12,4 @@ comment: false
 -   [rust 第一个程序](first-rust-code)
 -   [Cargo 基本使用](cargo-base-use)
 -   [宏入门](marco-base.md)
+-   [所有权以及所有权转移](owner-move-clonecopy.md)
