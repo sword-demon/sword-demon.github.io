@@ -11,4 +11,5 @@ export const deploy = arraySidebar([
     'linux-install-nginx',
     'linux-install-php-swoole',
     'quick-install-k8s',
+    'docker-mysql-cluster',
 ])
