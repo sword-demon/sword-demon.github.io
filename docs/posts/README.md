@@ -21,3 +21,4 @@ comment: false
 -   [redis 缓存原理与设计](redis-cache-struct.md)
 -   [MySQL 主从复制](mysql-master-slave.md)
 -   [MySQL 一致性 Hash 算法](unique-hash-algom.md)
+-   [PHP 搭配 Consul 实现服务注册和服务发现](php-consule-base.md)

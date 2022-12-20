@@ -16,4 +16,5 @@ export const posts = arraySidebar([
     'redis-cache-struct',
     'mysql-master-slave',
     'unique-hash-algom',
+    'php-consule-base',
 ])
