@@ -9,3 +9,4 @@ comment: false
 ## 目录
 
 -   [Linux 单机安装 redis](linux-single-install-redis.md)
+-   [redis 持久化机制以及缓存过期和淘汰策略](persistence-and-lrfu.md)
