@@ -47,6 +47,10 @@ export default navbar([
                 text: 'Redis',
                 children: ['/views/redis/'],
             },
+            {
+                text: 'RabbitMQ',
+                children: ['/views/rabbitmq/'],
+            },
         ],
     },
     {

@@ -13,6 +13,7 @@ import { Process } from './process'
 import { rust } from './rust'
 import { javas } from './java'
 import { redis } from './redis'
+import { rabbitmq } from './rabbitmq'
 
 export const mySidebarConfig = sidebar({
     '/views/go/': go,
@@ -29,4 +30,5 @@ export const mySidebarConfig = sidebar({
     '/views/rust': rust,
     '/views/java': javas,
     '/views/redis': redis,
+    '/views/rabbitmq': rabbitmq,
 })
