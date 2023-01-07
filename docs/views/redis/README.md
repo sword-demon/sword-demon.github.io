@@ -11,3 +11,4 @@ comment: false
 -   [Linux 单机安装 redis](linux-single-install-redis.md)
 -   [redis 持久化机制以及缓存过期和淘汰策略](persistence-and-lrfu.md)
 -   [redis 集群策略](redis-cluster-stra.md)
+-   [redis 缓存问题应对方案](redis-cache-question.md)
