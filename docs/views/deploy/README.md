@@ -18,3 +18,5 @@ article: false
 -   [Linux 编译安装 PHP7](linux-install-php-swoole.md)
 -   [使用 Rancher 快速安装 K8S 集群](quick-install-k8s)
 -   [Docker 安装部署 MySQL 集群](docker-mysql-cluster.md)
+-   [consul 集群角色选举 Raft 算法](consul-raft.md)
+-   [consul 配置中心](consul-config-center.md)

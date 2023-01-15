@@ -12,4 +12,6 @@ export const deploy = arraySidebar([
     'linux-install-php-swoole',
     'quick-install-k8s',
     'docker-mysql-cluster',
+    'consul-raft',
+    'consul-config-center',
 ])
