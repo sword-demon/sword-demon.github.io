@@ -32,4 +32,6 @@ export const go = arraySidebar([
     'grpc-protobuf',
     'go-context',
     'go-coroutine-dispath',
+    'grpc-intereceptor',
+    'grpc-metadata',
 ])

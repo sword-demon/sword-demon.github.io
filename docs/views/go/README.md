@@ -39,3 +39,5 @@ category:
 -   [go 面试题](go-interview.md)
 -   [gRPC 和 protobuf](grpc-protobuf.md)
 -   [context](go-context.md)
+-   [gRPC 拦截器](grpc-intereceptor.md)
+-   [gRPC 的 metadata](grpc-metadata.md)
