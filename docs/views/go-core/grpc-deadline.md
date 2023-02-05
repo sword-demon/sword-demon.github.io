@@ -1,3 +1,9 @@
+---
+title: gRPC 的超时机制
+date: 2023-02-06 22:08:15
+category: GoCore
+---
+
 # gRPC 的超时机制
 
 使用`context`包自带的`WithTimeout`函数进行设置超时时间

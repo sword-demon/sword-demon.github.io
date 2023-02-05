@@ -16,3 +16,4 @@ comment: false
 -   [解决 map 并发的问题](sync-map.md)
 -   [接口的隐式和显式](interface-type.md)
 -   [gRPC 超时机制](grpc-deadline.md)
+-   [gin 自定义验证器和翻译响应内容](gin-validator-trans.md)

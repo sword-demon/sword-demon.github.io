@@ -10,4 +10,5 @@ export const goCore = arraySidebar([
     'sync-map',
     'interface-type',
     'grpc-deadline',
+    'gin-validator-trans',
 ])
