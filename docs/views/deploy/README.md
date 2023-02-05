@@ -20,3 +20,4 @@ article: false
 -   [Docker 安装部署 MySQL 集群](docker-mysql-cluster.md)
 -   [consul 集群角色选举 Raft 算法](consul-raft.md)
 -   [consul 配置中心](consul-config-center.md)
+-   [Portainer 安装](mac-docker-portainer-install.md)

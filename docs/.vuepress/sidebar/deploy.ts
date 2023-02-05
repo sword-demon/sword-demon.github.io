@@ -14,4 +14,5 @@ export const deploy = arraySidebar([
     'docker-mysql-cluster',
     'consul-raft',
     'consul-config-center',
+    'mac-docker-portainer-install',
 ])
