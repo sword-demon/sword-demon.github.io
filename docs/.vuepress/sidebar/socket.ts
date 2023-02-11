@@ -11,4 +11,5 @@ export const sockets = arraySidebar([
     'unix-socket',
     'stream-socket-api',
     'go-tcp',
+    'tcp-paste-package',
 ])
