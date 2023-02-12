@@ -34,4 +34,5 @@ export const go = arraySidebar([
     'go-coroutine-dispath',
     'grpc-intereceptor',
     'grpc-metadata',
+    'go-gitcommit-tool',
 ])
