@@ -21,3 +21,4 @@ article: false
 -   [consul 集群角色选举 Raft 算法](consul-raft.md)
 -   [consul 配置中心](consul-config-center.md)
 -   [Portainer 安装](mac-docker-portainer-install.md)
+-   [centos7 安装 redis](centos7-redis-install.md)

@@ -15,4 +15,5 @@ export const deploy = arraySidebar([
     'consul-raft',
     'consul-config-center',
     'mac-docker-portainer-install',
+    'centos7-redis-install',
 ])
