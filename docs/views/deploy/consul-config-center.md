@@ -31,3 +31,7 @@ tag:
 ## consul 支持配置中心的实现
 
 可以直接在管理界面直接去`key/value`创建即可，先创建一个`demoService/`的文件夹，用于为`demoService`服务提供配置信息存储，点击进去之后，再创建环境`dev/`和`pro/`测试和生产环境的文件夹，可能会连接多个数据库，所以我们在新建一个`demo/`的数据库的文件夹，`consul`如果加上`/`则是创建文件夹，不加则是对应的配置信息的`key`
+
+## 服务注册
+
+相关文档地址：[https://developer.hashicorp.com/consul/api-docs/agent/service#register-service](https://developer.hashicorp.com/consul/api-docs/agent/service#register-service)

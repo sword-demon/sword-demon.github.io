@@ -22,3 +22,5 @@ article: false
 -   [consul 配置中心](consul-config-center.md)
 -   [Portainer 安装](mac-docker-portainer-install.md)
 -   [centos7 安装 redis](centos7-redis-install.md)
+-   [redis 的配置](redis-conf-some.md)
+-   [nsf 配置共享服务](nsf-server-shared.md)

@@ -16,4 +16,6 @@ export const deploy = arraySidebar([
     'consul-config-center',
     'mac-docker-portainer-install',
     'centos7-redis-install',
+    'redis-conf-some',
+    'nsf-server-shared',
 ])
