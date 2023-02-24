@@ -18,4 +18,5 @@ export const deploy = arraySidebar([
     'centos7-redis-install',
     'redis-conf-some',
     'nsf-server-shared',
+    'mac-m1-ubuntu-k8s-cluster',
 ])
