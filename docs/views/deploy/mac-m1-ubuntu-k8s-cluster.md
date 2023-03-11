@@ -49,8 +49,6 @@ cp 00-install-config.yaml 00-install-config.yaml.bak
 
 最终修改为
 
-![image-20230224213134192](https://virusoss.oss-cn-shanghai.aliyuncs.com/images/image-20230224213134192.png)
-
 ```yaml
 netowork:
 	ethernets:
