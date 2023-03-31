@@ -148,3 +148,51 @@ if cap > doublecap {
 3. 如果原切片长度（`old.len`）小于 1024，则最终申请容量（newcap）等于原容量的两倍（`doublecap`）；
 
 4. 否则，最终申请容量（`newcap`，初始值等于 `old.cap`）每次增加 `newcap/4`，直到大于所需容量（`cap`）为止，然后，判断最终申请容量（`newcap`）是否溢出，如果溢出，最终申请容量（`newcap`）等于所需容量（`cap`）
+
+## 切片自定义实现新增元素和删除元素
+
+```go
+func Add(s []int, index int, value int) []int {
+	// 先把长度+1
+	s = append(s, 0)
+	copy(s[index+1:], s[index:])
+	s[index] = value
+	return s
+}
+
+func Delete(s []int, index int) []int {
+	return append(s[:index], s[index+1:]...)
+}
+
+func TestAppendSlice(t *testing.T) {
+	a := make([]int, 6, 10)
+	a[1] = 12
+	a[2] = 13
+	fmt.Println(a)
+	Add(a, 1, 10)
+	Add(a, 2, 11)
+	fmt.Println(a)
+	fmt.Println(len(a))
+}
+
+func TestDeleteSlice(t *testing.T) {
+	a := []int{1, 2, 3, 4}
+	fmt.Println(a)
+	fmt.Println(a[2:])
+	Delete(a, 1)
+	fmt.Println(a)
+}
+
+func TestFibonacci(t *testing.T) {
+	t.Log(Fibonacci(4))
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
+	c := make(chan int, 10)
+	fib(cap(c), c)
+	for i := range c {
+		fmt.Println(i)
+	}
+}
+```
