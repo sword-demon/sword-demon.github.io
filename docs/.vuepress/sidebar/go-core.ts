@@ -11,4 +11,5 @@ export const goCore = arraySidebar([
     'interface-type',
     'grpc-deadline',
     'gin-validator-trans',
+    'go-web-server',
 ])

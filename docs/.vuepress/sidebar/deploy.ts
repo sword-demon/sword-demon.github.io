@@ -19,4 +19,5 @@ export const deploy = arraySidebar([
     'redis-conf-some',
     'nsf-server-shared',
     'mac-m1-ubuntu-k8s-cluster',
+    'docker-cmd-summarize',
 ])
