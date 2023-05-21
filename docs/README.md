@@ -37,6 +37,10 @@ projects:
       name: 又见月
       desc: 转Java开发的Python脚本小子
       link: https://jykcc.github.io/coding/
+    - icon: friend
+      name: CrazyCodeBoy的技术博客官网
+      desc: 专注于移动开发，分享技术，分享快乐
+      link: https://devio.org/
 
 footer: 无解的游戏
 ---
