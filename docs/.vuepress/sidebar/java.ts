@@ -9,4 +9,5 @@ export const javas = arraySidebar([
     'linux-install-export',
     'dubbo3-micro-struct',
     'dubbo3-miaosha-struct',
+    'ruoyi-scaffold-study',
 ])
