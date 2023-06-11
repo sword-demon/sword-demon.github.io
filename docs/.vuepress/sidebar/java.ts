@@ -10,4 +10,5 @@ export const javas = arraySidebar([
     'dubbo3-micro-struct',
     'dubbo3-miaosha-struct',
     'ruoyi-scaffold-study',
+    'java-mqtt',
 ])

@@ -16,3 +16,4 @@ comment: false
 -   [Dubbo3 微服务架构概述](dubbo3-micro-struct.md)
 -   [秒杀购物技术架构](dubbo3-miaosha-struct.md)
 -   [若依脚手架改造学习](ruoyi-scaffold-study.md)
+-   [java 对接 mqtt](java-mqtt.md)
