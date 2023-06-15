@@ -10,3 +10,4 @@ comment: false
 
 -   [CDN 单页面以及后台数据读取](cdn-page.md)
 -   [后台主控面板开发](admin-dashboard.md)
+-   [Vue3 管理系统学习](vue3-manager.md)

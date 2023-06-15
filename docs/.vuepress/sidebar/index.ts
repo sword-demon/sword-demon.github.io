@@ -14,6 +14,7 @@ import { rust } from './rust'
 import { javas } from './java'
 import { redis } from './redis'
 import { rabbitmq } from './rabbitmq'
+import { flutter } from './flutter'
 
 export const mySidebarConfig = sidebar({
     '/views/go/': go,
@@ -31,4 +32,5 @@ export const mySidebarConfig = sidebar({
     '/views/java': javas,
     '/views/redis': redis,
     '/views/rabbitmq': rabbitmq,
+    '/flutter/': flutter,
 })

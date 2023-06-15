@@ -2,11 +2,11 @@
 home: true
 layout: Blog
 icon: home
-title: 主页
+title: 首页
 # heroImage: https://www.wjstar.top/img/avatar.jpeg
-heroText: licorne
-heroFullScreen: true
-bgImage: https://virusoss.oss-cn-shanghai.aliyuncs.com/images/Fk2mIrJZJPwZpHeN8-3Q4gCa1vfs.jpeg
+heroText: 神隐
+# heroFullScreen: true
+# bgImage: https://virusoss.oss-cn-shanghai.aliyuncs.com/images/Fk2mIrJZJPwZpHeN8-3Q4gCa1vfs.jpeg
 tagline: 人生就是一场无解的游戏
 projects:
     # - icon: project
