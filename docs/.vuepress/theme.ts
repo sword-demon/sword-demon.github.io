@@ -52,6 +52,7 @@ export default hopeTheme({
         config: {
             '/guide/encrypt.html': ['1234'],
             '/linux/': ['123456'],
+            '/views/vue3/vue3-manager': ['88888888'],
         },
     },
 
