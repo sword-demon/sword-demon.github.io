@@ -1,4 +1,4 @@
-import { navbar } from 'vuepress-theme-hope'
+import { navbar } from 'vuepress-theme-hope';
 
 export default navbar([
     '/',
@@ -90,7 +90,7 @@ export default navbar([
         link: '/interview/',
     },
     {
-        text: 'Vue3',
+        text: '前端',
         link: '/views/vue3/',
     },
-])
+]);
