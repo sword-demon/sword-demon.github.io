@@ -34,13 +34,17 @@ projects:
       desc: 一个前端大佬
       link: https://www.linasan.cn/
     - icon: friend
-      name: 又见月
-      desc: 转Java开发的Python脚本小子
-      link: https://jykcc.github.io/coding/
-    - icon: friend
       name: CrazyCodeBoy的技术博客官网
       desc: 专注于移动开发，分享技术，分享快乐
       link: https://devio.org/
+    - icon: friend
+      name: Siam 博客
+      desc: 宣言
+      link: https://blog.siammm.cn/
+    - icon: friend
+      name: 老苗博客
+      desc: 多数笔记，少数牢骚
+      link: https://miaoqiang.top/
 
 footer: 无解的游戏
 ---

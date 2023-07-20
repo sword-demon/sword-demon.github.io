@@ -587,3 +587,247 @@ function App() {
 
 export default App;
 ```
+
+## 组件
+
+> React 一切皆是组件
+
+-   组件就是一个 UI 片段
+-   拥有独立的逻辑和显示
+-   组件可大可小，可嵌套
+
+> 组件的价值和意义
+
+-   组件嵌套来组织 UI 结构，和 HTML 一样，无学习成本
+-   组件拆分，利于代码维护，和多人协作开发
+-   可封装公共组件（或第三方组件）复用代码，提高开发效率
+
+> 组件形式
+
+-   `class`组件
+-   函数组件
+-   React16 之后比较推崇函数组件和 `Hooks`
+
+> 将前面的列表代码封装成一个组件独立出去
+
+`List1.tsx`
+
+```tsx
+import React, { FC } from 'react';
+import './List1.css';
+
+const List1: FC = () => {
+    // 问卷列表数组
+    const questionList = [
+        { id: 1, title: '问卷 1', isPublished: true },
+        { id: 2, title: '问卷 2', isPublished: false },
+        { id: 3, title: '问卷 3', isPublished: true },
+        { id: 4, title: '问卷 4', isPublished: false },
+    ];
+
+    function edit(id: number) {
+        console.log('edit', id);
+    }
+    return (
+        <div>
+            <h1>问卷列表页</h1>
+            <div>
+                {questionList.map(question => {
+                    const { id, title, isPublished } = question;
+                    return (
+                        <div key={id} className='list-item'>
+                            <strong>{title}</strong> &nbsp;
+                            {/* 条件判断 */}
+                            {isPublished ? <span style={{ color: 'green' }}>已发布</span> : <span>未发布</span>}
+                            &nbsp;
+                            <button
+                                onClick={() => {
+                                    edit(id);
+                                }}
+                            >
+                                编辑问卷
+                            </button>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
+export default List1;
+```
+
+`App.tsx`
+
+```tsx
+import React from 'react';
+import List1 from './List1';
+
+function App() {
+    return (
+        <>
+            <List1 />
+        </>
+    );
+}
+
+export default App;
+```
+
+## React 开发者工具，chrome 插件
+
+百度搜索：`chrome react dev tools`
+
+[谷歌下载地址](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related)
+
+国内访问可以通过`bing`去搜索，如果有资源可以上网，那就使用谷歌搜索出来的
+
+## JSX 和 Vue 模板的区别
+
+-   判断，Vue 模板中使用`v-if`指令，JSX 使用三元表达式，函数和`&&`
+-   循环，Vue 模板中使用的是`v-for`指令，JSX 使用`map`函数
+-   React - 能用 JS 的就用 JS 的，需要 JS 基础比较扎实的使用
+-   Vue - 简单使用`if`、`for`就可以方便初学者使用和记忆
+-   现在 Vue3 也能很好的支持 JSX 语法，同时还是继承前面的指令
+
+## React Hooks
+
+-   React 内置的 Hooks
+    -   useState
+    -   useEffect
+    -   其他内置
+-   自定义 Hooks （复用代码）
+-   使用第三方 Hooks（提高效率）
+
+**注意事项**
+
+-   Hooks 是 React 最重要的内容
+-   必须练习，练习，练习！
+-   Hooks 有很对规则，遇到错误时，先查看是否违反规则
+
+### useState
+
+> 需求：让页面“动”起来
+>
+> -   点击一个`button`，累加数量
+> -   用普通变量，无法实现
+> -   使用`useState`实现
+
+-   用普通的 JS 变量无法触发组件的更新
+
+```tsx
+import React, { useState } from 'react';
+
+function App() {
+    // let count = 0
+    const [count, setCount] = useState(0);
+
+    function add() {
+        setCount(count + 1);
+    }
+    return (
+        <>
+            <div>
+                <button onClick={add}>add {count}</button>
+            </div>
+        </>
+    );
+}
+
+export default App;
+```
+
+`useState`设置返回的结果是一个数组，第一个元素是这个变量，第二个是改变这个变量的函数，必须传入的是一个新值。
+
+> `state`一个组件的“独家记忆”
+
+-   `props`父组件传递过来的信息
+-   `state`组件内部的状态信息，不对外
+-   `state`变化，触发组件更新，重新渲染`rerender`页面
+
+上面代码中,`count`相当于`state`，`state`的变化就相当于`setCount`方法。
+
+> `state`的几个特点
+
+-   异步更新: 无法拿到最新的`state`的值
+
+    ```tsx
+    import React, { FC, useState } from 'react';
+
+    const Demo: FC = () => {
+        const [count, setCount] = useState(0);
+
+        function add() {
+            // setCount(count + 1)
+            setCount(count => count + 1);
+            console.log('cur count', count);
+        }
+
+        return (
+            <div>
+                <button onClick={add}>add {count}</button>
+            </div>
+        );
+    };
+
+    export default Demo;
+    ```
+
+-   注意，如果设置的一个变量没有在`tsx/jsx`里引用，按理说就不需要使用`setstate`来管理它，使用`useRef`
+
+-   可能会被合并
+
+    ```tsx
+    import React, { FC, useState } from 'react';
+
+    const Demo: FC = () => {
+        const [count, setCount] = useState(0);
+
+        function add() {
+            setCount(count + 1);
+            setCount(count + 1);
+            setCount(count + 1);
+            setCount(count + 1);
+            setCount(count + 1);
+            console.log('cur count', count);
+        }
+
+        return (
+            <div>
+                <button onClick={add}>add {count}</button>
+            </div>
+        );
+    };
+
+    export default Demo;
+    ```
+
+    上面每次都是`0+1`，所以不会打印 5，也可以使用函数的方式来更新，就会是 5
+
+    ```tsx
+    import React, { FC, useState } from 'react';
+
+    const Demo: FC = () => {
+        const [count, setCount] = useState(0);
+
+        function add() {
+            setCount(count => count + 1);
+            setCount(count => count + 1);
+            setCount(count => count + 1);
+            setCount(count => count + 1);
+            setCount(count => count + 1);
+            console.log('cur count', count);
+        }
+
+        return (
+            <div>
+                <button onClick={add}>add {count}</button>
+            </div>
+        );
+    };
+
+    export default Demo;
+    ```
+
+    使用函数更新 `state` 不会被合并
