@@ -1,6 +1,6 @@
-import { hopeTheme } from 'vuepress-theme-hope'
-import navbar from './navbar'
-import { mySidebarConfig } from './sidebar'
+import { hopeTheme } from 'vuepress-theme-hope';
+import navbar from './navbar';
+import { mySidebarConfig } from './sidebar';
 
 export default hopeTheme({
     hostname: 'https://sword-demon.github.io',
@@ -53,6 +53,7 @@ export default hopeTheme({
             '/guide/encrypt.html': ['1234'],
             '/linux/': ['123456'],
             '/views/vue3/vue3-manager': ['88888888'],
+            '/views/java/pan-system-learn': ['wujiedeyouxi'],
         },
     },
 
@@ -98,4 +99,4 @@ export default hopeTheme({
             },
         },
     },
-})
+});

@@ -1,4 +1,4 @@
-import { arraySidebar } from 'vuepress-theme-hope'
+import { arraySidebar } from 'vuepress-theme-hope';
 
 export const javas = arraySidebar([
     '',
@@ -11,4 +11,5 @@ export const javas = arraySidebar([
     'dubbo3-miaosha-struct',
     'ruoyi-scaffold-study',
     'java-mqtt',
-])
+    'pan-system-learn',
+]);
