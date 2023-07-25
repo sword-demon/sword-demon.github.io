@@ -888,3 +888,250 @@ public class CorsFilter implements Filter {
 }
 
 ```
+
+## framework/swagger2 模块
+
+`Swagger2ConfigProperties.java`
+
+```java
+package top.wjstar.pan.swagger2;
+
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+import top.wjstar.pan.core.constants.WPanConstants;
+
+/**
+ * swagger2配置类
+ */
+@Data
+@Component
+@ConfigurationProperties(prefix = "swagger2")
+public class Swagger2ConfigProperties {
+
+    private boolean show = true;
+
+    private String groupName = "w-pan";
+
+    private String basePackage = WPanConstants.BASE_COMPONENT_SCAN_PATH;
+
+    private String title = "w-pan-server";
+
+    private String description = "w-pan-server";
+
+    private String termsOfServiceUrl = "http://127.0.0.1:${server.port}";
+
+    private String contactName = "wxvirus";
+
+    private String contactUrl = "https://wujiedeyouxi.com";
+
+    private String contactEmail = "xxxxxx@qq.com";
+
+    private String version = "1.0";
+}
+
+```
+
+在`resoueces/META-INFO`下新建文件`additional-spring-configuration-metadata.json`
+
+```json
+{
+    "properties": [
+        {
+            "name": "swagger2.show",
+            "type": "java.lang.Boolean",
+            "description": "是否展示接口文档",
+            "defaultValue": true
+        },
+        {
+            "name": "swagger2.group-name",
+            "type": "java.lang.String",
+            "description": "组名称",
+            "defaultValue": "w-pan"
+        },
+        {
+            "name": "swagger2.title",
+            "type": "java.lang.String",
+            "description": "接口文档标题",
+            "defaultValue": "w-pan-server"
+        },
+        {
+            "name": "swagger2.description",
+            "type": "java.lang.String",
+            "description": "接口文档描述",
+            "defaultValue": "w-pan-server"
+        },
+        {
+            "name": "swagger2.terms-of-service-url",
+            "type": "java.lang.String",
+            "description": "接口文档基础请求路径",
+            "defaultValue": "http://127.0.0.1:${server.port}"
+        },
+        {
+            "name": "swagger2.base-package",
+            "type": "java.lang.String",
+            "description": "接口文档基础接口扫描路径",
+            "defaultValue": "top.wjstar.pan"
+        },
+        {
+            "name": "swagger2.contact-name",
+            "type": "java.lang.String",
+            "description": "联系人名称",
+            "defaultValue": "wxvirus"
+        },
+        {
+            "name": "swagger2.contact-url",
+            "type": "java.lang.String",
+            "description": "联系人地址",
+            "defaultValue": "https://www.wjstar.top"
+        },
+        {
+            "name": "swagger2.contact-email",
+            "type": "java.lang.String",
+            "description": "联系人邮箱",
+            "defaultValue": "无"
+        },
+        {
+            "name": "swagger2.version",
+            "type": "java.lang.String",
+            "description": "项目版本",
+            "defaultValue": "1.0"
+        }
+    ]
+}
+```
+
+然后编译项目，在`server`模块中引入`swagger2`模块依赖
+
+```xml
+ <dependency>
+    <groupId>top.wjstar.pan</groupId>
+    <artifactId>w-pan-swagger2</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+编译完项目之后，以及引入依赖之后，在`server`配置文件里使用
+
+```yaml
+swagger2:
+    show: true
+    group-name: ${spring.application.name}
+    base-package: top.wjstar.pan
+    title: w-pan-server docs
+    description: w-pan-server docs
+    terms-of-service-url: http://127.0.0.1:${server.port}
+    contact-name: wxvirus
+    contact-url: https://www.wjstar.top
+    contact-email: xxxx@163.com
+    version: 1.0
+```
+
+就会有对应的提示内容。
+
+## 在 server 模块添加监听器
+
+```java
+package top.wjstar.pan.server.common.listener;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.boot.ansi.AnsiColor;
+import org.springframework.boot.ansi.AnsiOutput;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
+
+/**
+ * 详情启动成功时日志打印的监听器
+ */
+@Component
+@Log4j2
+public class StartedListener implements ApplicationListener<ApplicationReadyEvent> {
+
+    /**
+     * 项目启动成功将会在日志中输出对应的启动信息
+     *
+     * @param applicationReadyEvent
+     */
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+        String serverPort = applicationReadyEvent.getApplicationContext().getEnvironment().getProperty("server.port");
+        String serverUrl = String.format("http://%s:%s", "127.0.0.1", serverPort);
+        log.info(AnsiOutput.toString(AnsiColor.BRIGHT_BLUE, "w pan server started at: ", serverUrl));
+
+        if (checkShowServerSwaggerDoc(applicationReadyEvent.getApplicationContext())) {
+            log.info(AnsiOutput.toString(AnsiColor.BRIGHT_BLUE, "w pan server's doc started at: ", serverUrl + "/doc.html"));
+        }
+        log.info(AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW, "w pan server has started successfully!"));
+    }
+
+    /**
+     * 校验是否开启了接口文档
+     * 检测配置文件是否配置 swagger2.show: true
+     * 检测容器中是否存在 bean 为 swagger2Config
+     *
+     * @param applicationContext
+     * @return
+     */
+    private boolean checkShowServerSwaggerDoc(ConfigurableApplicationContext applicationContext) {
+        return applicationContext.getEnvironment().getProperty("swagger2.show", Boolean.class, true) &&
+                applicationContext.containsBean("swagger2Config");
+    }
+}
+
+```
+
+## 添加项目入参校验器-validator
+
+```java
+package top.wjstar.pan.web.validator;
+
+import lombok.extern.log4j.Log4j2;
+import org.hibernate.validator.HibernateValidator;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
+import top.wjstar.pan.core.constants.WPanConstants;
+
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+/**
+ * 统一的参数校验器
+ */
+@SpringBootConfiguration
+@Log4j2
+public class WebValidatorConfig {
+
+    private static final String FAIL_FAST_KEY = "hibernate.validator.fail_fast";
+
+    /**
+     * 参数后置处理器
+     *
+     * @return
+     */
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        MethodValidationPostProcessor postProcessor = new MethodValidationPostProcessor();
+        postProcessor.setValidator(wPanValidator());
+        log.info("The hibernate validator is loaded successfully");
+        return postProcessor;
+    }
+
+    /**
+     * 构造项目的方法参数校验器
+     *
+     * @return
+     */
+    private Validator wPanValidator() {
+        ValidatorFactory factory = Validation.byProvider(HibernateValidator.class)
+                .configure().addProperty(FAIL_FAST_KEY, WPanConstants.TRUE_STR)
+                .buildValidatorFactory();
+        Validator validator = factory.getValidator();
+        return validator;
+    }
+}
+
+```
