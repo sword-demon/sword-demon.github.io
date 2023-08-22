@@ -1,4 +1,4 @@
-import { arraySidebar } from 'vuepress-theme-hope'
+import { arraySidebar } from 'vuepress-theme-hope';
 
 export const redis = arraySidebar([
     '',
@@ -9,4 +9,5 @@ export const redis = arraySidebar([
     'currence-two-write',
     'redis-cocurrence-get-key',
     'hotkey-bigkey-qa',
-])
+    'redis-java-client',
+]);

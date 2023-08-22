@@ -831,3 +831,240 @@ export default App;
     ```
 
     使用函数更新 `state` 不会被合并
+
+-   **不可变数据**
+
+    ```tsx
+    import React, { FC, useState } from 'react'
+
+    const Demo2: FC = () => {
+      const [userInfo, setUserInfo] = useState({ name: '无解', age: 12 })
+
+      function changeAge() {
+        // 不可变数据
+        // 不去修改 state 的值，而是传入一个新的值
+        // ES6 解构语法
+        setUserInfo({ ...userInfo, age: 21 })
+      }
+
+      const [list, setList] = useState(['x', 'y'])
+
+      function addItem() {
+        // 不可变数据
+        // push 返回的是插入数据的位置
+        // list.push('z')
+        // concat 返回的是一个新数组
+        setList(list.concat('z'))
+        // 解构赋值语法
+        setList([...list, 'z'])
+      }
+
+      return (
+        <div>
+          <h2>state 不可变数据</h2>
+          <div>{JSON.stringify(userInfo)}</div>
+          <button onClick={changeAge}>change age</button>
+          <div>{JSON.stringify(list)}</div>
+          <button onClick={addItem}>add item</button>
+        </div>
+      )
+    }
+
+    export default Demo2
+
+    ```
+
+
+
+### 重构列表页
+
+```jsx
+import React, { FC, useState } from 'react'
+import QuestionCard from './components/QuestionCard'
+
+const List2: FC = () => {
+  const [questionList, setQuestionList] = useState([
+    { id: '1', title: '问卷 1', isPublished: true },
+    { id: '2', title: '问卷 2', isPublished: false },
+    { id: '3', title: '问卷 3', isPublished: true },
+    { id: '4', title: '问卷 4', isPublished: false },
+  ])
+
+  function add() {
+    // 随机数
+    const r = Math.random().toString().slice(-3)
+    setQuestionList(
+      questionList.concat({
+        id: 'q' + r,
+        title: '问卷5' + r,
+        isPublished: false,
+      })
+    )
+  }
+
+  function deleteQuestion(id: string) {
+    // state 是不可变的数据
+    // 删除如何操作 使用 filter 过滤掉 id 对应的数据
+    setQuestionList(
+      questionList.filter(q => {
+        if (q.id === id) return false
+        else return true
+      })
+    )
+  }
+
+  function publishQuestion(id: string) {
+    // 修改使用 map
+    setQuestionList(
+      questionList.map(q => {
+        // 不等于要修改的直接返回
+        if (q.id !== id) return q
+        return {
+          ...q,
+          isPublished: true,
+        }
+      })
+    )
+  }
+
+  return (
+    <div>
+      <h2>问卷列表 2</h2>
+      <div>
+        {questionList.map(question => {
+          const { id, title, isPublished } = question
+          return (
+            <QuestionCard
+              key={id}
+              id={id}
+              title={title}
+              isPublished={isPublished}
+              deleteQuestion={deleteQuestion}
+              publishQuestion={publishQuestion}
+            />
+          )
+        })}
+      </div>
+      <div>
+        <button onClick={add}>新增问卷</button>
+      </div>
+    </div>
+  )
+}
+
+export default List2
+
+```
+
+组件`QuestionCard`
+
+```jsx
+import React, { FC } from 'react'
+
+// ts 自定义类型
+type PropsType = {
+  id: string
+  title: string
+  isPublished: boolean
+  // 函数类型 可选属性类型
+  deleteQuestion?: (id: string) => void
+  publishQuestion?: (id: string) => void
+}
+
+const QuestionCard: FC<PropsType> = props => {
+  const { id, title, isPublished, deleteQuestion, publishQuestion } = props
+
+  function pub(id: string) {
+    // 组件的状态提升
+    publishQuestion && publishQuestion(id)
+  }
+
+  function del(id: string) {
+    // 需要通知父组件进行删除
+    // 执行父组件的删除操作
+    deleteQuestion && deleteQuestion(id)
+  }
+
+  return (
+    <div key={id} className="list-item">
+      <strong>{title}</strong>
+      {isPublished ? <span style={{ color: 'green' }}>已发布</span> : <span>未发布</span>}
+      <button
+        onClick={() => {
+          pub(id)
+        }}
+      >
+        发布问卷
+      </button>
+      &nbsp;
+      <button onClick={() => del(id)}>删除</button>
+    </div>
+  )
+}
+
+export default QuestionCard
+
+```
+
+
+
+## 使用 immer
+
+-   `state`是不可变数据
+-   操作成本高，有很大的不稳定性
+
+>   就可以使用`immer`可以避免这些问题
+
+
+
+安装
+
+```bash
+npm install immer --save
+```
+
+`ImmerDemo.tsx`
+
+```tsx
+import React, { FC, useState } from 'react'
+import { produce } from 'immer'
+
+const Demo: FC = () => {
+  const [userInfo, setUserInfo] = useState({ name: '无解', age: 12 })
+  const [list, setList] = useState(['x', 'y'])
+
+  function changeAge() {
+    // setUserInfo({ ...userInfo, age: 21 })
+    setUserInfo(
+      // 可以直接修改某个字段
+      produce(draft => {
+        draft.age = 21
+        draft.name = '无解的游戏'
+      })
+    )
+  }
+
+  function addItem() {
+    setList(
+      produce(draft => {
+        draft.push('z')
+      })
+    )
+  }
+
+  return (
+    <div>
+      <h2>state 不可变数据</h2>
+      <div>{JSON.stringify(userInfo)}</div>
+      <button onClick={changeAge}>change age</button>
+      <div>{JSON.stringify(list)}</div>
+      <button onClick={addItem}>add item</button>
+    </div>
+  )
+}
+
+export default Demo
+
+```
+
+>   现在修改我们的内容都可以使用`js`的一些特有的方法和习惯。

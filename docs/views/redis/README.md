@@ -15,3 +15,4 @@ comment: false
 -   [高并发双写一致性问题](currence-two-write.md)
 -   [redis 并发竞争问题以及分布式锁](redis-cocurrence-get-key.md)
 -   [热 key 和大 key 的发现和解决办法](hotkey-bigkey-qa.md)
+-   [redis 的 java 客户端](redis-java-client.md)
