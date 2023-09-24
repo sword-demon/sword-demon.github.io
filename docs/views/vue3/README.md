@@ -12,3 +12,4 @@ comment: false
 -   [后台主控面板开发](admin-dashboard.md)
 -   [Vue3 管理系统学习](vue3-manager.md)
 -   [React + TS 学习](react-ts-learn.md)
+-   [Vue3 基础学习](vue3-basic.md)
