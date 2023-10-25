@@ -1,4 +1,4 @@
-import { arraySidebar } from 'vuepress-theme-hope'
+import { arraySidebar } from 'vuepress-theme-hope';
 
 export const goCore = arraySidebar([
     '',
@@ -12,4 +12,5 @@ export const goCore = arraySidebar([
     'grpc-deadline',
     'gin-validator-trans',
     'go-web-server',
-])
+    'go-web-context-design',
+]);
