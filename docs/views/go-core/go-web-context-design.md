@@ -116,3 +116,104 @@ func (c *Context) FormValue(key string) (string, error) {
 > 每次都调用`ParseForm`，是否会引起重复解析
 
 **不会，它代码里加了判断如果是`nil`才会再次解析**
+
+## 处理输入 - 查询参数
+
+查询参数就是在`URL 问号之后的部分`，例如：`http://localhost:8081/form?name=xxx&age=12`
+
+那么查询参数有 2 个，`name=xxx`和`age=12`，前面表单里面有一个`ParseForm`，那么这部分数据也可以在`Form`里面找到。
+
+```go
+type Context struct {
+	Req        *http.Request
+	Resp       http.ResponseWriter
+	PathParams map[string]string
+
+	// cacheQueryValues url.Values 引入URL 查询参数缓存
+	cacheQueryValues url.Values
+}
+```
+
+```go
+// QueryValue 获取 url 中的 query 参数解析
+func (c *Context) QueryValue(key string) (string, error) {
+	if c.cacheQueryValues == nil {
+		c.cacheQueryValues = c.Req.URL.Query()
+	}
+	values, ok := c.cacheQueryValues[key]
+	if !ok {
+		return "", errors.New("web: key不存在")
+	}
+	// 用户区别不出来真的有值，但是值恰好是空字符串还是没有值
+	// 每次都 ParseForm 都要重新解析，所以这里直接使用 Get
+	// 和表单比起来，它是没有缓存的，所以每次都要解析
+	// 避免多次解析, 稍微缓存一下
+	return values[0], nil
+}
+```
+
+## 处理输入 - 路径参数
+
+```go
+// PathValue 路径参数解析
+func (c *Context) PathValue(key string) (string, error) {
+	val, ok := c.PathParams[key]
+	if !ok {
+		return "", errors.New("web: key不存在")
+	}
+	return val, nil
+}
+```
+
+> 类似上述的，我们如果需要处理返回的内容作为其他类型，这里一般都是字符串，我们不能在`Context`上面去加东西，我们可以自己定义一个返回值类型，再针对返回值类型进行添加额外的扩展方法
+
+```go
+func (c *Context) PathValueV1(key string) StringValue {
+	val, ok := c.PathParams[key]
+	if !ok {
+		return StringValue{
+			err: errors.New("web: key不存在"),
+		}
+	}
+	return StringValue{val: val}
+}
+
+type StringValue struct {
+	val string
+	err error
+}
+
+// AsInt64 扩展性函数 将字符串转为 int64
+func (s StringValue) AsInt64() (int64, error) {
+	if s.err != nil {
+		return 0, s.err
+	}
+	return strconv.ParseInt(s.val, 10, 64)
+}
+
+```
+
+这样我们在使用的时候就很方便
+
+```go
+func TestServer(t *testing.T) {
+	h := NewHTTPServer()
+
+	h.Get("/values/:id", func(ctx *Context) {
+		// 使用 StringValue 返回值可以进行链式调用来解析数据
+		id, err := ctx.PathValueV1("id").AsInt64()
+		if err != nil {
+			ctx.Resp.WriteHeader(400)
+			ctx.Resp.Write([]byte("id 输入不对"))
+			return
+		}
+
+		ctx.Resp.Write([]byte(fmt.Sprintf("hello id: %d", id)))
+	})
+
+	err := h.Start(":8081")
+	if err != nil {
+		return
+	}
+}
+```
