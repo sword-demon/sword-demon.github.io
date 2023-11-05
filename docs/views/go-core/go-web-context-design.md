@@ -23,7 +23,7 @@ category: GoCore
 -   处理状态码：允许用户返回特定的状态码的响应，例如`HTTP 404`
 -   错误页面：特定`HTTP Status`或者`error`的时候，能够重定向到一个错误页面，例如`404`被重定向到首页
 -   设置`COokie`：设置`Cookie`的值
--   设置`Header`：往`Heeader`里面放一些东西
+-   设置`Header`：往`Header`里面放一些东西
 
 ## 处理输入 - Body 输入
 
@@ -217,3 +217,189 @@ func TestServer(t *testing.T) {
 	}
 }
 ```
+
+## 处理输出 - JSON 响应
+
+这种设计就是将用户的值进行转换一下，其他格式的输出也是类似的写法。
+
+```go
+func (c *Context) RespJSON(code int, val any) error {
+	bs, err := json.Marshal(val)
+	if err != nil {
+		return err
+	}
+	c.Resp.WriteHeader(code)
+	// 不设置也能正常
+	c.Resp.Header().Set("Content-Type", "application/json")
+	// n 返回的处理的数据的长度
+	n, err := c.Resp.Write(bs)
+	if n != len(bs) {
+		// 说明写入的长度和 val 的长度不一致
+		// 一般来说不需要处理，但是如果是自定义的类型，那么就需要处理
+		return errors.New("web: 写入长度和 val 长度不一致")
+	}
+	return err
+}
+```
+
+测试
+
+```go
+type User struct {
+    Name string `json:"name"`
+}
+
+h.Get("/user/:id", func(ctx *Context) {
+    ctx.RespJSON(200, User{Name: "张三"})
+})
+```
+
+> 如果`val`已经是`string`或者`[]byte`，那么用户不需要调用这个，直接自己操作`Resp`即可。
+
+## 处理输出 - 设置 cookie
+
+```go
+type Context struct {
+	Req        *http.Request
+	Resp       http.ResponseWriter
+	PathParams map[string]string
+
+	// cacheQueryValues url.Values 引入URL 查询参数缓存
+	cacheQueryValues url.Values
+
+	// cookie 的默认配置 不推荐
+	// cookieSameSite http.SameSite
+}
+
+// SetCookie 设置 cookie
+func (c *Context) SetCookie(ck *http.Cookie) {
+	// 不推荐
+	// ck.SameSite = c.cookieSameSite
+	http.SetCookie(c.Resp, ck)
+}
+```
+
+## 处理输出 - 错误页面？
+
+如果有一个需求，如果请求了一个不存在的接口，响应了 404，那么应该重定向到一个默认页面，比如说重定向到首页，或者自定义一个 404 页面。
+
+但是不是所有的 404 都是需要重定向的，比如你是异步加载数据的`restful`请求，例如在打开页面之后异步加载用户详情，即便 404 了也不应该重定向。
+
+> 所以一般不支持在`Context`层做处理，用户每次都得检测是不是 404 或者 500，这样不是很好。
+>
+> 一般我们可以在`AOP`里设计解决方案。
+
+> TODO
+
+## Context 总结 - Context 是线程安全的吗？
+
+> 不是线程安全的！
+
+```go
+type Context struct {
+	Req        *http.Request
+	Resp       http.ResponseWriter
+	PathParams map[string]string
+
+	// cacheQueryValues url.Values 引入URL 查询参数缓存
+	cacheQueryValues url.Values
+}
+```
+
+没有锁，很明显不是线程安全的。
+
+> `Context`不需要保证线程安全，是因为在我们的预期里面，这个`Context`只会被用户在一个方法里面使用，**而且不应该被多个`goroutine`操作**。
+>
+> 对于绝大多数人来说，他们不需要一个线程安全的`Context`。即便真的要线程安全，我们可以**提供一个装饰器**，让用户在使用前手动创建装饰器来转换一下。
+
+```go
+type SafeContext struct {
+	Context
+	mutex sync.RWMutex
+}
+
+func (c *SafeContext) RespJSON1(val any) error {
+	c.mutex.Lock()
+	defer c.mutex.Unlock()
+	return c.Context.RespJSONOK(val)
+}
+
+```
+
+然后使用前可以这样
+
+```go
+h.Get("/user/:id", func(ctx *Context) {
+    safeCtx := SafeContext {
+        Context: *ctx
+    }
+    safeCtx.RespJSON(200, User{Name: "张三"})
+})
+```
+
+## Context 总结 - Context 为什么不设计为接口？
+
+> 目前看来，看不出来设计为接口的必要性。
+>
+> `Echo`设计为接口，但只有一个实现，有点过度设计的感觉
+
+## Context 总结 - Context 能不能使用泛型？
+
+> 不能，因为`Go`的泛型有一个限制，结构体本身可以是泛型的，但是它不能声明泛型方法。
+>
+> 即：`StringValue`也不能声明为泛型，因为我们在结构体上设计了之后，在创建的时候我们不知道用户需要什么作为`T`
+
+## 面试要点
+
+-   **能不能重复读取`HTTP`协议的`Body`内容？**，原生`API`是不可以的。但是我们可以封装来允许重复读取，核心步骤就是将`Body`的内容读取之后存到一个地方，后续都从这个地方读取。
+
+-   能不能修改`HTTP`协议的响应？,原生`API`不可以。但是我们可以使用`RespData`机制，在最后再把数据刷新到网络中，在刷新之前，都是可以修改的。
+
+-   `Form`和`PostForm`的区别：前者包揽后者，正常情况下你的`API`优先使用`Form`就不太可能出错。
+
+-   `Web`框架是怎么支持路径参数的？`Web`框架在发现匹配上了某个路径参数之后，将这段路径记录下来作为路径参数的值，这个值默认是`string`类型，用户自己有需要就可以转化为不同的类型。
+
+    -   路由核心代码
+
+    -   ```go
+        func (r *router) findRoute(method string, path string) (*matchInfo, bool) {
+        	// 沿着树深度遍历查找下去
+        	root, ok := r.trees[method]
+        	if !ok {
+        		return nil, false
+        	}
+        	// 如果是根节点直接返回
+        	if path == "/" {
+        		return &matchInfo{n: root}, true
+        	}
+        	// 把前置和后置的 / 去掉
+        	path = strings.Trim(path, "/")
+        	// 按照 / 切割
+        	segs := strings.Split(path, "/")
+        	// 构造 pathParams
+        	var pathParams map[string]string
+        	for _, seg := range segs {
+        		child, paramChild, found := root.childOf(seg)
+        		if !found {
+        			return nil, false
+        		}
+        		// 命中了路径参数
+        		if paramChild {
+        			if pathParams == nil {
+        				pathParams = make(map[string]string)
+        			}
+        			// path 是 :id 这种形式
+        			pathParams[child.path[1:]] = seg
+        		}
+        		root = child
+        	}
+
+        	// 代表我确实有这个节点
+        	// 但是节点是不是用户注册的业务逻辑 有 handler 的 就不一定了
+        	//return root, root.handler != nil
+        	return &matchInfo{
+        		n:          root,
+        		pathParams: pathParams,
+        	}, true
+        }
+        ```
