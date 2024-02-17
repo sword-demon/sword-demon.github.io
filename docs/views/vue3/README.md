@@ -14,3 +14,6 @@ comment: false
 -   [React + TS 学习](react-ts-learn.md)
 -   [Vue3 基础学习](vue3-basic.md)
 - [按键修饰符](key-desc.md)
+- [tov-ui工程目录初始化](project-directory-init.md)
+- [tov-ui配置eslint](tov-ui-eslint-config.md)
+- [tov-ui配置husky](tov-ui-husky-config.md)
