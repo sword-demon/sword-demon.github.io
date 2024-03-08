@@ -4,8 +4,8 @@ layout: Blog
 icon: home
 title: 首页
 # heroImage: https://www.wjstar.top/img/avatar.jpeg
-heroText: 神隐
-# heroFullScreen: true
+heroText: 无解
+heroFullScreen: true
 # bgImage: https://virusoss.oss-cn-shanghai.aliyuncs.com/images/Fk2mIrJZJPwZpHeN8-3Q4gCa1vfs.jpeg
 tagline: 人生就是一场无解的游戏
 projects:
@@ -45,6 +45,10 @@ projects:
       name: 老苗博客
       desc: 多数笔记，少数牢骚
       link: https://miaoqiang.top/
+    - icon: friend
+      name: 烨哥儿
+      desc: 前端同事
+      link: https://yezhang24.github.io/
 
 footer: 无解的游戏
 ---

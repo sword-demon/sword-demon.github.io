@@ -17,3 +17,4 @@ comment: false
 - [tov-ui工程目录初始化](project-directory-init.md)
 - [tov-ui配置eslint](tov-ui-eslint-config.md)
 - [tov-ui配置husky](tov-ui-husky-config.md)
+- [tov-ui配置lint-staged](tov-ui-lint-staged.md)

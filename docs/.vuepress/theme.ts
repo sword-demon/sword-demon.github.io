@@ -44,7 +44,7 @@ export default hopeTheme({
             Gitee: 'https://gitee.com/wxvirus',
             GitHub: 'https://github.com/sword-demon',
         },
-        avatar: 'https://www.wjstar.top/img/avatar.jpeg',
+        avatar: 'https://sword-demon.github.io/vue-blog/logo.jpg',
         roundAvatar: true,
     },
 
