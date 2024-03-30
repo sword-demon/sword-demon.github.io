@@ -20,5 +20,6 @@ export const deploy = arraySidebar([
     'nsf-server-shared',
     'mac-m1-ubuntu-k8s-cluster',
     'docker-cmd-summarize',
-    'linux-fastdfs'
+    'linux-fastdfs',
+    'docker-mysql-redis-operate'
 ])

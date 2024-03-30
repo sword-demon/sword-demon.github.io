@@ -5,7 +5,7 @@ icon: home
 title: 首页
 # heroImage: https://www.wjstar.top/img/avatar.jpeg
 heroText: 无解
-heroFullScreen: true
+# heroFullScreen: true
 # bgImage: https://virusoss.oss-cn-shanghai.aliyuncs.com/images/Fk2mIrJZJPwZpHeN8-3Q4gCa1vfs.jpeg
 tagline: 人生就是一场无解的游戏
 projects:

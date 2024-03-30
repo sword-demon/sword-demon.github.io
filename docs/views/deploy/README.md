@@ -27,3 +27,4 @@ article: false
 -   [mac m1 系统使用 ubuntu arm 虚拟机部署 k8s 集群](mac-m1-ubuntu-k8s-cluster.md)
 -   [Docker 命令总结](docker-cmd-summarize.md)
 -   [FastDFS](linux-fastdfs.md)
+- [Docker配置redis和mysql](docker-mysql-redis-operate.md)
