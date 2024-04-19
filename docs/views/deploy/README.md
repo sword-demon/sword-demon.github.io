@@ -28,3 +28,4 @@ article: false
 -   [Docker 命令总结](docker-cmd-summarize.md)
 -   [FastDFS](linux-fastdfs.md)
 - [Docker配置redis和mysql](docker-mysql-redis-operate.md)
+- [K8S 入门](k8s-apply.md)

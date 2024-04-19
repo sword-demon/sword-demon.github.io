@@ -21,5 +21,6 @@ export const deploy = arraySidebar([
     'mac-m1-ubuntu-k8s-cluster',
     'docker-cmd-summarize',
     'linux-fastdfs',
-    'docker-mysql-redis-operate'
+    'docker-mysql-redis-operate',
+    'k8s-apply'
 ])
