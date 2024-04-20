@@ -14,3 +14,5 @@ comment: false
 -   [宏入门](marco-base.md)
 -   [所有权以及所有权转移](owner-move-clonecopy.md)
 - [rust常用工具](rust-tools.md)
+- [rust常见问题](rust-interview-qa.md)
+- [rust处理csv的cli工具](rust-csv-cli)
