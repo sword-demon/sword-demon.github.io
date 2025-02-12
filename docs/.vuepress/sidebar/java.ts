@@ -12,4 +12,5 @@ export const javas = arraySidebar([
     'ruoyi-scaffold-study',
     'java-mqtt',
     'pan-system-learn',
+    'rocketmq-service'
 ]);
