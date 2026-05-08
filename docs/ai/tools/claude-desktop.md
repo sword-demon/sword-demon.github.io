@@ -1,7 +1,7 @@
 ---
 title: Claude Desktop 第三方 Provider 配置指南
 description: 详细讲解如何在 Claude Desktop 中配置自定义第三方 API Provider，包括 macOS 和 Windows 双平台的完整操作流程。
-date: 2026-05-21 21:22:02
+date: 2026-05-09 21:22:02
 categories:
   - ClaudeCode
 tags:
