@@ -1,9 +1,10 @@
 ---
 title: 递归和斐波那契数列
 date: 2022-05-28 15:39:15
-category: DataStruct
-tag:
-    - recursive
+categories:
+- DataStruct
+tags:
+- recursive
 ---
 
 ## 递归和斐波那契数列

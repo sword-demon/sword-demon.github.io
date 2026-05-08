@@ -1,10 +1,11 @@
 ---
 title: go面试题积攒
 date: 2022-06-30 00:12:10
-category: Interview
-tag:
-    - go
-    - interview
+categories:
+- Interview
+tags:
+- go
+- interview
 ---
 
 ## 以下 go 代码输出什么

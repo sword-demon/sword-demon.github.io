@@ -1,9 +1,10 @@
 ---
 title: redis并发竞争问题以及分布式锁
 date: 2023-01-15 21:24:10
-category: Redis
-tag:
-    - cocurrence
+categories:
+- Redis
+tags:
+- cocurrence
 ---
 
 # redis 并发竞争问题以及分布式锁

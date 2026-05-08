@@ -1,9 +1,10 @@
 ---
 title: Portainer 的安装
 date: 2023-02-05 16:12:10
-category: Deploy
-tag:
-    - Portainer
+categories:
+- Deploy
+tags:
+- Portainer
 ---
 
 # Portainer 的安装

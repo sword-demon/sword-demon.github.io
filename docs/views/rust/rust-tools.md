@@ -1,9 +1,9 @@
 ---
 title: rust常用工具
 date: 2024-03-23
-tag:
- - rust
- - tool
+tags:
+- rust
+- tool
 ---
 
 # 常用工具

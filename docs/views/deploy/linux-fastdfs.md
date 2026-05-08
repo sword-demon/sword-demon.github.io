@@ -1,10 +1,11 @@
 ---
 title: FastDFS
 date: 2023-09-23 12:40:10
-category: Deploy
-tag:
-    - fastdfs
-    - linux
+categories:
+- Deploy
+tags:
+- fastdfs
+- linux
 ---
 
 # 中小文件最流行的分布式文件服务-FastDFS

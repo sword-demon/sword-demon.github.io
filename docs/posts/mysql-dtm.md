@@ -1,10 +1,11 @@
 ---
 title: MySQL事务并发问题
 date: 2021-11-28 19:29:15
-category: Note
-tag:
-    - MySQL
-    - dtm
+categories:
+- Note
+tags:
+- MySQL
+- dtm
 ---
 
 ## 脏读(Dirty read)

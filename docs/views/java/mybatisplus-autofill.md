@@ -1,9 +1,10 @@
 ---
 title: MybatisPlus 公共字段自动填充
 date: 2022-11-20 21:39:10
-category: Java
-tag:
-    - MyBatisPlus
+categories:
+- Java
+tags:
+- MyBatisPlus
 ---
 
 # MybatisPlus 公共字段自动填充

@@ -1,9 +1,10 @@
 ---
 title: vue3基础学习
 date: 2023-09-24 09:33:10
-category: Vue3
-tag:
-    - vue3
+categories:
+- Vue3
+tags:
+- vue3
 ---
 
 # Vue3 学习

@@ -1,9 +1,10 @@
 ---
 title: 排序算法
 date: 2021-11-03 20:27:15
-category: DataStruct
-tag:
-    - sort
+categories:
+- DataStruct
+tags:
+- sort
 ---
 
 ## 冒泡排序

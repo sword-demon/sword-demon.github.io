@@ -1,9 +1,10 @@
 ---
 title: 互斥锁和读写互斥锁
 date: 2022-06-28 22:10:10
-category: Go
-tag:
-    - lock
+categories:
+- Go
+tags:
+- lock
 ---
 
 ## Go 中的锁

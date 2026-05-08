@@ -1,9 +1,10 @@
 ---
 title: unix域socket
 date: 2022-07-07 22:49:10
-category: Socket
-tag:
-    - unix
+categories:
+- Socket
+tags:
+- unix
 ---
 
 ## UNIX TCP

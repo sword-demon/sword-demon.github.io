@@ -1,9 +1,10 @@
 ---
 title: vscode生成自己的代码片段
 date: 2022-06-19 23:32:10
-category: Note
-tag:
-    - vscode
+categories:
+- Note
+tags:
+- vscode
 ---
 
 ## 设置 vue 快速生成 data

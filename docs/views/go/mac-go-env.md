@@ -1,10 +1,11 @@
 ---
 title: mac搭建go语言环境
 date: 2021-09-23 23:10:00
-category: Go
-tag:
-    - mac
-    - env
+categories:
+- Go
+tags:
+- mac
+- env
 ---
 
 ## Mac 系统 Go 开发环境搭建

@@ -1,9 +1,10 @@
 ---
 title: context上下文
 date: 2022-08-03
-category: Go
-tag:
-    - context
+categories:
+- Go
+tags:
+- context
 ---
 
 ## 引入

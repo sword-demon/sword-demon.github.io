@@ -1,10 +1,11 @@
 ---
 title: Workerman Websocket Demo
 date: 2022-06-29 23:58:10
-category: Socket
-tag:
-    - workerman
-    - Websocket
+categories:
+- Socket
+tags:
+- workerman
+- Websocket
 ---
 
 ```php

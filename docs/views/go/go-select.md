@@ -1,10 +1,11 @@
 ---
 title: select多路复用
 date: 2022-06-25 21:10:21
-category: Go
-tag:
-    - select
-    - channel
+categories:
+- Go
+tags:
+- select
+- channel
 ---
 
 ## select 多路复用

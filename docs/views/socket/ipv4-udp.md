@@ -1,9 +1,10 @@
 ---
 title: IPV4 UDP
 date: 2022-07-03 22:43:10
-category: Socket
-tag:
-    - UDP
+categories:
+- Socket
+tags:
+- UDP
 ---
 
 ## IPV4 UDP 服务端

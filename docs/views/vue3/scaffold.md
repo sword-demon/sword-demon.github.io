@@ -1,7 +1,8 @@
 ---
 title: 脚手架项目的基本搭建
 date: 2025-02-09 21:29:10
-category: Vue3
+categories:
+- Vue3
 ---
 
 ## 配置项目基础结构

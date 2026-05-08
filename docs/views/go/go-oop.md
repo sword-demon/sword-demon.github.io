@@ -1,7 +1,8 @@
 ---
 title: go面向对象(接口)
 date: 2022-03-20 15:20:15
-category: Go
+categories:
+- Go
 ---
 
 ## 面向对象

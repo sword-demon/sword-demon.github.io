@@ -1,10 +1,11 @@
 ---
 title: 使用rancher安装k8s集群
 date: 2022-11-19 21:28:10
-category: Deploy
-tag:
-    - linux
-    - K8S
+categories:
+- Deploy
+tags:
+- linux
+- K8S
 ---
 
 # K8S 入门

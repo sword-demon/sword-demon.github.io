@@ -1,8 +1,8 @@
 ---
 title: Kubernetes 入门
 date: 2024-04-19
-tag:
- - k8s
+tags:
+- k8s
 ---
 
 # Kubernetes 入门

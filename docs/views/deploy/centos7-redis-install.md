@@ -1,10 +1,11 @@
 ---
 title: Redis 安装
 date: 2023-02-14 22:44:10
-category: Deploy
-tag:
-    - redis
-    - gcc
+categories:
+- Deploy
+tags:
+- redis
+- gcc
 ---
 
 # Redis 安装

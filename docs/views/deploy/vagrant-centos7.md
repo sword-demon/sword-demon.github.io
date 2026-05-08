@@ -2,9 +2,9 @@
 title: vagrant创建centos7虚拟机
 date: 2022-06-19 23:35:10
 catgory: Deploy
-tag:
-    - vagrant
-    - centos7
+tags:
+- vagrant
+- centos7
 ---
 
 ## 前提是必须下好 `virtual box`

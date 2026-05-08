@@ -1,9 +1,10 @@
 ---
 title: Linux操作Java环境以及运维部署
 date: 2022-12-11 22:24:10
-category: Java
-tag:
-    - operations
+categories:
+- Java
+tags:
+- operations
 ---
 
 # Linux 安装 Java 相关以及运维部署

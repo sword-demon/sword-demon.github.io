@@ -1,10 +1,10 @@
 ---
 title: Docker配置redis和mysql的操作记录
 date: 2024-03-30
-tag:
- - docker
- - mysql
- - redis
+tags:
+- docker
+- mysql
+- redis
 ---
 
 ## MySQL8 容器

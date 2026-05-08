@@ -1,9 +1,10 @@
 ---
 title: leetcode算法题加一
 date: 2022-06-22 23:29:10
-category: DataStruct
-tag:
-    - leetcode
+categories:
+- DataStruct
+tags:
+- leetcode
 ---
 
 ## 加一

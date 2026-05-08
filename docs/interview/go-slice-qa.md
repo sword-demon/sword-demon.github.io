@@ -1,10 +1,11 @@
 ---
 title: 切片原理常问
 date: 2022-11-23 00:10:10
-category: Interview
-tag:
-    - go
-    - slice
+categories:
+- Interview
+tags:
+- go
+- slice
 ---
 
 # 切片常问

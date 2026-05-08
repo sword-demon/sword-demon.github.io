@@ -1,7 +1,8 @@
 ---
 title: ELF文件结构
 date: 2022-04-30 14:28:15
-category: GoCore
+categories:
+- GoCore
 ---
 
 ## 编译好的含有程序指令+程序数据的二进制文件 - ELF 文件结构

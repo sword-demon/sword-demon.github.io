@@ -1,9 +1,10 @@
 ---
 title: 网盘系统学习
 date: 2023-07-23 21:49:10
-category: Java
-tag:
-    - SpringBoot&Vue3
+categories:
+- Java
+tags:
+- SpringBoot&Vue3
 ---
 
 # 网盘系统

@@ -1,7 +1,8 @@
 ---
 title: C语言简单代码解析
 date: 2022-07-05 00:06:10
-category: C
+categories:
+- C
 ---
 
 ## C 语言简单代码解析

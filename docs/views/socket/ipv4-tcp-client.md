@@ -1,9 +1,10 @@
 ---
 title: IPV4 TCP 套接字客户端
 date: 2022-06-29 23:54:10
-category: Socket
-tag:
-    - TCP
+categories:
+- Socket
+tags:
+- TCP
 ---
 
 ## IPV4 TCP 套接字客户端

@@ -1,7 +1,8 @@
 ---
 title: go语言常量
 date: 2021-10-12 23:10:15
-category: Go
+categories:
+- Go
 ---
 
 ## 常量概述

@@ -1,10 +1,11 @@
 ---
 title: Docker安装MongoDB
 date: 2023-06-17 23:36:10
-category: Deploy
-tag:
-    - docker
-    - MongoDB
+categories:
+- Deploy
+tags:
+- docker
+- MongoDB
 ---
 
 ## 安装 mongo 镜像

@@ -1,10 +1,11 @@
 ---
 title: consul集群角色选举Raft算法
 date: 2023-01-15 21:28:10
-category: Deploy
-tag:
-    - consul
-    - raft
+categories:
+- Deploy
+tags:
+- consul
+- raft
 ---
 
 # consul 集群角色选举 Raft 算法

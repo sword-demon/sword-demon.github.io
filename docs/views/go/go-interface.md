@@ -1,9 +1,10 @@
 ---
 title: go接口
 date: 2022-03-22
-category: Go
-tag:
-    - interface
+categories:
+- Go
+tags:
+- interface
 ---
 
 ## 接口概念

@@ -1,10 +1,11 @@
 ---
 title: 变量内存地址分析
 date: 2022-05-20 23:02:15
-category: C
-tag:
-    - variable
-    - memory
+categories:
+- C
+tags:
+- variable
+- memory
 ---
 
 ## 变量内存地址分析

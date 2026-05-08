@@ -1,9 +1,10 @@
 ---
 title: go语言数据类型转换
 date: 2022-01-22 20:38:15
-category: Go
-tag:
-    - convert
+categories:
+- Go
+tags:
+- convert
 ---
 
 ## 简单的案例

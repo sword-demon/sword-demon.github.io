@@ -1,7 +1,8 @@
 ---
 title: socket网络编程概述
 date: 2022-06-20 23:20:10
-category: Socket
+categories:
+- Socket
 ---
 
 ## 概述

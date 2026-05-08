@@ -1,9 +1,10 @@
 ---
 title: Iterator 模式
 date: 2022-11-19 21:45:10
-category: DataStruct
-tag:
-    - designer
+categories:
+- DataStruct
+tags:
+- designer
 ---
 
 # Iterator 模式

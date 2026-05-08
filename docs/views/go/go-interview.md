@@ -1,9 +1,10 @@
 ---
 title: go面试题
 date: 2022-05-12 22:03:41
-category: Go
-tag:
-    - interview
+categories:
+- Go
+tags:
+- interview
 ---
 
 # 面试题

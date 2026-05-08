@@ -1,9 +1,10 @@
 ---
 title: java对接 mqtt
 date: 2023-06-12 00:03:10
-category: Java
-tag:
-    - MQTT
+categories:
+- Java
+tags:
+- MQTT
 ---
 
 ## 依赖

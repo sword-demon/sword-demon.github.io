@@ -1,9 +1,10 @@
 ---
 title: SQL的生命周期
 date: 2022-06-22 23:22:10
-category: Note
-tag:
-    - MySQL
+categories:
+- Note
+tags:
+- MySQL
 ---
 ## 执行流程
 

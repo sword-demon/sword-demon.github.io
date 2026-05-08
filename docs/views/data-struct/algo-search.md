@@ -1,9 +1,10 @@
 ---
 title: 查找算法
 date: 2021-10-22 22:14:15
-category: DataStruct
-tag:
-    - search
+categories:
+- DataStruct
+tags:
+- search
 ---
 
 ## 查找

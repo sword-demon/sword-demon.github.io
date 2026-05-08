@@ -1,10 +1,11 @@
 ---
 title: Swoole事件回调
 date: 2023-01-05 21:02:10
-category: Process
-tag:
-    - Swoole
-    - Event
+categories:
+- Process
+tags:
+- Swoole
+- Event
 ---
 
 # Swoole 事件回调

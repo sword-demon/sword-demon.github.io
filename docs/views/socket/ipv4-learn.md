@@ -1,10 +1,11 @@
 ---
 title: IPV4 TCP套接字服务端
 date: 2022-06-26 16:50:10
-category: Socket
-tag:
-    - IPV4
-    - TCP
+categories:
+- Socket
+tags:
+- IPV4
+- TCP
 ---
 
 [https://www.php.net/manual/zh/book.stream.php](PHP Stream 函数文档地址)

@@ -1,10 +1,11 @@
 ---
 title: tov-ui配置lint-staged
 date: 2024-03-08 22:36:10
-category: Vue3
-tag:
-  - tov-ui
-  - vue3
+categories:
+- Vue3
+tags:
+- tov-ui
+- vue3
 ---
 
 # lint-staged配置

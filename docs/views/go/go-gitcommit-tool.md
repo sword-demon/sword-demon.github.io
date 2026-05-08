@@ -1,7 +1,8 @@
 ---
 title: go 比较好用的一些工具库
 date: 2023-02-12
-category: Go
+categories:
+- Go
 ---
 
 # go 比较好的一些规范

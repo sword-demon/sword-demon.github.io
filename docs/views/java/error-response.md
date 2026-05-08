@@ -1,9 +1,10 @@
 ---
 title: Error统一处理
 date: 2022-12-03 23:15:10
-category: Java
-tag:
-    - ErrorController
+categories:
+- Java
+tags:
+- ErrorController
 ---
 
 # Error 统一处理

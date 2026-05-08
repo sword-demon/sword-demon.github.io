@@ -1,9 +1,10 @@
 ---
 title: ELF 可执行文件的装载与执行
 date: 2022-11-26 20:28:15
-category: C
-tag:
-    - ELF
+categories:
+- C
+tags:
+- ELF
 ---
 
 # ELF 可执行文件的装载与执行

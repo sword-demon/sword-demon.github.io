@@ -1,9 +1,10 @@
 ---
 title: redis持久化机制以及缓存过期和淘汰策略
 date: 2023-01-04 22:03:10
-category: Redis
-tag:
-    - redis
+categories:
+- Redis
+tags:
+- redis
 ---
 
 # redis 持久化机制以及缓存过期和淘汰策略

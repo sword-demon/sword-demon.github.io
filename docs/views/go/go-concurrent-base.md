@@ -1,7 +1,8 @@
 ---
 title: 并发基础
 date: 2021-09-26 22:44:15
-category: Go
+categories:
+- Go
 ---
 
 :::tip

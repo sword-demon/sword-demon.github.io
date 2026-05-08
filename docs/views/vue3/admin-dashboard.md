@@ -1,10 +1,11 @@
 ---
 title: 后台主控面板开发
 date: 2022-10-23 18:02:10
-category: Vue3
-tag:
-    - Dashboard
-    - vue3
+categories:
+- Vue3
+tags:
+- Dashboard
+- vue3
 ---
 
 # 后台主控面板开发

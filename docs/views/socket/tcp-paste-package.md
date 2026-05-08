@@ -1,9 +1,10 @@
 ---
 title: TCP 粘包
 date: 2023-02-11 18:27:20
-category: Socket
-tag:
-    - tcp
+categories:
+- Socket
+tags:
+- tcp
 ---
 
 # TCP 粘包

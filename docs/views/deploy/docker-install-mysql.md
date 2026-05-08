@@ -1,10 +1,11 @@
 ---
 title: Docker安装MySQL
 date: 2022-06-19 23:46:10
-category: Deploy
-tag:
-    - docker
-    - MySQL
+categories:
+- Deploy
+tags:
+- docker
+- MySQL
 ---
 
 ## 下载镜像文件

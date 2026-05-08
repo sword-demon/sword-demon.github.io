@@ -2,10 +2,9 @@
 title: 处理csv
 date: 2024-04-20
 sticky: 2
-tag:
- - rust
- - cli
-
+tags:
+- rust
+- cli
 ---
 
 # 处理 csv

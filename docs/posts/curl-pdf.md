@@ -1,9 +1,10 @@
 ---
 title: CURL远程下载PDF
 date: 2022-07-18 23:02:10
-category: Note
-tag:
-    - curl
+categories:
+- Note
+tags:
+- curl
 ---
 
 ## 远程调用携带 Token 下载 PDF

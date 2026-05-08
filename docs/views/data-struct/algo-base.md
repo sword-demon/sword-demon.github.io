@@ -1,9 +1,10 @@
 ---
 title: 算法基础学习
 date: 2021-10-12 23:40:15
-category: DataStruct
-tag:
-    - algorithm
+categories:
+- DataStruct
+tags:
+- algorithm
 ---
 
 ## 简单判断算法的时间复杂度

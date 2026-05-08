@@ -1,10 +1,11 @@
 ---
 title: 配置中心的重要性
 date: 2023-01-15 21:30:10
-category: Deploy
-tag:
-    - consul
-    - raft
+categories:
+- Deploy
+tags:
+- consul
+- raft
 ---
 
 # 配置中心的重要性

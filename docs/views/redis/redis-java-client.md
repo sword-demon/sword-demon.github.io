@@ -1,9 +1,10 @@
 ---
 title: Redis的Java 客户端
 date: 2023-08-22 23:20:10
-category: Redis
-tag:
-    - client
+categories:
+- Redis
+tags:
+- client
 ---
 
 # Redis 的 Java 客户端

@@ -1,10 +1,11 @@
 ---
 title: Vue 3 + Vite 后台管理系统
 date: 2023-06-15 21:44:10
-category: Vue3
-tag:
-    - vite4
-    - vue3
+categories:
+- Vue3
+tags:
+- vite4
+- vue3
 ---
 
 # Vue 3 + Vite 后台管理系统

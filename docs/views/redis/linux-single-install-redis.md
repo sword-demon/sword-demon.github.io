@@ -1,9 +1,10 @@
 ---
 title: 单机安装redis
 date: 2022-11-21 22:47:10
-category: Redis
-tag:
-    - redis
+categories:
+- Redis
+tags:
+- redis
 ---
 
 # 单机安装 redis

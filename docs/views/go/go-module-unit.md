@@ -1,9 +1,10 @@
 ---
 title: 单元测试
 date: 2021-09-24 11:10:39
-category: Go
-tag:
-    - unit
+categories:
+- Go
+tags:
+- unit
 ---
 
 ## Go Package 管理发展史

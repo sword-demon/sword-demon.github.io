@@ -1,10 +1,11 @@
 ---
 title: ios开发者的flutter学习
 date: 2023-06-15 21:36:10
-category: Flutter
-tag:
-    - flutter
-    - ios
+categories:
+- Flutter
+tags:
+- flutter
+- ios
 ---
 
 # ios 开发者的 flutter 快速上手指南

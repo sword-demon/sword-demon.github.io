@@ -1,10 +1,11 @@
 ---
 title: gRPC和protobuf
 date: 2022-07-10 21:58:10
-category: Go
-tag:
-    - gRPC
-    - protobuf
+categories:
+- Go
+tags:
+- gRPC
+- protobuf
 ---
 
 ## gRPC

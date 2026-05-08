@@ -1,9 +1,10 @@
 ---
 title: C编译链接的过程
 date: 2022-05-12 21:59:15
-category: C
-tag:
-    - ld
+categories:
+- C
+tags:
+- ld
 ---
 
 # C 编译、链接过程

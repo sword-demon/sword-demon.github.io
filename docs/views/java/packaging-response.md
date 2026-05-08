@@ -1,9 +1,10 @@
 ---
 title: 封装响应对象
 date: 2022-11-21 22:52:10
-category: Java
-tag:
-    - Response
+categories:
+- Java
+tags:
+- Response
 ---
 
 ## 封装公共响应对象类

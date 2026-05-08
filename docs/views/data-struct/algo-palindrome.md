@@ -1,9 +1,10 @@
 ---
 title: Go实现回文检测
-date: 2022-7-10 17:21:10
-category: DataStruct
-tag:
- - palindrome
+date: 2022-07-10 17:21:10
+categories:
+- DataStruct
+tags:
+- palindrome
 ---
 ## Go语言实现回文检测
 

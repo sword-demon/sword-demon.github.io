@@ -1,10 +1,11 @@
 ---
 title: mac m1 安装laradock
 date: 2022-06-19 23:39:10
-category: Deploy
-tag:
-    - mac m1
-    - laradock
+categories:
+- Deploy
+tags:
+- mac m1
+- laradock
 ---
 
 ## 安装配置

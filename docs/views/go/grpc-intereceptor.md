@@ -1,10 +1,11 @@
 ---
 title: gRPC拦截器
 date: 2023-01-24 20:00:15
-category: Go
-tag:
-    - gRPC
-    - intereceptor
+categories:
+- Go
+tags:
+- gRPC
+- intereceptor
 ---
 
 # gRPC 拦截器

@@ -1,7 +1,8 @@
 ---
 title: 动态链接
 date: 2022-04-24 22:27:15
-category: GoCore
+categories:
+- GoCore
 ---
 
 ## 动态链接

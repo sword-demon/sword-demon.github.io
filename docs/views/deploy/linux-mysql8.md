@@ -1,10 +1,11 @@
 ---
 title: Linux安装MySQL8
 date: 2022-08-06
-category: Deploy
-tag:
-    - MySQL
-    - Linux
+categories:
+- Deploy
+tags:
+- MySQL
+- Linux
 ---
 
 ## 目录

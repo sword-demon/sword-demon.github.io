@@ -1,9 +1,10 @@
 ---
 title: 策略模式
 date: 2021-11-30 18:37:15
-category: Note
-tag:
-    - designer
+categories:
+- Note
+tags:
+- designer
 ---
 
 ## 引入

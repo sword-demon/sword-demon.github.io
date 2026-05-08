@@ -1,10 +1,11 @@
 ---
 title: 程序与进程
 date: 2022-07-17 11:43:10
-category: Process
-tag:
-    - process
-    - programe
+categories:
+- Process
+tags:
+- process
+- programe
 ---
 
 ## 程序 Program

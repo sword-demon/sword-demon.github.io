@@ -1,10 +1,11 @@
 ---
 title: tov-ui配置Husky
 date: 2024-02-17 23:01:10
-category: Vue3
-tag:
-  - tov-ui
-  - vue3
+categories:
+- Vue3
+tags:
+- tov-ui
+- vue3
 ---
 
 # 配置 Husky

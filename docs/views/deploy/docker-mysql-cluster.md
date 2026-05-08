@@ -1,10 +1,11 @@
 ---
 title: Docker部署MySQL集群
 date: 2022-12-17 22:05:10
-category: Deploy
-tag:
-    - docker
-    - mysql
+categories:
+- Deploy
+tags:
+- docker
+- mysql
 ---
 
 # Docker 部署 MySQL 集群

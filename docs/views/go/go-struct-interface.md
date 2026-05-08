@@ -1,10 +1,11 @@
 ---
 title: go结构体与接口
-category: Go
 date: 2022-05-24
-tag:
-    - struct
-    - interface
+categories:
+- Go
+tags:
+- struct
+- interface
 ---
 
 ## 类型别名和自定义类型

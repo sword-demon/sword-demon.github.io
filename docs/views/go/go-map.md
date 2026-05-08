@@ -1,7 +1,8 @@
 ---
 title: map类型
 date: 2022-03-17 23:10:15
-category: Go
+categories:
+- Go
 ---
 
 ## 定义

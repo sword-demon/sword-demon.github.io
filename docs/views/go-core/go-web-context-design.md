@@ -1,7 +1,8 @@
 ---
 title: go的web框架Context设计
 date: 2023-10-25 22:05:15
-category: GoCore
+categories:
+- GoCore
 ---
 
 # Context - 处理内容

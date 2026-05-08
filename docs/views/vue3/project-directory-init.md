@@ -1,10 +1,11 @@
 ---
 title: tov-ui工程目录初始化
 date: 2024-02-17 23:01:10
-category: Vue3
-tag:
-  - tov-ui
-  - vue3
+categories:
+- Vue3
+tags:
+- tov-ui
+- vue3
 ---
 
 # tov-ui工程目录初始化

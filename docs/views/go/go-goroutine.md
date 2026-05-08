@@ -1,7 +1,8 @@
 ---
 title: goroutine
-category: Go
 date: 2022-03-22 19:21:15
+categories:
+- Go
 ---
 
 ## 基本概念

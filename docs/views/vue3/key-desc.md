@@ -1,10 +1,11 @@
 ---
 title: 按键修饰符
 date: 2024-01-25 22:47:10
-category: Vue3
-tag:
-  - KeyBoard
-  - vue3
+categories:
+- Vue3
+tags:
+- KeyBoard
+- vue3
 ---
 
 # 按键修饰符

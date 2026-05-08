@@ -1,7 +1,8 @@
 ---
 title: go基本数据类型
 date: 2022-06-19
-category: Go
+categories:
+- Go
 ---
 
 ## bool 类型

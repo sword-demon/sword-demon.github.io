@@ -1,10 +1,11 @@
 ---
 title: Linux安装Nginx和配置
 date: 2022-08-13 22:06:10
-category: Deploy
-tag:
-    - nginx
-    - linux
+categories:
+- Deploy
+tags:
+- nginx
+- linux
 ---
 
 # Linux 安装 Nginx 和配置

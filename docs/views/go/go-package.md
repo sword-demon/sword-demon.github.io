@@ -1,10 +1,11 @@
 ---
 title: go包管理
 date: 2021-09-23
-category: Go
-tag:
-    - package
-    - mod
+categories:
+- Go
+tags:
+- package
+- mod
 ---
 
 ## 初识包管理

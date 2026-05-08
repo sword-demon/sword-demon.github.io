@@ -1,10 +1,11 @@
 ---
 title: 选项式API和组合式API
 date: 2024-01-29 22:02:10
-category: Vue3
-tag:
-    - composition
-    - vue3
+categories:
+- Vue3
+tags:
+- composition
+- vue3
 ---
 
 # 选项式API和组合式 API 的区别

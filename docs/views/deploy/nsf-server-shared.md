@@ -1,9 +1,10 @@
 ---
 title: 部署 nsf 服务进行跨主机文件共享
 date: 2023-02-19 22:52:10
-category: Deploy
-tag:
-    - nsf
+categories:
+- Deploy
+tags:
+- nsf
 ---
 
 # 部署 nsf 服务进行跨主机文件共享

@@ -1,9 +1,10 @@
 ---
 title: 线性表
 date: 2022-06-30 22:37:10
-category: DataStruct
-tag:
-    - ADT
+categories:
+- DataStruct
+tags:
+- ADT
 ---
 
 ## 线性表

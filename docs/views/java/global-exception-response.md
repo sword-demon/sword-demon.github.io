@@ -1,9 +1,10 @@
 ---
 title: 统一异常拦截
 date: 2022-12-03 23:14:10
-category: Java
-tag:
-    - RestControllerAdvice
+categories:
+- Java
+tags:
+- RestControllerAdvice
 ---
 
 # 统一异常拦截

@@ -1,9 +1,10 @@
 ---
 title: time标准库
 date: 2022-06-13 22:45:15
-category: Go
-tag:
-    - time
+categories:
+- Go
+tags:
+- time
 ---
 
 :::tip 转自

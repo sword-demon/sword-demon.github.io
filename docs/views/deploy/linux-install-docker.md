@@ -1,10 +1,11 @@
 ---
 title: Linux安装docker
 date: 2022-06-19 23:44:10
-category: Deploy
-tag:
-    - linux
-    - docker
+categories:
+- Deploy
+tags:
+- linux
+- docker
 ---
 
 ## 安装 docker

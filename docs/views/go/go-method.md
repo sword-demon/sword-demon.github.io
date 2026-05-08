@@ -1,9 +1,10 @@
 ---
 title: go函数式编程
 date: 2022-03-22 21:22:15
-category: Go
-tag:
-    - closure
+categories:
+- Go
+tags:
+- closure
 ---
 
 ## 函数与闭包

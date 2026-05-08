@@ -1,10 +1,11 @@
 ---
 title: Map的底层
 date: 2022-06-24 00:43:10
-category: GoCore
-tag:
-    - theory
-    - map
+categories:
+- GoCore
+tags:
+- theory
+- map
 ---
 
 ## 定义

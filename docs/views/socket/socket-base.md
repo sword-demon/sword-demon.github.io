@@ -1,9 +1,10 @@
 ---
 title: PHP Socket练习
 date: 2022-06-24 00:39:20
-category: Socket
-tag:
-    - socket
+categories:
+- Socket
+tags:
+- socket
 ---
 
 ## TCP 服务端使用 select 支持多路复用

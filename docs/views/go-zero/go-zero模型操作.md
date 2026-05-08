@@ -1,9 +1,10 @@
 ---
 title: go-zero模型操作
 date: 2022-06-19
-category: go-zero
-tag:
-    - microservice
+categories:
+- go-zero
+tags:
+- microservice
 ---
 
 ## goctl 生成 model

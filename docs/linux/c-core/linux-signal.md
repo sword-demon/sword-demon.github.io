@@ -1,9 +1,10 @@
 ---
 title: Linux信号
 date: 2023-05-21 15:43:15
-category: C
-tag:
-    - signal
+categories:
+- C
+tags:
+- signal
 ---
 
 # 信号

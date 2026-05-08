@@ -1,10 +1,11 @@
 ---
 title: map的扩容
 date: 2022-07-17 14:44:10
-category: GoCore
-tag:
-    - grown
-    - bucket
+categories:
+- GoCore
+tags:
+- grown
+- bucket
 ---
 
 ## map 为什么要扩容

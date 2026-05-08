@@ -1,9 +1,10 @@
 ---
 title: 文件包含
 date: 2022-05-28 15:50:15
-category: C
-tag:
-    - include
+categories:
+- C
+tags:
+- include
 ---
 
 ## 文件包含

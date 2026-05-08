@@ -1,9 +1,10 @@
 ---
 title: 如何避免高并发场景下数据不一致性
 date: 2023-01-08 14:54:10
-category: Redis
-tag:
-    - cocurrence
+categories:
+- Redis
+tags:
+- cocurrence
 ---
 
 # 如何避免高并发场景下数据不一致性

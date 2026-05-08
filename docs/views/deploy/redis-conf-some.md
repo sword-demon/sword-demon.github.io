@@ -1,9 +1,10 @@
 ---
 title: Redis 的配置
 date: 2023-02-19 22:52:10
-category: Deploy
-tag:
-    - redis
+categories:
+- Deploy
+tags:
+- redis
 ---
 
 # Redis 的配置

@@ -1,10 +1,11 @@
 ---
 title: Docker安装Redis
 date: 2022-06-19 23:48:10
-category: Deploy
-tag:
-    - docker
-    - redis
+categories:
+- Deploy
+tags:
+- docker
+- redis
 ---
 
 ## 下载安装 redis 镜像

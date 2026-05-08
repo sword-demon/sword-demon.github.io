@@ -1,9 +1,10 @@
 ---
 title: 缓存问题应对方案
 date: 2023-01-07 21:17:10
-category: Redis
-tag:
-    - cache
+categories:
+- Redis
+tags:
+- cache
 ---
 
 # 缓存问题应对方案

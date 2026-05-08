@@ -1,11 +1,11 @@
 ---
 title: go结构体内存对齐
 date: 2022-06-04 16:02:15
-category: Go
-star: true
-tag:
-    - struct
-    - memory
+categories:
+- Go
+tags:
+- struct
+- memory
 ---
 
 ## go 结构体内存对齐

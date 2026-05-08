@@ -1,9 +1,10 @@
 ---
 title: Docker命令总结
 date: 2023-04-09 00:25:10
-category: Deploy
-tag:
-    - Docker
+categories:
+- Deploy
+tags:
+- Docker
 ---
 
 # 命令总结

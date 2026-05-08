@@ -1,9 +1,10 @@
 ---
 title: go文件操作
 date: 2022-06-05 14:56:15
-category: Go
-tag:
-    - file
+categories:
+- Go
+tags:
+- file
 ---
 
 ## 打开和关闭文件

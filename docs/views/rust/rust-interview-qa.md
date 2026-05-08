@@ -2,11 +2,10 @@
 title: 问题积累
 date: 2024-04-20
 sticky: 2
-tag:
- - rust
- - question
- - interview
-
+tags:
+- rust
+- question
+- interview
 ---
 
 # 问题积累

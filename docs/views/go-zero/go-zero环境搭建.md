@@ -1,9 +1,10 @@
 ---
 title: go-zero环境搭建
 date: 2022-06-12 09:50:15
-category: go-zero
-tag:
-    - goctl
+categories:
+- go-zero
+tags:
+- goctl
 ---
 
 [go-zero github 地址](https://github.com/zeromicro/go-zero)

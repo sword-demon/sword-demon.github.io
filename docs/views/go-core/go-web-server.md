@@ -1,7 +1,8 @@
 ---
 title: web框架核心-Server
 date: 2023-04-09 00:31:15
-category: GoCore
+categories:
+- GoCore
 ---
 
 # web 核心-Server

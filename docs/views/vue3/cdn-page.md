@@ -1,10 +1,11 @@
 ---
 title: CDN单页面以及后台数据读取
 date: 2022-06-30 21:29:10
-category: Vue3
-tag:
-    - cdn
-    - vue3
+categories:
+- Vue3
+tags:
+- cdn
+- vue3
 ---
 
 ## 文档

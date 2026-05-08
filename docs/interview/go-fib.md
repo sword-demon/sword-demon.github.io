@@ -1,10 +1,11 @@
 ---
 title: go实现斐波那契数列多种方式
 date: 2023-03-31 23:48:10
-category: Interview
-tag:
-    - go
-    - interview
+categories:
+- Interview
+tags:
+- go
+- interview
 ---
 
 ## 斐波那契数列

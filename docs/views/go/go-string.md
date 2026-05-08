@@ -1,7 +1,8 @@
 ---
 title: go语言字符串
-category: Go
 date: 2021-10-12 23:40:15
+categories:
+- Go
 ---
 
 ## 字符串

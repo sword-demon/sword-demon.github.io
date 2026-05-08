@@ -1,10 +1,11 @@
 ---
 title: K8S使用kubeadm初始化
 date: 2023-07-18 23:37:10
-category: Deploy
-tag:
-    - k8s
-    - kubeadm
+categories:
+- Deploy
+tags:
+- k8s
+- kubeadm
 ---
 
 # Kubernetes 集群初始化

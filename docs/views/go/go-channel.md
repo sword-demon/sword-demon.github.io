@@ -1,9 +1,10 @@
 ---
 title: channel
 date: 2022-03-27 19:35:15
-category: Go
-tag:
-    - channel
+categories:
+- Go
+tags:
+- channel
 ---
 
 ## channel

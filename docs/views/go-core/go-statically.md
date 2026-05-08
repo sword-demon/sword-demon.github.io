@@ -1,7 +1,8 @@
 ---
 title: 静态链接
 date: 2022-04-17 23:27:15
-category: GoCore
+categories:
+- GoCore
 ---
 
 ## 静态链接

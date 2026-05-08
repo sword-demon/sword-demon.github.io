@@ -1,7 +1,8 @@
 ---
 title: gin 自定义验证器和翻译响应内容
 date: 2023-02-06 22:09:15
-category: GoCore
+categories:
+- GoCore
 ---
 
 # gin 自定义验证器和翻译响应内容

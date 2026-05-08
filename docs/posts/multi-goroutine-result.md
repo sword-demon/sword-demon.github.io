@@ -1,10 +1,11 @@
 ---
 title: 多协程执行收集结果的技巧
 date: 2022-06-24 00:39:10
-category: Note
-tag:
-    - goroutine
-    - skill
+categories:
+- Note
+tags:
+- goroutine
+- skill
 ---
 
 ## 多协程的好处

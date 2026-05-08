@@ -1,9 +1,10 @@
 ---
 title: 数据库权限
-date: 2022-6-22 23:26:10
-category: Note
-tag:
-    - MySQL
+date: 2022-06-22 23:26:10
+categories:
+- Note
+tags:
+- MySQL
 ---
 
 ## 总结

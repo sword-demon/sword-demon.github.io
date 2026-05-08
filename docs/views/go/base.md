@@ -1,7 +1,8 @@
 ---
 title: 基础学习
 date: 2022-06-19
-category: Go
+categories:
+- Go
 ---
 
 ## 输出

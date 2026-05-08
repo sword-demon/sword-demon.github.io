@@ -1,9 +1,10 @@
 ---
 title: 接口的隐式和显式
 date: 2022-07-18 22:50:15
-category: GoCore
-tag:
-    - interface
+categories:
+- GoCore
+tags:
+- interface
 ---
 
 ## Go 隐式接口的特点

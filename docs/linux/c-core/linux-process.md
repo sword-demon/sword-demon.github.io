@@ -1,9 +1,10 @@
 ---
 title: linux 多进程
 date: 2023-06-03 17:20:15
-category: C
-tag:
-    - linux
+categories:
+- C
+tags:
+- linux
 ---
 
 # linux 多进程

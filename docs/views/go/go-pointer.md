@@ -1,9 +1,10 @@
 ---
 title: go指针
 date: 2021-10-13 22:49:15
-category: Go
-tag:
-    - pointer
+categories:
+- Go
+tags:
+- pointer
 ---
 
 :::tip

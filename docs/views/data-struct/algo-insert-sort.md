@@ -1,9 +1,10 @@
 ---
 title: 插入排序
 date: 2022-07-20 23:54:10
-category: DataStruct
-tag:
-    - insert-sort
+categories:
+- DataStruct
+tags:
+- insert-sort
 ---
 
 ## 插入排序

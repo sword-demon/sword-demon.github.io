@@ -1,9 +1,10 @@
 ---
 title: Redis Cluster集群
 date: 2023-01-05 21:05:10
-category: Redis
-tag:
-    - redis
+categories:
+- Redis
+tags:
+- redis
 ---
 
 # Redis Cluster 集群

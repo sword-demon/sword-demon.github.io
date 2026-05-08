@@ -1,10 +1,11 @@
 ---
 title: PHP分片上传大文件
 date: 2022-08-13
-category: Note
-tag:
-    - slice
-    - upload
+categories:
+- Note
+tags:
+- slice
+- upload
 ---
 
 ## 分片上传大文件

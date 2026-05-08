@@ -1,10 +1,11 @@
 ---
 title: Linux编译安装PHP7.4和Swoole扩展
 date: 2022-08-14 21:04:10
-category: Deploy
-tag:
-    - PHP
-    - Swoole
+categories:
+- Deploy
+tags:
+- PHP
+- Swoole
 ---
 
 # PHP7.4 编译安装

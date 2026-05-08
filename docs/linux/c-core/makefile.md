@@ -1,9 +1,10 @@
 ---
 title: Makefile修炼
-date: 2022-7-25 22:14:10
-category: C
-tag:
-    - makefile
+date: 2022-07-25 22:14:10
+categories:
+- C
+tags:
+- makefile
 ---
 
 # Linux 中的编译脚本 Makefile 的讲解设计

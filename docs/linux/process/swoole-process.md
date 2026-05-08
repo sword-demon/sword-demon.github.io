@@ -1,10 +1,11 @@
 ---
 title: swoole 进程基础
 date: 2022-09-17 22:20:10
-category: Process
-tag:
-    - process
-    - swoole
+categories:
+- Process
+tags:
+- process
+- swoole
 ---
 
 # swoole 进程基础

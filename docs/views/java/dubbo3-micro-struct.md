@@ -1,9 +1,10 @@
 ---
 title: Dubbo3 微服务架构概述
 date: 2023-01-24 19:56:10
-category: Java
-tag:
-    - Dubbo3
+categories:
+- Java
+tags:
+- Dubbo3
 ---
 
 # Dubbo3 微服务架构概述

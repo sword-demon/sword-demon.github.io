@@ -1,10 +1,11 @@
 ---
 title: go控制gRPC的metadata
 date: 2023-01-24 20:01:15
-category: Go
-tag:
-    - gRPC
-    - metadata
+categories:
+- Go
+tags:
+- gRPC
+- metadata
 ---
 
 # go 控制 gRPC 的 metadata

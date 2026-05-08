@@ -1,9 +1,10 @@
 ---
 title: 若依脚手架
 date: 2023-05-25 00:00:05
-category: Java
-tag:
-    - RuoYi
+categories:
+- Java
+tags:
+- RuoYi
 ---
 
 # 若依脚手架

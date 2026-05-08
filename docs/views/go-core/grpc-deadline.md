@@ -1,7 +1,8 @@
 ---
 title: gRPC 的超时机制
 date: 2023-02-06 22:08:15
-category: GoCore
+categories:
+- GoCore
 ---
 
 # gRPC 的超时机制

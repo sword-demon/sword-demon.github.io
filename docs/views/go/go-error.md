@@ -1,9 +1,10 @@
 ---
 title: go错误处理
 date: 2022-06-13 22:01:15
-category: Go
-tag:
-    - error
+categories:
+- Go
+tags:
+- error
 ---
 
 ## error 处理一

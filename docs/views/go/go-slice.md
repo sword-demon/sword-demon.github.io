@@ -1,9 +1,10 @@
 ---
 title: go切片
 date: 2022-01-30 21:52:15
-category: Go
-tag:
-    - slice
+categories:
+- Go
+tags:
+- slice
 ---
 
 ## go 切片

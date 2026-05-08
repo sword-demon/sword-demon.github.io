@@ -1,10 +1,11 @@
 ---
 title: 分布式事务
 date: 2021-10-24 23:37:15
-category: Note
-tag:
-    - dtm
-    - distirbuted
+categories:
+- Note
+tags:
+- dtm
+- distirbuted
 ---
 
 ## 分布式事务

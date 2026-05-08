@@ -1,10 +1,11 @@
 ---
 title: stream-socket-api函数介绍
 date: 2022-07-07 23:52:10
-category: Socket
-tag:
-    - stream
-    - socket
+categories:
+- Socket
+tags:
+- stream
+- socket
 ---
 
 ## Stream socket api 函数介绍

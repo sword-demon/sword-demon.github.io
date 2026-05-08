@@ -1,9 +1,10 @@
 ---
 title: 热 key 和大 key 的发现和解决办法
 date: 2023-01-15 21:26:10
-category: Redis
-tag:
-    - hotAndBigKey
+categories:
+- Redis
+tags:
+- hotAndBigKey
 ---
 
 # 热 key 和大 key 的发现和解决办法

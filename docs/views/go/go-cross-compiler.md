@@ -1,9 +1,10 @@
 ---
 title: go交叉编译
 date: 2022-01-03 13:48:15
-category: Go
-tag:
-    - compile
+categories:
+- Go
+tags:
+- compile
 ---
 
 ## Mac 编译 Linux 可执行文件

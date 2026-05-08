@@ -1,10 +1,11 @@
 ---
 title: 解决map并发的问题
 date: 2022-07-17 17:36:10
-category: GoCore
-tag:
-    - sync
-    - dirty
+categories:
+- GoCore
+tags:
+- sync
+- dirty
 ---
 
 ## 示例代码

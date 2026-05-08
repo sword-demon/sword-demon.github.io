@@ -1,9 +1,10 @@
 ---
 title: Go语言实现TCP通信
 date: 2022-07-10 17:26:10
-category: Socket
-tag:
-    - TCP
+categories:
+- Socket
+tags:
+- TCP
 ---
 
 ## TCP 服务端
