@@ -3,6 +3,7 @@ title: wxvirus 介绍
 date: 2025-03-21 01:33:33
 article: false
 sidebar: false
+layout: page
 tags:
   - 个人介绍
 ---

@@ -48,6 +48,15 @@ export default defineConfig({
         activeMatch: "/ai/",
       },
       {
+        text: "Python",
+        items: [
+          {
+            text: "基础",
+            link: "/python/base/",
+          },
+        ],
+      },
+      {
         text: "技术栈学习",
         items: [
           { text: "Go语言基础", link: "/views/go/" },
@@ -58,7 +67,9 @@ export default defineConfig({
           { text: "Java技术", link: "/views/java/" },
           { text: "Redis", link: "/views/redis/" },
           { text: "RabbitMQ", link: "/views/rabbitmq/" },
-          { text: "前端", link: "/views/vue3/" },
+          { text: "Vue3", link: "/views/vue3/" },
+          { text: "React", link: "/views/react/" },
+          { text: "AdonisJS", link: "/views/adonisjs/" },
           { text: "网络编程", link: "/views/socket/" },
           { text: "数据结构与算法", link: "/views/data-struct/" },
         ],
@@ -85,6 +96,18 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/sword-demon" }],
     search: {
       provider: "local",
+    },
+    sidebar: {
+      "/python/base/": [
+        {
+          text: "Python 基础",
+          collapsed: false,
+          items: [
+            { text: "概览", link: "/python/base/" },
+            { text: "Python 线程", link: "/python/base/thread" },
+          ],
+        },
+      ],
     },
   },
 });
