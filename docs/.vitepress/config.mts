@@ -72,6 +72,7 @@ export default defineConfig({
           { text: "AdonisJS", link: "/views/adonisjs/" },
           { text: "网络编程", link: "/views/socket/" },
           { text: "数据结构与算法", link: "/views/data-struct/" },
+          { text: "WebChat项目学习", link: "/webchat/" },
         ],
       },
       {
