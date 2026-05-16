@@ -2,10 +2,17 @@
 title: SQL的生命周期
 date: 2022-06-22 23:22:10
 categories:
-- Note
+  - Note
 tags:
-- MySQL
+  - MySQL
 ---
+
+# SQL的生命周期
+
+## 执行思维导图
+
+<PreviewMarkmapPath />
+
 ## 执行流程
 
 ```mermaid
@@ -25,7 +32,7 @@ flowchart TD
 
 ```
 
-![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/380d2f09a36642f9b922e1d7e5e1f848~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp?)
+![流程图](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/380d2f09a36642f9b922e1d7e5e1f848~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp?)
 
 由上图，可以得出：在 MySQL 中，我们大致可以分为三个部分，分别是 **MySQL 客户端**、**MySQL 服务端**和**存储层**。其中，存储层主要是硬件层面，不在今天讨论的范围内，所以这里我们主要讨论前两者。
 
@@ -44,7 +51,7 @@ mysql -u$username -p$password -h$host -P$port
 
 **一条 SQL 执行的第一步是由 MySQL 客户端发送到 MySQL 服务端**。MySQL 客户端成功连接 MySQL 服务端之后，MySQL 服务端的连接池会对客户端的连接进行 `权限验证`，当权限验证通过之后，MySQL 服务端会将客户端的链接记录在服务端的连接池中，之后的各种操作将不再进行权限认证。
 
-```Mermaid
+```mermaid
 flowchart LR
   id1((客户端1))
   id2((客户端2))

@@ -1,4 +1,5 @@
 import { defineTeekConfig } from "vitepress-theme-teek/config";
+import { vitepressPluginLegend } from "vitepress-plugin-legend";
 
 export const teekConfig = defineTeekConfig({
   sidebarTrigger: true,
@@ -6,6 +7,19 @@ export const teekConfig = defineTeekConfig({
   vpHome: false,
   backTop: {
     enabled: true,
+  },
+  markdown: {
+    config: (md) => {
+      vitepressPluginLegend(md, {
+        markmap: {
+          showToolbar: true,
+        },
+        mermaid: true,
+        infographic: {
+          showToolbar: false,
+        },
+      });
+    },
   },
   comment: {
     provider: "giscus",

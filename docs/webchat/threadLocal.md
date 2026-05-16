@@ -2,9 +2,15 @@
 title: ThreadLocal 介绍
 date: 2026-05-16 11:10:10
 description: 用大白话讲清楚 ThreadLocal 是什么、怎么用、以及内存泄漏问题
+top: true
+sidebarSort: 2
 ---
 
 # ThreadLocal 介绍
+
+## 思维导图
+
+<PreviewMarkmapPath />
 
 ## 一句话理解
 

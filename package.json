@@ -12,5 +12,8 @@
     "vitepress": "^1.6.3",
     "vitepress-theme-teek": "latest",
     "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "vitepress-plugin-legend": "^2.0.0"
   }
 }
