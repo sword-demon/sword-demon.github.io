@@ -1,3 +1,14 @@
+---
+title: 布隆过滤器
+description: 布隆过滤器
+date: 2026-05-17 22:12:01
+categories:
+  - Algorithm
+tags:
+  - bloom-filter
+sidebarSort: 11
+---
+
 # 布隆过滤器（Bloom Filter）
 
 你有没有遇到过这样的场景：用户疯狂请求一个根本不存在的商品 ID，你的缓存没命中，请求全部打到数据库上，数据库瞬间就被压垮了。这就是传说中的**缓存穿透**。
@@ -62,15 +73,15 @@ k = 哈希函数个数
  * 核心思路：用多个哈希函数将元素映射到位数组的多个位置
  */
 class BloomFilter {
-  private bitArray: Uint8Array;  // 位数组，用 Uint8 模拟 bit
-  private size: number;          // 位数组长度
-  private hashCount: number;     // 哈希函数个数
+  private bitArray: Uint8Array; // 位数组，用 Uint8 模拟 bit
+  private size: number; // 位数组长度
+  private hashCount: number; // 哈希函数个数
 
   constructor(expectedItems: number, falsePositiveRate: number = 0.01) {
     // 根据预期元素数和误判率，算出最优位数组长度
     // 公式：m = -(n * ln(p)) / (ln(2))^2
     this.size = Math.ceil(
-      -(expectedItems * Math.log(falsePositiveRate)) / (Math.LN2 ** 2)
+      -(expectedItems * Math.log(falsePositiveRate)) / Math.LN2 ** 2,
     );
     // 根据位数组长度和元素数，算出最优哈希函数个数
     // 公式：k = (m / n) * ln(2)
@@ -84,7 +95,8 @@ class BloomFilter {
    */
   private getHashes(item: string): number[] {
     const hashes: number[] = [];
-    let h1 = 0, h2 = 0;
+    let h1 = 0,
+      h2 = 0;
     // 手动计算两个基础哈希值（类似 MurmurHash 的简化版）
     for (let i = 0; i < item.length; i++) {
       h1 = (h1 * 31 + item.charCodeAt(i)) >>> 0;
@@ -110,7 +122,7 @@ class BloomFilter {
    * 全是 1，则"可能"存在（有误判风险）
    */
   mightContain(item: string): boolean {
-    return this.getHashes(item).every(pos => this.bitArray[pos] === 1);
+    return this.getHashes(item).every((pos) => this.bitArray[pos] === 1);
   }
 }
 
@@ -307,7 +319,7 @@ import hashlib
 
 class BloomFilter:
     """布隆过滤器 —— Python 实现
-    
+
     核心思路：一个元素经过 k 个哈希函数，映射到位数组的 k 个位置。
     查询时只要有一个位是 0，就说明这个元素一定没被插入过。
     """
@@ -333,7 +345,7 @@ class BloomFilter:
 
     def _get_hashes(self, item: str) -> list[int]:
         """双重哈希：用两个基础哈希生成 k 个不同的哈希值
-        
+
         为什么这么做：不用真的写 k 个哈希函数，
         h(i) = h1 + i * h2 的效果在实践中足够好
         """
@@ -356,11 +368,11 @@ class BloomFilter:
 # 使用示例
 if __name__ == "__main__":
     bf = BloomFilter(expected_items=10000, false_positive_rate=0.01)
-    
+
     # 模拟已有的商品 ID
     for i in range(1000):
         bf.add(f"product:{i}")
-    
+
     # 查询
     print(bf.might_contain("product:100"))    # True —— 可能存在
     print(bf.might_contain("product:99999"))  # False —— 一定不存在
@@ -388,9 +400,9 @@ if __name__ == "__main__":
 ## 复杂度分析
 
 | 操作 | 时间复杂度 | 空间复杂度 |
-|------|-----------|-----------|
-| 插入 | O(k) | O(m) |
-| 查询 | O(k) | — |
+| ---- | ---------- | ---------- |
+| 插入 | O(k)       | O(m)       |
+| 查询 | O(k)       | —          |
 
 - **时间复杂度 O(k)**：k 是哈希函数个数，通常 3-10 个。无论你存了多少元素，插入和查询都只算 k 次哈希 + k 次位操作，跟元素总量无关。
 - **空间复杂度 O(m)**：m 是位数组长度。10 亿个元素、1% 误判率，只需要约 **1.2GB**；如果误判率放宽到 5%，只要 **400MB** 左右。对比 Set 方案的 20GB，省了两个数量级。
