@@ -21,3 +21,4 @@ sidebarSort: 1
 - [布隆过滤器](bloom-filter.md)
 - [滑动窗口](sliding-window.md)
 - [水塘抽样](reservoir-sampling.md)
+- [LRU 缓存](lru-cache.md)
