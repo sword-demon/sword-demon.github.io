@@ -102,36 +102,5 @@ export default defineConfig({
     search: {
       provider: "local",
     },
-    sidebar: {
-      "/python/base/": [
-        {
-          text: "Python 基础",
-          collapsed: false,
-          items: [
-            { text: "概览", link: "/python/base/" },
-            { text: "Python 线程", link: "/python/base/thread" },
-          ],
-        },
-      ],
-      "/algo/": [
-        {
-          text: "算法",
-          collapsed: false,
-          items: [
-            { text: "概览", link: "/algo/" },
-            { text: "算法基础学习", link: "/algo/algo-base" },
-            { text: "递归和斐波那契数列", link: "/algo/algo-recursive" },
-            { text: "查找算法", link: "/algo/algo-search" },
-            { text: "排序算法", link: "/algo/algo-sort" },
-            { text: "插入排序", link: "/algo/algo-insert-sort" },
-            { text: "线性表", link: "/algo/line-table" },
-            { text: "Go 回文检测", link: "/algo/algo-palindrome" },
-            { text: "leetcode 算法题加 1", link: "/algo/leetcode-plusone" },
-            { text: "iterator 模式", link: "/algo/iterator-designer" },
-            { text: "布隆过滤器", link: "/algo/bloom-filter" },
-          ],
-        },
-      ],
-    },
   },
 });

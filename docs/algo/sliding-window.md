@@ -1,3 +1,14 @@
+---
+title: 滑动窗口
+description: 滑动窗口（Sliding Window）
+date: 2026-05-17 23:30:00
+categories:
+  - Algorithm
+tags:
+  - sliding-window
+sidebarSort: 12
+---
+
 # 滑动窗口（Sliding Window）
 
 你打开了一个外卖 App，疯狂刷新页面——1 秒钟刷了 50 次。如果后端不加以限制，每台服务器可能同时收到几万个请求，直接被打爆。怎么办？最直觉的办法：**每分钟最多允许你请求 60 次**。但问题来了——如果用户在第 1 分钟的最后 1 秒刷了 60 次，第 2 分钟的第 1 秒又刷了 60 次，实际上 2 秒内就刷了 120 次，远超预期。
@@ -90,7 +101,7 @@
  */
 class SlidingWindowRateLimiter {
   private timestamps: number[] = []; // 存储每次请求的时间戳
-  private windowMs: number;  // 窗口大小（毫秒）
+  private windowMs: number; // 窗口大小（毫秒）
   private maxRequests: number; // 窗口内允许的最大请求数
 
   constructor(windowMs: number, maxRequests: number) {
@@ -129,8 +140,8 @@ class SlidingWindowRateLimiter {
  * 为什么用滑动窗口：双指针各只遍历一次数组，O(n) 搞定
  */
 function minSubArrayLen(nums: number[], target: number): number {
-  let left = 0;   // 窗口左边界
-  let sum = 0;    // 当前窗口内元素之和
+  let left = 0; // 窗口左边界
+  let sum = 0; // 当前窗口内元素之和
   let minLen = Infinity; // 记录最短长度
 
   for (let right = 0; right < nums.length; right++) {
@@ -293,7 +304,7 @@ class SlidingWindowArray {
 
     /**
      * 给定正整数数组和 target，求和 ≥ target 的最短连续子数组长度
-     * 
+     *
      * 为什么用滑动窗口而不是暴力法：
      * 暴力法要枚举所有子数组，O(n²)；滑动窗口左右指针各走一遍，O(n)
      * 关键性质：元素都是正整数 → 窗口扩大 sum 一定增大，满足单调性
@@ -341,7 +352,7 @@ from collections import deque
 
 class SlidingWindowRateLimiter:
     """滑动窗口限流器 —— 基于时间戳的精确实现
-    
+
     核心思路：用双端队列记录每次请求的时间戳，
     来新请求时先清理过期的老时间戳，再判断是否超限。
     为什么用 deque 不用 list：deque 的 popleft 是 O(1)，list 的 pop(0) 是 O(n)。
@@ -420,11 +431,11 @@ if __name__ == "__main__":
 
 ## 复杂度分析
 
-| 操作 | 时间复杂度 | 空间复杂度 |
-| ---- | ---------- | ---------- |
-| 限流判定（时间戳法） | O(过期数) | O(窗口内请求数) |
-| 限流判定（分片法） | O(1) | O(窗口格子数) |
-| 数组上的滑动窗口 | O(n) | O(1) |
+| 操作                 | 时间复杂度 | 空间复杂度      |
+| -------------------- | ---------- | --------------- |
+| 限流判定（时间戳法） | O(过期数)  | O(窗口内请求数) |
+| 限流判定（分片法）   | O(1)       | O(窗口格子数)   |
+| 数组上的滑动窗口     | O(n)       | O(1)            |
 
 - **限流时间复杂度**：时间戳法需要清理过期记录，均摊下来每次请求接近 O(1)；分片法直接加格子计数，严格 O(1)。
 - **数组滑动窗口 O(n)**：左右指针各最多遍历数组一次，不会回退，所以总操作次数不超过 2n。

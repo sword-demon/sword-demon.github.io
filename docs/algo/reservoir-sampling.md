@@ -1,3 +1,14 @@
+---
+title: 水塘抽样
+description: 水塘抽样（Reservoir Sampling）
+date: 2026-05-17 23:45:00
+categories:
+  - Algorithm
+tags:
+  - reservoir-sampling
+sidebarSort: 13
+---
+
 # 水塘抽样（Reservoir Sampling）
 
 你有没有遇到过这样的面试题："给你一个长度未知的数据流，如何等概率地随机抽取一个元素？"
@@ -77,9 +88,9 @@ P(第 i 条被选中) = P(第 i 条放入时被选中) × P(之后没被替换)
  * 适用场景：数据流式到达，总量未知，需要等概率随机抽样
  */
 class ReservoirSampling<T> {
-  private reservoir: T[];   // 水塘：存放最终抽样的结果
+  private reservoir: T[]; // 水塘：存放最终抽样的结果
   private readonly k: number; // 要抽取的样本数
-  private count: number;    // 当前已处理的元素计数
+  private count: number; // 当前已处理的元素计数
 
   constructor(k: number) {
     this.k = k;
@@ -123,8 +134,14 @@ class ReservoirSampling<T> {
 
 // 使用示例
 const sampler = new ReservoirSampling<string>(3);
-const dataStream = ["log:err:500", "log:info:200", "log:warn:301", "log:err:404", "log:info:200"];
-dataStream.forEach(item => sampler.feed(item));
+const dataStream = [
+  "log:err:500",
+  "log:info:200",
+  "log:warn:301",
+  "log:err:404",
+  "log:info:200",
+];
+dataStream.forEach((item) => sampler.feed(item));
 console.log(sampler.getSamples()); // 等概率抽出的 3 条日志
 ```
 
@@ -329,10 +346,10 @@ SELECT * FROM orders TABLESAMPLE BERNOULLI(1);
 
 ## 复杂度分析
 
-| 指标 | 复杂度 | 说明 |
-| ---- | ------ | ---- |
+| 指标 | 复杂度 | 说明                                                    |
+| ---- | ------ | ------------------------------------------------------- |
 | 时间 | O(n)   | 每个元素只处理一次，常数级操作（一个随机数 + 一次比较） |
-| 空间 | O(k)   | 只需要存 k 个样本，跟数据总量 n 无关 |
+| 空间 | O(k)   | 只需要存 k 个样本，跟数据总量 n 无关                    |
 
 - **时间 O(n)**：每个元素到达时只做一次随机数生成和一次条件判断，这是你能做到的最优了——至少得把数据过一遍吧。
 - **空间 O(k)**：不管数据流是 1 万还是 100 亿，你只需要 k 个位置的数组。这就是水塘抽样最大的优势：**空间与数据量解耦**。

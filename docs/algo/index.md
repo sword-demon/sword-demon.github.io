@@ -19,3 +19,5 @@ sidebarSort: 1
 - [leetcode 算法题加 1](leetcode-plusone.md)
 - [iterator 模式](iterator-designer.md)
 - [布隆过滤器](bloom-filter.md)
+- [滑动窗口](sliding-window.md)
+- [水塘抽样](reservoir-sampling.md)
