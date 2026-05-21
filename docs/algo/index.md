@@ -22,3 +22,4 @@ sidebarSort: 1
 - [滑动窗口](sliding-window.md)
 - [水塘抽样](reservoir-sampling.md)
 - [LRU 缓存](lru-cache.md)
+- [前缀树（Trie）](trie.md)
