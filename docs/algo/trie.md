@@ -221,7 +221,7 @@ class Trie {
 }
 ```
 
-### 使用示例
+### TypeScript 使用示例
 
 ```typescript
 const trie = new Trie();
@@ -244,6 +244,142 @@ console.log(trie.startsWith("xyz")); // false
 // 自动补全
 console.log(trie.autocomplete("he")); // ["her", "hermes", "hello"]
 console.log(trie.autocomplete("hi")); // ["hi"]
+```
+
+### Java 完整实现
+
+```java
+import java.util.*;
+
+class TrieNode {
+    Map<Character, TrieNode> children;
+    boolean isEnd;
+
+    public TrieNode() {
+        children = new HashMap<>();
+        isEnd = false;
+    }
+}
+
+class Trie {
+    private final TrieNode root;
+
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    /** 插入一个单词 */
+    public void insert(String word) {
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            node.children.putIfAbsent(c, new TrieNode());
+            node = node.children.get(c);
+        }
+        node.isEnd = true;
+    }
+
+    /** 查找完整单词 */
+    public boolean search(String word) {
+        TrieNode node = findNode(word);
+        return node != null && node.isEnd;
+    }
+
+    /** 前缀查找 */
+    public boolean startsWith(String prefix) {
+        return findNode(prefix) != null;
+    }
+
+    /** 自动补全：返回所有以 prefix 开头的单词 */
+    public List<String> autocomplete(String prefix) {
+        return autocomplete(prefix, 10);
+    }
+
+    public List<String> autocomplete(String prefix, int limit) {
+        TrieNode node = findNode(prefix);
+        if (node == null) return Collections.emptyList();
+
+        List<String> results = new ArrayList<>();
+        dfs(node, prefix, results, limit);
+        return results;
+    }
+
+    /** 删除一个单词 */
+    public boolean delete(String word) {
+        return deleteHelper(root, word, 0);
+    }
+
+    private TrieNode findNode(String prefix) {
+        TrieNode node = root;
+        for (char c : prefix.toCharArray()) {
+            if (!node.children.containsKey(c)) return null;
+            node = node.children.get(c);
+        }
+        return node;
+    }
+
+    private void dfs(TrieNode node, String prefix, List<String> results, int limit) {
+        if (results.size() >= limit) return;
+        if (node.isEnd) results.add(prefix);
+        for (Map.Entry<Character, TrieNode> entry : node.children.entrySet()) {
+            dfs(entry.getValue(), prefix + entry.getKey(), results, limit);
+        }
+    }
+
+    private boolean deleteHelper(TrieNode node, String word, int depth) {
+        if (depth == word.length()) {
+            if (!node.isEnd) return false; // 单词不存在
+            node.isEnd = false;
+            return node.children.isEmpty(); // 如果没有子节点，可以删除这个节点
+        }
+
+        char c = word.charAt(depth);
+        TrieNode child = node.children.get(c);
+        if (child == null) return false;
+
+        boolean shouldDeleteChild = deleteHelper(child, word, depth + 1);
+
+        if (shouldDeleteChild) {
+            node.children.remove(c);
+            return node.children.isEmpty() && !node.isEnd;
+        }
+
+        return false;
+    }
+}
+```
+
+### Java 使用示例
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Trie trie = new Trie();
+
+        // 插入单词
+        trie.insert("her");
+        trie.insert("hermes");
+        trie.insert("hello");
+        trie.insert("hi");
+
+        // 查找
+        System.out.println(trie.search("her"));     // true
+        System.out.println(trie.search("he"));      // false（前缀存在，但不是完整单词）
+        System.out.println(trie.search("hero"));    // false
+
+        // 前缀查找
+        System.out.println(trie.startsWith("her")); // true
+        System.out.println(trie.startsWith("xyz")); // false
+
+        // 自动补全
+        System.out.println(trie.autocomplete("he")); // [her, hermes, hello]
+        System.out.println(trie.autocomplete("hi")); // [hi]
+
+        // 删除
+        System.out.println(trie.delete("her"));     // true
+        System.out.println(trie.search("her"));     // false
+        System.out.println(trie.search("hermes"));  // true（子节点保留）
+    }
+}
 ```
 
 ## 复杂度分析
