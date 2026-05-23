@@ -23,3 +23,4 @@ sidebarSort: 1
 - [水塘抽样](reservoir-sampling.md)
 - [LRU 缓存](lru-cache.md)
 - [前缀树（Trie）](trie.md)
+- [并查集（Union-Find）](union-find.md)
