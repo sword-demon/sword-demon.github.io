@@ -40,3 +40,4 @@ sidebarSort: 1
 - [归并排序](merge-sort.md)
 - [单调队列](monotonic-queue.md)
 - [线段树](segment-tree.md)
+- [LFU 缓存](lfu-cache.md)
