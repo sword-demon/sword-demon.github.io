@@ -41,3 +41,5 @@ sidebarSort: 1
 - [单调队列](monotonic-queue.md)
 - [线段树](segment-tree.md)
 - [LFU 缓存](lfu-cache.md)
+- [Dijkstra 最短路径算法](dijkstra.md)
+- [Top K 问题](top-k.md)
