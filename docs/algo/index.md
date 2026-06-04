@@ -43,3 +43,5 @@ sidebarSort: 1
 - [LFU 缓存](lfu-cache.md)
 - [Dijkstra 最短路径算法](dijkstra.md)
 - [Top K 问题](top-k.md)
+- [一致性哈希](consistent-hashing.md)
+- [跳表](skip-list.md)
