@@ -45,3 +45,5 @@ sidebarSort: 1
 - [Top K 问题](top-k.md)
 - [一致性哈希](consistent-hashing.md)
 - [跳表](skip-list.md)
+- [Kadane 算法（最大子数组和）](kadane.md)
+- [最长递增子序列（LIS）](lis.md)
