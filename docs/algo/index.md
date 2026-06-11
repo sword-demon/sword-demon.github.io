@@ -47,3 +47,7 @@ sidebarSort: 1
 - [跳表](skip-list.md)
 - [Kadane 算法（最大子数组和）](kadane.md)
 - [最长递增子序列（LIS）](lis.md)
+- [双堆找中位数](two-heaps.md)
+- [树状数组（Binary Indexed Tree）](binary-indexed-tree.md)
+- [Floyd 判圈算法（龟兔算法）](floyd-cycle-detection.md)
+- [合并区间](merge-intervals.md)
