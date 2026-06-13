@@ -51,3 +51,5 @@ sidebarSort: 1
 - [树状数组（Binary Indexed Tree）](binary-indexed-tree.md)
 - [Floyd 判圈算法（龟兔算法）](floyd-cycle-detection.md)
 - [合并区间](merge-intervals.md)
+- [A* 搜索算法](a-star.md)
+- [计数排序](counting-sort.md)
