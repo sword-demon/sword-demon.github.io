@@ -54,3 +54,5 @@ sidebarSort: 1
 - [A* 搜索算法](a-star.md)
 - [计数排序](counting-sort.md)
 - [Morris 遍历（O(1) 空间遍历二叉树）](morris-traversal.md)
+- [编辑距离（Edit Distance）](edit-distance.md)
+- [0-1 背包问题](knapsack.md)
