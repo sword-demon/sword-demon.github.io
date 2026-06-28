@@ -9,3 +9,4 @@ comment: false
 -   [Go 面试题积攒 ing](go-questions.md)
 -   [切片常见问题](go-slice-qa.md)
 -   [go 实现斐波那契数列](go-fib.md)
+-   [Go 主机安全面试：HIDS 事件采集到检测链路](go-hids-event-pipeline.md)
