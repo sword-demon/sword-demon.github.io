@@ -13,3 +13,4 @@ comment: false
 -   [Go 主机安全面试：Web RCE 到反弹 Shell 检测](go-edr-reverse-shell-detection.md)
 -   [Go 主机安全面试：eBPF 采集进程执行与网络连接](go-hids-ebpf-exec-connect.md)
 -   [Go 主机安全面试：WebShell 落地与文件篡改检测](go-hids-webshell-file-integrity.md)
+-   [Go 主机安全面试：Linux 提权与持久化检测](go-hids-linux-privilege-persistence.md)
