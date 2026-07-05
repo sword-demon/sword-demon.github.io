@@ -57,3 +57,5 @@ sidebarSort: 1
 - [编辑距离（Edit Distance）](edit-distance.md)
 - [0-1 背包问题](knapsack.md)
 - [最长公共子序列（LCS）](lcs.md)
+- [约瑟夫斯问题（Josephus Problem）](josephus-problem.md)
+- [Manacher 算法（马拉车）](manacher.md)

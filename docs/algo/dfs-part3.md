@@ -1,3 +1,16 @@
+---
+title: 深度优先搜索（DFS）回溯实战
+description: DFS 回溯实战：全排列与子集问题，TypeScript 实现
+date: 2026-06-05 09:20:00
+categories:
+  - Algorithm
+tags:
+  - dfs
+  - backtracking
+  - recursion
+  - interview
+sidebarSort: 39
+---
 
 ### 实战三：全排列（经典回溯）
 
@@ -40,6 +53,7 @@ console.log(permute([1, 2, 3]));
 ```
 
 对照回溯框架看：
+
 - **选择列表**：所有数字
 - **约束条件**：不能重复使用
 - **结束条件**：路径长度够了
@@ -58,11 +72,11 @@ function numIslands(grid: string[][]): number {
 
   function dfs(r: number, c: number) {
     // 边界检查 + 只处理陆地
-    if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] === '0') {
+    if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] === "0") {
       return;
     }
 
-    grid[r][c] = '0'; // 标记为已访问（沉岛思想）
+    grid[r][c] = "0"; // 标记为已访问（沉岛思想）
 
     // 向四个方向扩展
     dfs(r - 1, c); // 上
@@ -73,7 +87,7 @@ function numIslands(grid: string[][]): number {
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      if (grid[r][c] === '1') {
+      if (grid[r][c] === "1") {
         count++;
         dfs(r, c); // 把整个岛"沉掉"
       }
@@ -85,10 +99,10 @@ function numIslands(grid: string[][]): number {
 
 // 测试
 const grid = [
-  ['1', '1', '0', '0', '0'],
-  ['1', '1', '0', '0', '0'],
-  ['0', '0', '1', '0', '0'],
-  ['0', '0', '0', '1', '1'],
+  ["1", "1", "0", "0", "0"],
+  ["1", "1", "0", "0", "0"],
+  ["0", "0", "1", "0", "0"],
+  ["0", "0", "0", "1", "1"],
 ];
 console.log(numIslands(grid)); // 3
 ```

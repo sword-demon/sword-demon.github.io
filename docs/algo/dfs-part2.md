@@ -1,3 +1,16 @@
+---
+title: 深度优先搜索（DFS）代码实战
+description: DFS 代码实战：二叉树遍历与岛屿数量，TypeScript 实现
+date: 2026-06-05 09:10:00
+categories:
+  - Algorithm
+tags:
+  - dfs
+  - tree
+  - recursion
+  - interview
+sidebarSort: 38
+---
 
 ## 代码实战
 
@@ -20,9 +33,9 @@ function preorder(root: TreeNode | null): number[] {
   const result: number[] = [];
   function dfs(node: TreeNode | null) {
     if (!node) return;
-    result.push(node.val);   // 先访问根
-    dfs(node.left);           // 再左子树
-    dfs(node.right);          // 最后右子树
+    result.push(node.val); // 先访问根
+    dfs(node.left); // 再左子树
+    dfs(node.right); // 最后右子树
   }
   dfs(root);
   return result;
@@ -95,6 +108,10 @@ function countComponents(n: number, edges: [number, number][]): number {
 }
 
 // 测试
-const edges: [number, number][] = [[0, 1], [1, 2], [3, 4]];
+const edges: [number, number][] = [
+  [0, 1],
+  [1, 2],
+  [3, 4],
+];
 console.log(countComponents(5, edges)); // 2（0-1-2 一组，3-4 一组）
 ```
