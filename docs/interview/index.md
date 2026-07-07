@@ -16,3 +16,4 @@ comment: false
 -   [Go 主机安全面试：Linux 提权与持久化检测](go-hids-linux-privilege-persistence.md)
 -   [Go 主机安全面试：EDR 告警降噪与误报治理](go-edr-alert-noise-reduction.md)
 -   [Go 主机安全面试：procfs 进程画像与异常行为识别](go-hids-procfs-process-profile.md)
+-   [Go 主机安全面试：Netlink 网络连接与异常外联检测](go-hids-netlink-network-detection.md)
