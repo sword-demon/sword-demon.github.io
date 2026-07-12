@@ -20,3 +20,4 @@ comment: false
 -   [Go 主机安全面试：Windows 服务自启动与异常持久化检测](go-edr-windows-service-persistence.md)
 -   [Go 主机安全面试：EDR Agent 自保护与资源控制](go-edr-agent-self-protection.md)
 -   [Go 主机安全面试：规则引擎性能与攻击链关联](go-edr-rule-engine-attack-chain.md)
+-   [Go 主机安全面试：事件上报可靠性与背压控制](go-edr-event-upload-backpressure.md)
