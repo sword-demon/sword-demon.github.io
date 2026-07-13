@@ -59,3 +59,8 @@ sidebarSort: 1
 - [最长公共子序列（LCS）](lcs.md)
 - [约瑟夫斯问题（Josephus Problem）](josephus-problem.md)
 - [Manacher 算法（马拉车）](manacher.md)
+- [Rabin-Karp 字符串哈希算法](rabin-karp.md)
+- [接雨水问题](trapping-rain-water.md)
+- [珂朵莉树（Chtholly Tree）](chtholly-tree.md)
+- [AC 自动机（Aho-Corasick）](aho-corasick.md)
+- [状态压缩动态规划（Bitmask DP）](bitmask-dp.md)

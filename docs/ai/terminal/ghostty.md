@@ -7,8 +7,6 @@ date: 2026-07-05
 
 > MacOS 版本
 
-
-
 ## ghostty 的主题配置
 
 [https://github.com/catppuccin/ghostty](https://github.com/catppuccin/ghostty)
@@ -24,7 +22,7 @@ date: 2026-07-05
 >
 > [https://www.nerdfonts.com/font-downloads](https://www.nerdfonts.com/font-downloads)
 
-```
+```txt
 # --- Typography ---
 font-family = "0xProto Nerd Font Mono Bold"
 font-size = 16
@@ -88,6 +86,9 @@ eval "$(starship init bash)"
 ### 配置和 Catppuccin 的预设配置
 
 ```bash
-starship preset catppuccin-powerline -o ~/.config/starship.toml --force
+starship preset catppuccin-powerline -o ~/.config/starship.toml
 ```
 
+如果提示写入有问题，会提示你加上`--force`，在上述命令后面加上这个即可。
+
+![image-20260705174124576](https://virusoss.oss-cn-shanghai.aliyuncs.com/image-20260705174124576.png)
