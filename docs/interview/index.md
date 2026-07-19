@@ -26,3 +26,4 @@ comment: false
 -   [Go 主机安全面试：auditd 系统调用审计与命令溯源](go-hids-auditd-syscall-command-audit.md)
 -   [Go 主机安全面试：systemd 服务基线与异常启动项检测](go-hids-systemd-service-baseline.md)
 -   [Go 主机安全面试：容器进程识别与逃逸检测](go-hids-container-escape-detection.md)
+-   [Go 主机安全面试：Windows 计划任务与 WMI 持久化检测](go-edr-windows-scheduled-task-wmi.md)
