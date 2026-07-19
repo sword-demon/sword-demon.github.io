@@ -78,6 +78,7 @@ export default defineConfig({
           { text: "AdonisJS", link: "/views/adonisjs/" },
           { text: "网络编程", link: "/views/socket/" },
           { text: "WebChat项目学习", link: "/webchat/" },
+          { text: "Java 深度学习", link: "/java/" },
         ],
       },
       {
