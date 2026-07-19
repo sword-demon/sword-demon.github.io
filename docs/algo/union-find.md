@@ -1,205 +1,174 @@
 ---
 title: 并查集（Union-Find）
-description: 并查集（Union-Find / Disjoint Set）——从社交网络好友圈到最小生成树，搞定一切连通性问题
-date: 2026-05-23 11:50:00
+description: 并查集（Union-Find）—— 处理"连接"问题的神器，朋友圈数量、岛屿数量、等式方程求解一网打尽
+date: 2026-07-19 09:01:37
 categories:
   - Algorithm
 tags:
   - union-find
   - disjoint-set
-  - graph
-  - data-structure
-sidebarSort: 15
+  - connected-components
+  - interview
+sidebarSort: 66
 ---
 
-# 并查集（Union-Find / Disjoint Set）
+# 并查集（Union-Find）
 
-你刷微博的时候，有没有想过一个问题：系统是怎么知道你和某个陌生人的「关系链」的？比如它告诉你「你们有 3 个共同好友」。再比如，地图 App 怎么判断两个城市之间是否有路可走？这些问题本质上都在问同一件事——**两个元素是否在同一个"连通分量"里**。
+你有没有遇到过这样的问题：**"朋友圈"**
 
-这就是并查集（Union-Find）要解决的核心问题。它是一种专门处理**动态连通性**的数据结构，支持两个操作：
+> 假设有 n 个人，如果两个人是朋友关系，我们就说他们属于同一个朋友圈。已知若干对朋友关系，问一共有多少个朋友圈？
 
-1. **Union**：把两个元素合并到同一个集合
-2. **Find**：查找某个元素属于哪个集合（或者说，两个元素是否在同一个集合）
+或者 **"岛屿数量"**：
 
-听起来很朴素对吧？但它的实现充满了工程智慧——路径压缩、按秩合并，这些优化让每次操作的时间复杂度接近 **O(1)**。不夸张地说，并查集是算法里"四两拨千斤"的典范 🏆。
+> 给一个二维网格地图（'1' 表示陆地，'0' 表示水域），统计有多少个独立的岛屿（相邻的陆地上下左右相连算一个岛屿）。
+
+这两个看起来风马牛不相及的问题，其实都可以用 **并查集（Union-Find）** 来秒解 ✨
+
+再比如 **"等式方程可满足性"**：
+
+> 给定一组形如 `a == b` 或 `a != b` 的方程，问这些方程能否同时成立？
+
+这题也是并查集的经典应用。
 
 ## 原理拆解
 
-### 1. 用"代表元"来标识集合
+### 1. 从生活中理解
 
-想象一个公司年会做团建游戏。主持人喊"分组！"，所有人开始自由组队。怎么标记谁和谁是一队的？
+想象你是一个班主任，要统计班级里有多少个"小团体"。
 
-最直觉的方法：**每队选一个队长**。队长就是这队的"代表元"。想判断两个人是不是一队的？看他们的队长是不是同一个人就行了。
-
-```
-初始状态：每个人自成一队，自己就是队长
-
-人:    [A] [B] [C] [D] [E] [F]
-队长:   A   B   C   D   E   F
-
-A 和 B 组队 → B 认 A 当队长：
-人:    [A] [B] [C] [D] [E] [F]
-队长:   A   A   C   D   E   F
-
-C 和 D 组队 → D 认 C 当队长：
-人:    [A] [B] [C] [D] [E] [F]
-队长:   A   A   C   C   E   F
-
-B 和 D 组队 → B 的队长 A 和 D 的队长 C 需要合并
-假设 A 认 C 当队长：
-人:    [A] [B] [C] [D] [E] [F]
-队长:   C   A   C   C   E   F
-（B→A→C，D→C，现在 A、B、C、D 都是一队的了）
-```
-
-这就是并查集的核心思想：用一棵**有根树**来表示一个集合，树的**根节点**就是集合的代表元。
-
-### 2. Find 操作：顺藤摸瓜找队长
-
-Find(x) 就是沿着父指针一直往上走，直到找到根节点：
+一开始，每个学生都是独立的个体，各自为营：
 
 ```
-      C ← 根节点（队长）
-     / \
-    A   D
-    |
-    B
-
-Find(B)：B → A → C → 找到队长 C！
-Find(D)：D → C → 找到队长 C！
-Find(B) == Find(D) → true，B 和 D 是一队的 ✅
+学生1  学生2  学生3  学生4  学生5
+ ①      ②      ③      ④      ⑤
 ```
 
-### 3. Union 操作：让两个队长合并
-
-Union(x, y) 的逻辑很简单：先找到 x 和 y 各自的队长，然后让其中一个队长认另一个当队长。
-
+老师告诉你：小明和小红是好朋友 → 合并他俩
 ```
-Union(E, F)：
-  Find(E) = E（E 自己是队长）
-  Find(F) = F（F 自己是队长）
-  让 F 认 E 当队长：
-
-  E ← 新的根
-  |
-  F
-
-现在 E 和 F 是一队的了
+学生1  学生2  学生3  学生4  学生5
+ ①←②   ③      ④      ⑤
 ```
 
-### 4. 问题来了：树太深怎么办？
-
-如果每次 Union 都是"让 A 认 B 当队长"，然后"让 B 认 C 当队长"……最终可能形成一条**长链**：
-
+老师又告诉你：小刚和小明是好朋友 → 合并小刚和小明所在的小团体
 ```
-最坏情况：
-F → E → D → C → B → A
-
-Find(F) 要走 5 步！
-如果元素有 10 万个，Find 最多要走 10 万步，退化为 O(n) 😱
+学生1  学生2  学生3  学生4  学生5
+ ①←②←④  ③      ⑤
 ```
 
-怎么优化？两大杀器：
+这样，通过不断"合并"小团体，我们能快速知道：
+- 任意两个学生是否在同一个朋友圈？
+- 总共有多少个独立的小团体？
+
+这就是并查集干的事情 —— **维护一堆不相交的集合，支持"合并"和"查询"两个操作**。
+
+### 2. 数据结构设计
+
+并查集本质上是一个**森林**（多棵树），每棵树代表一个集合。树根节点就是整个集合的"代表元"。
+
+```
+初始状态（每个元素都是自己的根）：
+
+parent: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        0  1  2  3  4  5  6  7  8  9
+        ↑  ↑  ↑  ↑  ↑  ↑  ↑  ↑  ↑  ↑
+       各自指向自己（根节点的 parent 指向自己）
+
+合并 0-1, 3-8, 2-5 后：
+
+parent: [1, 1, 5, 8, 4, 5, 6, 7, 8, 9]
+        0  1  2  3  4  5  6  7  8  9
+        ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓  ↓
+        1→1  1  5→5  8→8  4  5  6  7  8  9
+
+树结构：
+  {0, 1}     {2, 5}    {3, 8}    {4}  {6}  {7}  {9}
+    ①           ⑤        ⑧       ④    ⑥    ⑦    ⑨
+   ↗ ↳                      ↗
+  0   1                      3
+```
+
+### 3. 核心操作
+
+#### Find（查）：找元素的根节点
+
+递归地沿着 `parent` 指针往上找，直到找到根节点。
+
+```typescript
+// 朴素版 Find
+function find(x: number): number {
+  if (parent[x] !== x) {
+    return find(parent[x]); // 递归找根
+  }
+  return x;
+}
+```
+
+#### Union（并）：合并两个集合
+
+把一个集合的根节点的 parent 指向另一个集合的根节点。
+
+```typescript
+function union(x: number, y: number): void {
+  const rootX = find(x);
+  const rootY = find(y);
+  if (rootX !== rootY) {
+    parent[rootX] = rootY; // 把 X 的根接到 Y 的根下面
+  }
+}
+```
+
+### 4. 性能优化：路径压缩 + 按秩合并
+
+上面的朴素实现有一个问题：如果树长得很深（类似链表），find 操作会退化到 O(n)。
 
 #### 优化一：路径压缩（Path Compression）
 
-Find 的时候，顺便把沿途的节点都**直接挂到根节点**上，让树变"矮"：
+在 find 的过程中，把路径上所有的节点都直接指向根节点：
 
-```
-压缩前：           压缩后：
-    A                 A
-    |               / | \
-    B              B  C  D
-    |
-    C
-    |
-    D
-
-Find(D)：D → C → B → A
-压缩后：D 直接指向 A，C 也直接指向 A
-下次 Find(D) 只要 1 步！
+```typescript
+// 路径压缩版本
+function find(x: number): number {
+  if (parent[x] !== x) {
+    parent[x] = find(parent[x]); // 递归返回时顺带压缩路径
+  }
+  return parent[x];
+}
 ```
 
-路径压缩有两种实现方式：
-- **递归式**（完全压缩）：Find 过程中把路径上所有节点都直接挂到根上
-- **隔代压缩**（迭代式）：`parent[x] = parent[parent[x]]`，只往上跳一层
+```
+压缩前：  1 → 2 → 3 → 4 → 5（根）
+压缩后：  1 → 5
+         2 ↗
+         3 ↗
+         4 ↗
+所有节点都直接指向根节点！
+```
 
 #### 优化二：按秩合并（Union by Rank）
 
-Union 的时候，**让矮树的根挂到高树的根下面**。Rank 就是树的高度（或近似高度）。这样合并后树的高度不会增长太快。
+合并时，把较短的树接到较长的树下，避免头重脚轻：
 
-```
-A 树（rank=2）     C 树（rank=1）
-    A                 C
-   / \                |
-  B   D               E
-  |
-  G
-
-Union(B, E)：
-  Find(B) = A，rank = 2
-  Find(E) = C，rank = 1
-  C 的 rank 更小，让 C 挂到 A 下面
-
-      A
-    / | \
-   B  D  C
-   |     |
-   G     E
-
-树的高度还是 2，没变！
+```typescript
+// 用 rank 数组记录每棵树的"高度"（秩）
+function union(x: number, y: number): void {
+  const rootX = find(x);
+  const rootY = find(y);
+  if (rootX !== rootY) {
+    // 把秩小的接到秩大的下面
+    if (rank[rootX] < rank[rootY]) {
+      parent[rootX] = rootY;
+    } else if (rank[rootX] > rank[rootY]) {
+      parent[rootY] = rootX;
+    } else {
+      // 秩相同，合并后秩 +1
+      parent[rootY] = rootX;
+      rank[rootX]++;
+    }
+  }
+}
 ```
 
-#### 两个优化一起用会怎样？
-
-路径压缩 + 按秩合并一起用，每次 Find/Union 的**均摊时间复杂度**是 **O(α(n))**，其中 α 是**反阿克曼函数**。这个函数增长极慢——慢到什么程度呢？n 等于宇宙中原子数量（约 10⁸⁰）时，α(n) 也不超过 **4**。
-
-所以实际使用中，你可以把并查集的操作看作 **O(1)** 🎉。
-
-### 5. 图解完整流程
-
-```
-初始：5 个元素，各自为战
-parent: [0, 1, 2, 3, 4]
-
-Union(0, 1)：
-parent: [0, 0, 2, 3, 4]    ← 1 的父亲变成 0
-   (0)
-    |
-   (1)
-
-Union(2, 3)：
-parent: [0, 0, 2, 2, 4]    ← 3 的父亲变成 2
-   (0)    (2)
-    |      |
-   (1)    (3)
-
-Union(1, 3)：
-  Find(1) = 0, Find(3) = 2
-  按秩合并：rank[0] == rank[2]，让 2 挂到 0 下
-parent: [0, 0, 0, 2, 4]    ← 2 的父亲变成 0
-      (0)
-     / |
-   (1) (2)
-        |
-       (3)
-
-Union(4, 0)：（顺便路径压缩）
-  Find(4) = 4, Find(0) = 0
-  让 4 挂到 0 下
-parent: [0, 0, 0, 2, 0]    ← 4 的父亲变成 0
-      (0)
-    / | \
-  (1)(2)(4)
-      |
-     (3)
-
-Find(3)：3 → 2 → 0，路径压缩后 parent[3] = 0
-parent: [0, 0, 0, 0, 0]    ← 3 也直接指向 0 了
-      (0)
-    / | \ \
-  (1)(2)(4)(3)   ← 全部在同一层，Find 都是 O(1)！
-```
+加上这两个优化后，并查集的均摊时间复杂度可以做到 **α(n)** —— Ackermann 函数的反函数，增长极慢，**实际可以认为是 O(1)**。
 
 ## 代码实现
 
@@ -207,283 +176,100 @@ parent: [0, 0, 0, 0, 0]    ← 3 也直接指向 0 了
 
 ```typescript
 /**
- * 并查集（Union-Find）—— TypeScript 实现
- * 带路径压缩 + 按秩合并，均摊时间复杂度 O(α(n))
+ * 并查集 —— TypeScript 实现
+ * 
+ * 支持操作：
+ * - union(a, b): 合并 a 和 b 所在的集合
+ * - find(x): 找到 x 所在的集合根节点
+ * - connected(a, b): 判断 a 和 b 是否在同一个集合
+ * - count(): 返回当前有多少个独立的集合
  */
 class UnionFind {
-  private parent: number[]; // parent[i] 表示 i 的父节点
-  private rank: number[];   // rank[i] 表示以 i 为根的树的高度（近似）
-  private count: number;    // 当前连通分量的个数
+  private parent: number[];   // 父节点数组
+  private rank: number[];      // 树的秩（高度上界）
+  private sets: number;        // 当前独立集合的数量
 
-  /**
-   * @param n 元素个数，元素编号为 0 ~ n-1
-   */
   constructor(n: number) {
-    this.parent = Array.from({ length: n }, (_, i) => i); // 初始时每个元素自己是自己的父节点
-    this.rank = new Array(n).fill(0); // 初始高度都是 0
-    this.count = n; // 初始有 n 个连通分量（每个元素各自为战）
+    this.parent = new Array(n);
+    this.rank = new Array(n);
+    this.sets = n;
+
+    // 初始化：每个元素都是独立的集合，父节点指向自己
+    for (let i = 0; i < n; i++) {
+      this.parent[i] = i;
+      this.rank[i] = 0;
+    }
   }
 
   /**
-   * 查找 x 的根节点（代表元）
-   * 路径压缩：查找过程中顺便把路径上的节点都挂到根上
+   * 查找根节点（带路径压缩）
+   * 
+   * 为什么用递归：路径压缩需要在回溯时修改路径上所有节点的父指针
+   * 递归天然适合这种"自底向上"的处理
    */
   find(x: number): number {
     if (this.parent[x] !== x) {
-      // 递归式路径压缩：让 parent[x] 直接指向根
+      // 路径压缩：直接把父节点指向根节点
       this.parent[x] = this.find(this.parent[x]);
     }
     return this.parent[x];
   }
 
   /**
-   * 合并 x 和 y 所在的集合
-   * 按秩合并：矮树挂到高树下面，避免树退化成链表
+   * 合并两个元素所在的集合（按秩合并）
+   * 
+   * 为什么要按秩合并：避免合并后树的高度增长过快
+   * 秩小（矮树）接到秩大（高树）下面，合并后高度不变或+1
    */
   union(x: number, y: number): void {
     const rootX = this.find(x);
     const rootY = this.find(y);
 
-    if (rootX === rootY) return; // 已经在同一集合，不用合并
+    if (rootX === rootY) {
+      return; // 已经在同一个集合，不需要合并
+    }
 
-    // 按秩合并：rank 小的挂到 rank 大的下面
     if (this.rank[rootX] < this.rank[rootY]) {
+      // X 的树矮，接入 Y 的根
       this.parent[rootX] = rootY;
     } else if (this.rank[rootX] > this.rank[rootY]) {
+      // Y 的树矮，接入 X 的根
       this.parent[rootY] = rootX;
     } else {
-      // rank 相等，随便挂，但被挂的那个 rank 要 +1
+      // 高度相同，随便选一个作为根，并增加秩
       this.parent[rootY] = rootX;
       this.rank[rootX]++;
     }
 
-    this.count--; // 合并后连通分量数 -1
+    this.sets--; // 合并后集合数 -1
   }
 
-  /** 判断 x 和 y 是否在同一个集合 */
+  /** 判断两个元素是否相连 */
   connected(x: number, y: number): boolean {
     return this.find(x) === this.find(y);
   }
 
-  /** 获取当前连通分量数 */
-  getCount(): number {
-    return this.count;
+  /** 返回当前独立集合的数量 */
+  count(): number {
+    return this.sets;
   }
 }
 
-// 使用示例
-const uf = new UnionFind(6);
-
-uf.union(0, 1);
-uf.union(2, 3);
-uf.union(1, 3); // 0,1,2,3 连通了
-uf.union(4, 5); // 4,5 连通了
-
-console.log(uf.connected(0, 3)); // true  ← 同一个集合
-console.log(uf.connected(1, 4)); // false ← 不同集合
-console.log(uf.getCount());      // 2 ← 两个连通分量：{0,1,2,3} 和 {4,5}
-
-uf.union(3, 4); // 两个集合合并
-console.log(uf.connected(1, 5)); // true  ← 现在全部连通了
-console.log(uf.getCount());      // 1
-```
-
-### Python
-
-```python
-class UnionFind:
-    """并查集（Union-Find）—— Python 实现
-
-    带路径压缩 + 按秩合并，均摊时间复杂度 O(α(n))。
-    α 是反阿克曼函数，实际中不超过 4，可以当作 O(1)。
-
-    为什么用并查集而不是 BFS/DFS：
-    并查集擅长处理「动态合并 + 快速查询连通性」的场景，
-    不需要真的把整张图存下来，只需要维护 parent 数组。
-    """
-
-    def __init__(self, n: int):
-        self.parent = list(range(n))  # 初始时每个人是自己的队长
-        self.rank = [0] * n           # 树的高度（近似值）
-        self.count = n                # 连通分量数
-
-    def find(self, x: int) -> int:
-        """查找根节点，同时做路径压缩"""
-        if self.parent[x] != x:
-            # 递归路径压缩：一路找到根，再把沿途节点都挂到根上
-            self.parent[x] = self.find(self.parent[x])
-        return self.parent[x]
-
-    def union(self, x: int, y: int) -> None:
-        """合并 x 和 y 所在的集合"""
-        root_x = self.find(x)
-        root_y = self.find(y)
-
-        if root_x == root_y:
-            return  # 已经是同一集合
-
-        # 按秩合并：矮树挂高树
-        if self.rank[root_x] < self.rank[root_y]:
-            self.parent[root_x] = root_y
-        elif self.rank[root_x] > self.rank[root_y]:
-            self.parent[root_y] = root_x
-        else:
-            self.parent[root_y] = root_x
-            self.rank[root_x] += 1
-
-        self.count -= 1
-
-    def connected(self, x: int, y: int) -> bool:
-        """判断 x 和 y 是否连通"""
-        return self.find(x) == self.find(y)
-
-    def get_count(self) -> int:
-        """返回当前连通分量数"""
-        return self.count
-
-
-# 使用示例
-if __name__ == "__main__":
-    uf = UnionFind(6)
-    uf.union(0, 1)
-    uf.union(2, 3)
-    uf.union(1, 3)
-    uf.union(4, 5)
-
-    print(uf.connected(0, 3))  # True
-    print(uf.connected(1, 4))  # False
-    print(uf.get_count())      # 2
-```
-
-## 进阶用法
-
-### 1. 带权并查集（加权 Union-Find）
-
-有时候我们不仅关心"是否连通"，还关心节点之间的**相对关系**。比如：
-
-- A 比 B 大 3 岁
-- B 比 C 大 2 岁
-- 问：A 比 C 大几岁？
-
-这就需要在并查集的边上维护一个**权重**：
-
-```typescript
+// ============================================================
+// LeetCode 547. 朋友圈（Number of Provinces）
+// ============================================================
 /**
- * 带权并查集 —— 每个节点到父节点有一个"距离" weight
- * find 时同步维护到根节点的总距离
+ * 题目：给定一个 n x n 的矩阵 isConnected，表示城市之间的连接关系。
+ *       isConnected[i][j] = 1 表示第 i 座城市和第 j 座城市直接相连。
+ *       返回省份（朋友圈）的数量。
+ * 
+ * 思路：把相邻的城市合并到同一个集合，最后数有多少个独立集合
  */
-class WeightedUnionFind {
-  private parent: number[];
-  private weight: number[]; // weight[i] 表示 i 到 parent[i] 的距离
-  private rank: number[];
-
-  constructor(n: number) {
-    this.parent = Array.from({ length: n }, (_, i) => i);
-    this.weight = new Array(n).fill(0);
-    this.rank = new Array(n).fill(0);
-  }
-
-  find(x: number): number {
-    if (this.parent[x] !== x) {
-      const root = this.find(this.parent[x]);
-      // 路径压缩时，累加权重
-      // 为什么这么做：压缩前 weight[x] 是 x 到 parent[x] 的距离，
-      // 压缩后要变成 x 到 root 的距离，所以要加上 parent[x] 到 root 的距离
-      this.weight[x] += this.weight[this.parent[x]];
-      this.parent[x] = root;
-    }
-    return this.parent[x];
-  }
-
-  /**
-   * 建立 x 和 y 的关系：weight[y] - weight[x] = delta
-   * 比如 union(0, 1, 3) 表示 1 比 0 大 3
-   */
-  union(x: number, y: number, delta: number): void {
-    const rootX = this.find(x);
-    const rootY = this.find(y);
-
-    if (rootX === rootY) return;
-
-    // 按秩合并，同时计算新边的权重
-    if (this.rank[rootX] < this.rank[rootY]) {
-      this.parent[rootX] = rootY;
-      // 推导：weight[y] - weight[x] = delta
-      // rootY 到 rootX 的距离 = weight[y] - weight[x] - delta
-      this.weight[rootX] = this.weight[y] - this.weight[x] - delta;
-    } else {
-      this.parent[rootY] = rootX;
-      this.weight[rootY] = this.weight[x] + delta - this.weight[y];
-      if (this.rank[rootX] === this.rank[rootY]) {
-        this.rank[rootX]++;
-      }
-    }
-  }
-
-  /**
-   * 查询 x 和 y 的相对关系
-   * 返回 weight[y] - weight[x]
-   * 如果不在同一集合，返回 null
-   */
-  query(x: number, y: number): number | null {
-    if (this.find(x) !== this.find(y)) return null;
-    return this.weight[y] - this.weight[x];
-  }
-}
-
-// 使用示例：食物链关系
-const wuf = new WeightedUnionFind(3);
-wuf.union(0, 1, 1); // 1 - 0 = 1（1 比 0 大 1）
-wuf.union(1, 2, 1); // 2 - 1 = 1（2 比 1 大 1）
-console.log(wuf.query(0, 2)); // 2（2 比 0 大 2，传递性）
-```
-
-### 2. 并查集 + 删除操作
-
-标准并查集不支持删除单个元素（因为删除会破坏树结构）。一个常用的 hack 是**虚拟节点法**：
-
-```
-给每个元素分配一个"虚拟 ID"，用一个指针 map 映射真实元素到虚拟 ID。
-删除元素时，只需要让它指向一个新的孤立虚拟 ID，不影响其他元素。
-```
-
-## 业务场景
-
-### 1. 最小生成树（Kruskal 算法）
-
-这是并查集最经典的配合场景。Kruskal 算法求最小生成树的过程：
-
-1. 把所有边按权重从小到大排序
-2. 依次取边，如果边的两个端点不在同一集合（不会形成环），就加入这条边并 Union
-3. 直到选够 n-1 条边
-
-```
-图：
-    A ---3--- B
-    |       / |
-    4     1   5
-    |   /     |
-    C ---2--- D
-
-边排序：(B,C,1), (C,D,2), (A,B,3), (A,C,4), (B,D,5)
-
-第1步：选 B-C（权重1），Union(B,C)   → 连通分量: {A}, {B,C}, {D}
-第2步：选 C-D（权重2），Union(C,D)   → 连通分量: {A}, {B,C,D}
-第3步：选 A-B（权重3），Union(A,B)   → 连通分量: {A,B,C,D}
-选够 3 条边，最小生成树完成！
-
-总权重 = 1 + 2 + 3 = 6
-```
-
-### 2. 社交网络的好友圈
-
-LeetCode 547「省份数量」就是典型题目：n 个城市，给出哪些城市直接相连，问有多少个"省份"（连通分量）。
-
-```typescript
 function findCircleNum(isConnected: number[][]): number {
   const n = isConnected.length;
   const uf = new UnionFind(n);
 
+  // 遍历矩阵的上三角，合并相邻的城市
   for (let i = 0; i < n; i++) {
     for (let j = i + 1; j < n; j++) {
       if (isConnected[i][j] === 1) {
@@ -492,97 +278,685 @@ function findCircleNum(isConnected: number[][]): number {
     }
   }
 
-  return uf.getCount();
+  return uf.count();
 }
 
-// 示例
-const grid = [
-  [1, 1, 0],
-  [1, 1, 0],
-  [0, 0, 1],
-];
-console.log(findCircleNum(grid)); // 2 ← 城市分组：{0,1} 和 {2}
-```
+// ============================================================
+// LeetCode 200. 岛屿数量
+// ============================================================
+/**
+ * 题目：给定一个二维网格地图，'1' 是陆地，'0' 是水域。
+ *       上下左右相邻的陆地算同一个岛屿。
+ *       返回岛屿的数量。
+ * 
+ * 思路：把相邻的陆地合并到同一个集合，最后数有多少个独立岛屿
+ */
+function numIslands(grid: char[][]): number {
+  if (!grid || grid.length === 0) return 0;
 
-### 3. 岛屿数量
+  const m = grid.length;
+  const n = grid[0].length;
+  
+  // 给每个格子一个编号：id = i * n + j
+  const uf = new UnionFind(m * n);
+  
+  // 方向数组：上下左右
+  const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
 
-LeetCode 200「岛屿数量」也可以用并查集解（虽然 DFS 更直觉）：
-
-```typescript
-function numIslands(grid: string[][]): number {
-  if (grid.length === 0) return 0;
-
-  const rows = grid.length;
-  const cols = grid[0].length;
-
-  // 多开一个位置给"水"节点，所有边界外的水都连到这个虚拟节点
-  const uf = new UnionFind(rows * cols + 1);
-  const waterRoot = rows * cols; // 虚拟水节点
-
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      if (grid[r][c] === "0") {
-        // 水节点连接到虚拟水节点
-        uf.union(r * cols + c, waterRoot);
-      } else {
-        // 陆地：检查右边和下面的邻居
-        if (c + 1 < cols && grid[r][c + 1] === "1") {
-          uf.union(r * cols + c, r * cols + c + 1);
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] === '1') {
+        const idx = i * n + j;
+        
+        // 检查右边和下边的邻居，合并相邻的陆地
+        if (j + 1 < n && grid[i][j + 1] === '1') {
+          uf.union(idx, idx + 1);
         }
-        if (r + 1 < rows && grid[r + 1][c] === "1") {
-          uf.union(r * cols + c, (r + 1) * cols + c);
+        if (i + 1 < m && grid[i + 1][j] === '1') {
+          uf.union(idx, idx + n);
         }
       }
     }
   }
 
-  // 连通分量数 - 1（减去虚拟水节点那个分量）
-  return uf.getCount() - 1;
+  // 统计所有陆地格子有多少个独立的根
+  let islands = 0;
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] === '1') {
+        const root = uf.find(i * n + j);
+        // 只统计根节点（代表元），避免重复计数
+        if (uf.find(i * n + j) === i * n + j) {
+          islands++;
+        }
+      }
+    }
+  }
+
+  return islands;
+}
+
+// ============================================================
+// LeetCode 990. 等式方程的可满足性
+// ============================================================
+/**
+ * 题目：给定一个字符串数组 equations，表示若干变量之间的关系。
+ *       格式如 "a==b" 或 "a!=b"。
+ *       判断所有方程能否同时成立。
+ * 
+ * 思路：分两遍处理
+ *       1. 先把所有 "==" 的变量合并到同一个集合
+ *       2. 再检查所有 "!=" 的变量对，它们必须在不同的集合中
+ */
+function equationsPossible(equations: string[]): boolean {
+  const uf = new UnionFind(26); // 26 个小写字母
+
+  // 第一遍：合并所有相等的变量
+  for (const eq of equations) {
+    if (eq.includes('==')) {
+      const [a, , b] = eq;
+      uf.union(a.charCodeAt(0) - 97, b.charCodeAt(0) - 97);
+    }
+  }
+
+  // 第二遍：检查所有不相等的变量
+  for (const eq of equations) {
+    if (eq.includes('!=')) {
+      const [a, , b] = eq;
+      // 如果两个变量在同一个集合，却声明了不相等，矛盾！
+      if (uf.connected(a.charCodeAt(0) - 97, b.charCodeAt(0) - 97)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+// 测试用例
+console.log("\n=== 并查集基础测试 ===");
+const uf = new UnionFind(5);
+console.log("初始集合数:", uf.count()); // 5
+
+uf.union(0, 1);
+uf.union(2, 3);
+console.log("合并 0-1, 2-3 后集合数:", uf.count()); // 3
+
+console.log("0 和 1 是否连通:", uf.connected(0, 1)); // true
+console.log("0 和 2 是否连通:", uf.connected(0, 2)); // false
+
+uf.union(1, 2);
+console.log("合并 1-2 后集合数:", uf.count()); // 2
+console.log("0 和 2 是否连通:", uf.connected(0, 2)); // true
+
+console.log("\n=== 朋友圈测试 ===");
+const isConnected = [
+  [1, 1, 0],
+  [1, 1, 0],
+  [0, 0, 1]
+];
+console.log("朋友圈数量:", findCircleNum(isConnected)); // 2
+
+console.log("\n=== 岛屿数量测试 ===");
+const grid = [
+  ['1', '1', '0', '0', '0'],
+  ['1', '1', '0', '0', '0'],
+  ['0', '0', '1', '0', '0'],
+  ['0', '0', '0', '1', '1']
+];
+console.log("岛屿数量:", numIslands(grid)); // 3
+
+console.log("\n=== 等式方程测试 ===");
+const equations = ["a==b", "b!=c", "c==d", "b==d"];
+console.log("方程是否可满足:", equationsPossible(equations)); // false
+```
+
+### Python
+
+```python
+from typing import List
+
+
+class UnionFind:
+    """并查集 —— Python 实现
+
+    核心思想：用森林（多棵树）表示不相交的集合，
+    每棵树的根节点是集合的"代表元"，通过 parent 数组维护父子关系。
+
+    优化策略：
+    1. 路径压缩（Path Compression）：find 时把路径上的节点都指向根
+    2. 按秩合并（Union by Rank）：把矮树接到高树下，均摊 O(α(n))
+    """
+
+    def __init__(self, n: int):
+        self.parent = list(range(n))  # 父节点数组
+        self.rank = [0] * n           # 树的秩（高度上界）
+        self.sets = n                 # 独立集合数量
+
+    def find(self, x: int) -> int:
+        """查找根节点（带路径压缩）
+
+        路径压缩的原理：递归返回时，让路径上每个节点直接指向根
+        这样下次查找会快很多
+        """
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x: int, y: int) -> None:
+        """合并两个元素所在的集合（按秩合并）"""
+        root_x = self.find(x)
+        root_y = self.find(y)
+
+        if root_x == root_y:
+            return  # 已经在同一个集合
+
+        # 按秩合并：把秩小的接到秩大的下面
+        if self.rank[root_x] < self.rank[root_y]:
+            self.parent[root_x] = root_y
+        elif self.rank[root_x] > self.rank[root_y]:
+            self.parent[root_y] = root_x
+        else:
+            self.parent[root_y] = root_x
+            self.rank[root_x] += 1
+
+        self.sets -= 1
+
+    def connected(self, x: int, y: int) -> bool:
+        """判断两个元素是否在同一个集合"""
+        return self.find(x) == self.find(y)
+
+    def count(self) -> int:
+        """返回独立集合的数量"""
+        return self.sets
+
+
+# ============================================================
+# LeetCode 547. 朋友圈
+# ============================================================
+def find_circle_num(is_connected: List[List[int]]) -> int:
+    """朋友圈数量
+
+    思路：把所有相邻的城市合并，最后数有多少个独立集合
+    """
+    n = len(is_connected)
+    uf = UnionFind(n)
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            if is_connected[i][j] == 1:
+                uf.union(i, j)
+
+    return uf.count()
+
+
+# ============================================================
+# LeetCode 200. 岛屿数量
+# ============================================================
+def num_islands(grid: List[List[str]]) -> int:
+    """岛屿数量
+
+    思路：把相邻的陆地合并到同一个集合，最后数有多少个独立的岛屿
+    """
+    if not grid or not grid[0]:
+        return 0
+
+    m, n = len(grid), len(grid[0])
+    uf = UnionFind(m * n)
+
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == '1':
+                idx = i * n + j
+                # 只检查右边和下边的邻居（避免重复）
+                if j + 1 < n and grid[i][j + 1] == '1':
+                    uf.union(idx, idx + 1)
+                if i + 1 < m and grid[i + 1][j] == '1':
+                    uf.union(idx, idx + n)
+
+    # 统计有多少个独立的岛屿
+    roots = set()
+    for i in range(m):
+        for j in range(n):
+            if grid[i][j] == '1':
+                roots.add(uf.find(i * n + j))
+    return len(roots)
+
+
+# ============================================================
+# LeetCode 990. 等式方程的可满足性
+# ============================================================
+def equations_possible(equations: List[str]) -> bool:
+    """等式方程可满足性
+
+    思路：
+    1. 先把所有 "==" 的变量合并到同一个集合
+    2. 再检查所有 "!=" 的变量对是否真的在不同集合
+    """
+    uf = UnionFind(26)
+
+    # 第一遍：合并所有相等的变量
+    for eq in equations:
+        if '==' in eq:
+            a, b = eq.split('==')
+            uf.union(ord(a) - ord('a'), ord(b) - ord('a'))
+
+    # 第二遍：检查所有不相等的变量
+    for eq in equations:
+        if '!=' in eq:
+            a, b = eq.split('!=')
+            if uf.connected(ord(a) - ord('a'), ord(b) - ord('a')):
+                return False
+
+    return True
+
+
+if __name__ == "__main__":
+    print("=== 朋友圈测试 ===")
+    is_connected = [
+        [1, 1, 0],
+        [1, 1, 0],
+        [0, 0, 1]
+    ]
+    print(f"朋友圈数量: {find_circle_num(is_connected)}")  # 2
+
+    print("\n=== 岛屿数量测试 ===")
+    grid = [
+        ['1', '1', '0', '0', '0'],
+        ['1', '1', '0', '0', '0'],
+        ['0', '0', '1', '0', '0'],
+        ['0', '0', '0', '1', '1']
+    ]
+    print(f"岛屿数量: {num_islands(grid)}")  # 3
+
+    print("\n=== 等式方程测试 ===")
+    equations = ["a==b", "b!=c", "c==d", "b==d"]
+    print(f"方程是否可满足: {equations_possible(equations)}")  # False
+```
+
+### Go
+
+```go
+package unionfind
+
+import "fmt"
+
+/**
+ * 并查集 —— Go 实现
+ *
+ * 核心数据结构：
+ * - parent: 父节点数组，parent[i] 表示 i 的父节点
+ * - rank: 树的秩，用于按秩合并优化
+ * - sets: 当前独立集合的数量
+ */
+type UnionFind struct {
+	parent []int
+	rank   []int
+	sets   int
+}
+
+// New 创建一个大小为 n 的并查集
+func New(n int) *UnionFind {
+	uf := &UnionFind{
+		parent: make([]int, n),
+		rank:   make([]int, n),
+		sets:   n,
+	}
+	// 初始化：每个元素的父节点指向自己
+	for i := 0; i < n; i++ {
+		uf.parent[i] = i
+	}
+	return uf
+}
+
+// find 查找根节点（带路径压缩）
+func (uf *UnionFind) Find(x int) int {
+	if uf.parent[x] != x {
+		// 路径压缩：递归返回时把父节点指向根
+		uf.parent[x] = uf.Find(uf.parent[x])
+	}
+	return uf.parent[x]
+}
+
+// union 合并两个元素所在的集合（按秩合并）
+func (uf *UnionFind) Union(x, y int) {
+	rootX := uf.Find(x)
+	rootY := uf.Find(y)
+
+	if rootX == rootY {
+		return // 已经在同一个集合
+	}
+
+	// 按秩合并
+	if uf.rank[rootX] < uf.rank[rootY] {
+		uf.parent[rootX] = rootY
+	} else if uf.rank[rootX] > uf.rank[rootY] {
+		uf.parent[rootY] = rootX
+	} else {
+		uf.parent[rootY] = rootX
+		uf.rank[rootX]++
+	}
+
+	uf.sets--
+}
+
+// Connected 判断两个元素是否相连
+func (uf *UnionFind) Connected(x, y int) bool {
+	return uf.Find(x) == uf.Find(y)
+}
+
+// Count 返回独立集合的数量
+func (uf *UnionFind) Count() int {
+	return uf.sets
+}
+
+// ============================================================
+// LeetCode 547. 朋友圈
+// ============================================================
+// FindCircleNum 朋友圈数量
+func FindCircleNum(isConnected [][]int) int {
+	n := len(isConnected)
+	uf := New(n)
+
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			if isConnected[i][j] == 1 {
+				uf.Union(i, j)
+			}
+		}
+	}
+
+	return uf.Count()
+}
+
+// ============================================================
+// LeetCode 990. 等式方程可满足性
+// ============================================================
+// EquationsPossible 判断等式方程是否可满足
+func EquationsPossible(equations []string) bool {
+	uf := New(26)
+
+	// 第一遍：合并所有相等的变量
+	for _, eq := range equations {
+		if len(eq) >= 4 && eq[1] == '=' && eq[2] == '=' {
+			a := int(eq[0] - 'a')
+			b := int(eq[3] - 'a')
+			uf.Union(a, b)
+		}
+	}
+
+	// 第二遍：检查所有不相等的变量
+	for _, eq := range equations {
+		if len(eq) >= 4 && eq[1] == '!' && eq[2] == '=' {
+			a := int(eq[0] - 'a')
+			b := int(eq[3] - 'a')
+			if uf.Connected(a, b) {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
+// ============================================================
+// 简单测试
+// ============================================================
+func main() {
+	// 朋友圈测试
+	isConnected := [][]int{
+		{1, 1, 0},
+		{1, 1, 0},
+		{0, 0, 1},
+	}
+	fmt.Printf("朋友圈数量: %d\n", FindCircleNum(isConnected)) // 2
+
+	// 等式方程测试
+	equations := []string{"a==b", "b!=c", "c==d", "b==d"}
+	fmt.Printf("方程是否可满足: %v\n", EquationsPossible(equations)) // false
 }
 ```
 
-### 4. 图片连通域标记
+### Java
 
-图像处理中，经常需要把相邻的同色像素归为一个连通域。用并查集扫描一遍图片，相邻像素 Union 起来，最后统计连通分量数即可。OpenCV 的 `connectedComponents` 函数底层就用了类似思路。
+```java
+import java.util.*;
 
-### 5. Git 的分支合并检测
+/**
+ * 并查集 —— Java 实现
+ *
+ * 关键点：
+ * 1. parent 数组维护每棵树的父子关系
+ * 2. rank 数组记录树的"高度"（上界），用于按秩合并
+ * 3. 路径压缩 + 按秩合并 -> 均摊 O(α(n))，实际近似 O(1)
+ */
+public class UnionFind {
+    private final int[] parent;  // 父节点数组
+    private final int[] rank;    // 树的秩
+    private int sets;           // 独立集合数量
 
-Git 在判断两个分支是否已经合并时，本质上就是在查：这两个 commit 是否在同一个连通分量里。大型 Git 仓库的 commit 图可能有数百万节点，用并查集做连通性判断效率极高。
+    public UnionFind(int n) {
+        this.parent = new int[n];
+        this.rank = new int[n];
+        this.sets = n;
+
+        for (int i = 0; i < n; i++) {
+            this.parent[i] = i;
+            this.rank[i] = 0;
+        }
+    }
+
+    /**
+     * 查找根节点（带路径压缩）
+     *
+     * 递归实现：顺着 parent 指针一直往上找，直到找到根节点
+     * 回溯时把路径上每个节点的父节点都指向根，实现路径压缩
+     */
+    public int find(int x) {
+        if (parent[x] != x) {
+            parent[x] = find(parent[x]); // 路径压缩
+        }
+        return parent[x];
+    }
+
+    /**
+     * 合并两个集合（按秩合并）
+     *
+     * 秩小的树接到秩大的树下，避免树的高度增长过快
+     */
+    public void union(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+
+        if (rootX == rootY) {
+            return;
+        }
+
+        if (rank[rootX] < rank[rootY]) {
+            parent[rootX] = rootY;
+        } else if (rank[rootX] > rank[rootY]) {
+            parent[rootY] = rootX;
+        } else {
+            parent[rootY] = rootX;
+            rank[rootX]++;
+        }
+
+        sets--;
+    }
+
+    /** 判断两个元素是否相连 */
+    public boolean connected(int x, int y) {
+        return find(x) == find(y);
+    }
+
+    /** 返回独立集合数量 */
+    public int count() {
+        return sets;
+    }
+
+    // ============================================================
+    // LeetCode 547. 朋友圈
+    // ============================================================
+    public static int findCircleNum(int[][] isConnected) {
+        int n = isConnected.length;
+        UnionFind uf = new UnionFind(n);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (isConnected[i][j] == 1) {
+                    uf.union(i, j);
+                }
+            }
+        }
+
+        return uf.count();
+    }
+
+    // ============================================================
+    // LeetCode 200. 岛屿数量
+    // ============================================================
+    public static int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+
+        int m = grid.length;
+        int n = grid[0].length;
+        UnionFind uf = new UnionFind(m * n);
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    int idx = i * n + j;
+                    // 只检查右边和下边
+                    if (j + 1 < n && grid[i][j + 1] == '1') {
+                        uf.union(idx, idx + 1);
+                    }
+                    if (i + 1 < m && grid[i + 1][j] == '1') {
+                        uf.union(idx, idx + n);
+                    }
+                }
+            }
+        }
+
+        Set<Integer> roots = new HashSet<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    roots.add(uf.find(i * n + j));
+                }
+            }
+        }
+
+        return roots.size();
+    }
+
+    // ============================================================
+    // LeetCode 990. 等式方程可满足性
+    // ============================================================
+    public static boolean equationsPossible(String[] equations) {
+        UnionFind uf = new UnionFind(26);
+
+        // 第一遍：合并所有相等的变量
+        for (String eq : equations) {
+            if (eq.contains("==")) {
+                char a = eq.charAt(0);
+                char b = eq.charAt(3);
+                uf.union(a - 'a', b - 'a');
+            }
+        }
+
+        // 第二遍：检查所有不相等的变量
+        for (String eq : equations) {
+            if (eq.contains("!=")) {
+                char a = eq.charAt(0);
+                char b = eq.charAt(3);
+                if (uf.connected(a - 'a', b - 'a')) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        // 朋友圈测试
+        int[][] isConnected = {
+            {1, 1, 0},
+            {1, 1, 0},
+            {0, 0, 1}
+        };
+        System.out.printf("朋友圈数量: %d%n", findCircleNum(isConnected)); // 2
+
+        // 岛屿数量测试
+        char[][] grid = {
+            {'1', '1', '0', '0', '0'},
+            {'1', '1', '0', '0', '0'},
+            {'0', '0', '1', '0', '0'},
+            {'0', '0', '0', '1', '1'}
+        };
+        System.out.printf("岛屿数量: %d%n", numIslands(grid)); // 3
+
+        // 等式方程测试
+        String[] equations = {"a==b", "b!=c", "c==d", "b==d"};
+        System.out.printf("方程是否可满足: %b%n", equationsPossible(equations)); // false
+    }
+}
+```
+
+## 业务场景
+
+### 1. 社交网络中的朋友圈数量
+
+当产品经理问："我们平台的 100 万用户，可以分成多少个'圈子'？"——这就是并查集的典型应用。把互相关注/互为好友的用户合并到同一个集合，最后数一下有多少个独立的集合就行了。
+
+### 2. 图的连通分量检测
+
+在分布式系统中，可以用并查集检测节点之间的连通性。比如 Kubernetes 集群中的服务发现：如果 Pod A 和 Pod B 需要互相通信，我们需要知道它们是否在同一个 NetworkPolicy 组内。
+
+### 3. 迷宫/网格的连通性判断
+
+游戏开发中，判断从起点到终点是否可达，或者统计有多少个独立的封闭区域——这些都可以用并查集秒解。把相邻的可达格子合并，最后看起点和终点是否相连即可。
+
+### 4. Kruskal 最小生成树算法
+
+最小生成树算法中，Kruskal 算法的核心就是：把所有边按权重排序，然后依次加入——如果这条边连接的两个顶点已经在同一个集合中（会形成环），就跳过；否则加入并合并集合。这就是一个不断 `union` 和 `connected` 的过程 🎯
+
+```
+Kruskal 伪代码：
+
+sort all edges by weight
+for each edge (u, v) in sorted edges:
+    if not connected(u, v):  // 并查集查询
+        add edge to MST
+        union(u, v)            // 并查集合并
+```
 
 ## 复杂度分析
 
-| 操作 | 时间复杂度 | 空间复杂度 |
-| ---- | ---------- | ---------- |
-| Find | O(α(n)) ≈ O(1) | — |
-| Union | O(α(n)) ≈ O(1) | — |
-| 初始化 | O(n) | O(n) |
+| 操作 | 时间复杂度 | 空间复杂度 | 说明 |
+| ---- | ---------- | ---------- | ---- |
+| 初始化 | O(n) | O(n) | 需要初始化 n 个元素的 parent 和 rank |
+| Find | O(α(n)) | - | α(n) 是 Ackermann 函数的反函数，实际 ≈ O(1) |
+| Union | O(α(n)) | - | 需要两次 Find + 一次合并 |
+| Connected | O(α(n)) | - | 两次 Find |
 
-- **α(n)** 是反阿克曼函数，增长极慢。即使 n = 10⁸⁰（宇宙原子数），α(n) ≤ 4。所以工程上直接当 **O(1)** 看待。
-- **空间 O(n)**：需要两个数组 `parent` 和 `rank`，每个长度为 n。
-- 做 m 次 Union/Find 操作的总时间复杂度为 **O(m · α(n))**，几乎是线性时间。
+**为什么是 α(n) 而不是 O(1)？**
 
-## 常见面试题
+Ackermann 函数是一个增长极快的函数，它的反函数 α(n) 对于 n 的一切实际应用值都 ≤ 4。比如：
+- α(10^6) = 3
+- α(10^1000) = 4
 
-| 题目 | 难度 | 核心考点 |
-| ---- | ---- | -------- |
-| [LeetCode 200 - 岛屿数量](https://leetcode.cn/problems/number-of-islands/) | 🟡 中等 | 基础连通分量 |
-| [LeetCode 547 - 省份数量](https://leetcode.cn/problems/number-of-provinces/) | 🟡 中等 | 矩阵转并查集 |
-| [LeetCode 684 - 冗余连接](https://leetcode.cn/problems/redundant-connection/) | 🟡 中等 | 检测环 |
-| [LeetCode 721 - 账户合并](https://leetcode.cn/problems/accounts-merge/) | 🟡 中等 | 字符串映射 + Union |
-| [LeetCode 990 - 等式方程的可满足性](https://leetcode.cn/problems/satisfiability-of-equality-equations/) | 🟡 中等 | 等式/不等式判断 |
-| [LeetCode 1319 - 连通网络的操作次数](https://leetcode.cn/problems/number-of-operations-to-make-network-connected/) | 🟡 中等 | 连通分量 + 边数判断 |
-| [LeetCode 1631 - 最小体力消耗路径](https://leetcode.cn/problems/path-with-minimum-effort/) | 🟡 中等 | 二分 + 并查集 / Kruskal 变体 |
-| [LeetCode 1697 - 检查边长度限制的路径是否存在](https://leetcode.cn/problems/checking-existence-of-edge-length-limited-paths/) | 🔴 困难 | 离线查询 + 并查集 |
+所以业界通常说并查集的时间复杂度是 **近似 O(1)**，这是有数学依据的 💪
 
 ## 小结
 
-并查集是一种"小而美"的数据结构，代码不到 50 行，却能解决一大类连通性问题：
+并查集是解决"连接问题"的瑞士军刀 🔧
 
-- ✅ 代码极简，面试 5 分钟手撕
-- ✅ 路径压缩 + 按秩合并后，均摊 O(1) 操作
-- ✅ 天然适配动态合并场景，不需要预先知道完整图结构
-- ✅ 和排序结合就是 Kruskal 最小生成树
+- ✅ 支持快速合并（union）和查询（connected）
+- ✅ 路径压缩 + 按秩合并 → 均摊 O(α(n))，实际 O(1)
+- ✅ 空间 O(n)，简单高效
+- ✅ 应用广泛：朋友圈、岛屿数量、方程可满足性、Kruskal MST...
 
-使用口诀：**看到"连通"、"合并"、"分组"、"是否有环"这些关键词，第一时间想到并查集** 🎯
+记住一个口诀：**"查根、合并、按秩优化、路径压缩"** —— 面试写出来，面试官都得点头 👍
 
-它和 DFS/BFS 的区别在于：DFS/BFS 需要把整张图存下来，适合静态查询；而并查集只需要一个 `parent` 数组，适合动态增量的连通性维护。选对工具，事半功倍 💪
+> 补充：如果你不想手写并查集，Python 的 `scipy.sparse.csgraph.connected_components`、Java 的 Apache Commons Collections 都提供了现成实现。但面试/手撕代码的时候，还是要能默写的 😎

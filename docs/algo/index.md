@@ -64,3 +64,6 @@ sidebarSort: 1
 - [珂朵莉树（Chtholly Tree）](chtholly-tree.md)
 - [AC 自动机（Aho-Corasick）](aho-corasick.md)
 - [状态压缩动态规划（Bitmask DP）](bitmask-dp.md)
+- [卡特兰数（Catalan Number）](catalan-number.md)
+- [扫描线算法（Sweep Line）](sweep-line.md)
+- [并查集（Union-Find）](union-find.md)
