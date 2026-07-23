@@ -29,3 +29,4 @@ comment: false
 -   [Go 主机安全面试：Windows 计划任务与 WMI 持久化检测](go-edr-windows-scheduled-task-wmi.md)
 -   [Go 主机安全面试：LD_PRELOAD 动态库劫持与 Rootkit 线索检测](go-hids-ld-preload-rootkit-detection.md)
 -   [Go 主机安全面试：Cron 与 at 定时任务持久化检测](go-hids-cron-at-persistence-detection.md)
+-   [Go 主机安全面试：Windows Run Key 与启动目录持久化检测](go-edr-windows-run-key-startup-detection.md)
