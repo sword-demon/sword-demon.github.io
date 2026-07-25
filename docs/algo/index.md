@@ -67,3 +67,5 @@ sidebarSort: 1
 - [卡特兰数（Catalan Number）](catalan-number.md)
 - [扫描线算法（Sweep Line）](sweep-line.md)
 - [并查集（Union-Find）](union-find.md)
+- [扩展欧几里得算法（Extended Euclidean）](extended-euclidean.md)
+- [分数背包（Fractional Knapsack）](fractional-knapsack.md)
