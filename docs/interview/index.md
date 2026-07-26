@@ -31,3 +31,4 @@ comment: false
 -   [Go 主机安全面试：Cron 与 at 定时任务持久化检测](go-hids-cron-at-persistence-detection.md)
 -   [Go 主机安全面试：Windows Run Key 与启动目录持久化检测](go-edr-windows-run-key-startup-detection.md)
 -   [Go 主机安全面试：Linux 无文件执行与 memfd 检测](go-hids-linux-fileless-memfd-detection.md)
+-   [Go 主机安全面试：Linux 内核模块与可疑驱动检测](go-hids-linux-kernel-module-detection.md)
