@@ -69,3 +69,4 @@ sidebarSort: 1
 - [并查集（Union-Find）](union-find.md)
 - [扩展欧几里得算法（Extended Euclidean）](extended-euclidean.md)
 - [分数背包（Fractional Knapsack）](fractional-knapsack.md)
+- [稀疏表（Sparse Table）](sparse-table.md)
