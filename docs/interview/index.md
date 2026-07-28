@@ -33,3 +33,4 @@ comment: false
 -   [Go 主机安全面试：Linux 无文件执行与 memfd 检测](go-hids-linux-fileless-memfd-detection.md)
 -   [Go 主机安全面试：Linux 内核模块与可疑驱动检测](go-hids-linux-kernel-module-detection.md)
 -   [Go 主机安全面试：Linux ptrace 调试注入与进程内存读取检测](go-hids-linux-ptrace-memory-detection.md)
+-   [Go 主机安全面试：Linux 异常监听端口与后门服务检测](go-hids-linux-listening-port-detection.md)
