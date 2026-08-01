@@ -37,3 +37,4 @@ comment: false
 -   [Go 主机安全面试：Windows PowerShell 与 LOLBin 下载执行检测](go-edr-windows-powershell-lolbin-detection.md)
 -   [Go 主机安全面试：Linux PAM 后门与 SSH 登录链路检测](go-hids-linux-pam-ssh-backdoor-detection.md)
 -   [Go 主机安全面试：Windows LSASS 凭据转储与进程访问检测](go-edr-windows-lsass-credential-dump-detection.md)
+-   [Go 主机安全面试：Linux Web RCE 进程链与异常命令检测](go-hids-linux-web-rce-process-detection.md)
