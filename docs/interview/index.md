@@ -40,3 +40,4 @@ comment: false
 -   [Go 主机安全面试：Linux Web RCE 进程链与异常命令检测](go-hids-linux-web-rce-process-detection.md)
 -   [Go 主机安全面试：Linux DNS 隧道与异常域名外联检测](go-hids-linux-dns-tunnel-detection.md)
 -   [Go 主机安全面试：Linux SUID 与 Capabilities 异常提权检测](go-hids-linux-suid-capability-privesc-detection.md)
+-   [C/C++ Linux应用开发面试：TCP 粘包拆包与协议帧解析](cpp-linux-tcp-frame-parser-interview.md)
