@@ -41,3 +41,4 @@ comment: false
 -   [Go 主机安全面试：Linux DNS 隧道与异常域名外联检测](go-hids-linux-dns-tunnel-detection.md)
 -   [Go 主机安全面试：Linux SUID 与 Capabilities 异常提权检测](go-hids-linux-suid-capability-privesc-detection.md)
 -   [C/C++ Linux应用开发面试：TCP 粘包拆包与协议帧解析](cpp-linux-tcp-frame-parser-interview.md)
+-   [Go 主机安全面试：Linux 日志清理与审计痕迹破坏检测](go-hids-linux-log-tamper-detection.md)
