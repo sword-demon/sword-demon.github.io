@@ -43,3 +43,4 @@ comment: false
 -   [C/C++ Linux应用开发面试：TCP 粘包拆包与协议帧解析](cpp-linux-tcp-frame-parser-interview.md)
 -   [Go 主机安全面试：Linux 日志清理与审计痕迹破坏检测](go-hids-linux-log-tamper-detection.md)
 -   [Go 主机安全面试：Linux 账号新增与 sudoers 权限持久化检测](go-hids-linux-account-sudoers-persistence-detection.md)
+-   [Go 主机安全面试：Linux SSH authorized_keys 后门检测](go-hids-linux-ssh-authorized-keys-backdoor-detection.md)
