@@ -44,3 +44,4 @@ comment: false
 -   [Go 主机安全面试：Linux 日志清理与审计痕迹破坏检测](go-hids-linux-log-tamper-detection.md)
 -   [Go 主机安全面试：Linux 账号新增与 sudoers 权限持久化检测](go-hids-linux-account-sudoers-persistence-detection.md)
 -   [Go 主机安全面试：Linux SSH authorized_keys 后门检测](go-hids-linux-ssh-authorized-keys-backdoor-detection.md)
+-   [Go 主机安全面试：Linux Shell Profile 启动脚本持久化检测](go-hids-linux-shell-profile-persistence-detection.md)
