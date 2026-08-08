@@ -70,3 +70,6 @@ sidebarSort: 1
 - [扩展欧几里得算法（Extended Euclidean）](extended-euclidean.md)
 - [分数背包（Fractional Knapsack）](fractional-knapsack.md)
 - [稀疏表（Sparse Table）](sparse-table.md)
+- [Treap（树堆）](treap.md)
+- [单调栈](monotonic-stack.md)
+- [Minimax 算法与 Alpha-Beta 剪枝](minimax-and-alpha-beta.md)
