@@ -35,6 +35,14 @@ xxx.jdbc.password=root
 - 由键值对组成
 - 键和值之间的符号是等号`=`
 - 每一行都必须顶格写，前面不能有空格之类的其他的符号
+- `properties`支持的注释语法`# 注释`
+
+```properties
+# 注释内容
+key=value
+```
+
+
 
 ### 1.2.2 xml 配置文件
 
