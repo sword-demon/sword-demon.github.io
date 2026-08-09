@@ -18,6 +18,7 @@ comment: false
 -   [Go 主机安全面试：procfs 进程画像与异常行为识别](go-hids-procfs-process-profile.md)
 -   [Go 主机安全面试：进程、线程、系统调用与采集链路](go-hids-process-thread-syscall-collection.md)
 -   [Go 主机安全面试：Netlink 网络连接与异常外联检测](go-hids-netlink-network-detection.md)
+-   [Go 主机安全面试：Linux 文件系统元数据与 inode 篡改检测](go-hids-linux-filesystem-inode-tamper-detection.md)
 -   [Go 主机安全面试：Windows 服务自启动与异常持久化检测](go-edr-windows-service-persistence.md)
 -   [Go 主机安全面试：EDR Agent 自保护与资源控制](go-edr-agent-self-protection.md)
 -   [Go 主机安全面试：规则引擎性能与攻击链关联](go-edr-rule-engine-attack-chain.md)
