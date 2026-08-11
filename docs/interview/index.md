@@ -48,3 +48,4 @@ comment: false
 -   [Go 主机安全面试：Linux 账号新增与 sudoers 权限持久化检测](go-hids-linux-account-sudoers-persistence-detection.md)
 -   [Go 主机安全面试：Linux SSH authorized_keys 后门检测](go-hids-linux-ssh-authorized-keys-backdoor-detection.md)
 -   [Go 主机安全面试：Linux Shell Profile 启动脚本持久化检测](go-hids-linux-shell-profile-persistence-detection.md)
+-   [Go 主机安全面试：Linux 勒索加密与批量文件改写检测](go-hids-linux-ransomware-file-encryption-detection.md)
