@@ -117,3 +117,7 @@ public class XxxApplicationContextUtilsB implements ApplicationListener<ContextR
 }
 ```
 
+## 启发
+
+1. 工程业务开发需要合适的数据结构
+2. 学会代码封装，把一类信息放在一个`java`类中

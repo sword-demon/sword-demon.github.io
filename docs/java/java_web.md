@@ -119,6 +119,79 @@ $$
 
 
 
+### 1.2.3 约束引入语法
+
+> #### DTD 约束引入
+
+```xml
+<!DOCTYPE note SYSTEM "note.dtd">
+```
+
+约束文件`note.dtd`一般都放在相对位置下，直接引入即可。
+
+然后下面输入`<`就会有提示，根标签为`note`
+
+
+
+> 约束文件`note.dtd`内容
+
+```dtd
+<!-- 定义 note 元素，它包含 to、from、heading、body 四个子元素，且子元素必须按次顺序出现 -->
+<!ELEMENT note (to, from, heading, body)>
+<!-- 定义 to 元素， #PCDATA 表示该元素的内容为可解析的字符数据 文本 -->
+<!ELEMENT to (#PCDATA)>
+
+<!ELEMENT from (#PCDATA)>
+
+<!ELEMENT heading (#PCDATA)>
+
+<!ELEMENT body (#PCDATA)>
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE note SYSTEM "note.dtd">
+
+<note>
+	<to>xxx</to>
+  <from>xxx</from>
+  <heading>dwqdqwdqw</heading>
+  <body>dwqdqwdqwdwq</body>
+</note>
+```
+
+> 一个`xml`文件只能导入一个`dtd`约束
+
+
+
+#### schema 约束
+
+> 一个`xml`文件可以导入多个`schema`约束
+
+`schema`约束导入的位置是在根标签中，利用根标签的属性导入
+
+`xmlns:xsi:"http://www.w3.org/2001/XMLSchema-instance"`这句话是官方约束，提供导入`schema`约束的属性。
+
+`xsi:schemaLocation=`从这里开始导入的是自定义的约束。
+
+格式为：`url`地址 + 约束文件名，`url`地址是命名空间的概念
+
+`xmlns`-> `name space`
+
+就是将标签分成不同的类别，`schema`约束限制的是某一个类别某一个空间的标签
+
+`foo-schema.xsd` -> 约束命名空间 -> `foo`空间 ，那么里面的标签得这么写：`<foo:标签名 >`
+
+命名空间的表现：命名空间就是一个唯一的字符串，一般情况下我们都使用`URL`地址
+
+`xsi:schemaLocation="约束的命名空间(url我们使用对应的域名 url 地址来当做命名空间) 约束文件"`
+
+给命名空间起别名：`xmlns:别名(别名要短一点)="导入约束的命名空间的地址 url地址"`
+
+
+
+
+
 > 配置文件的作用
 
 1. 分离可变参数，避免硬编码
