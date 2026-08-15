@@ -49,3 +49,4 @@ comment: false
 -   [Go 主机安全面试：Linux SSH authorized_keys 后门检测](go-hids-linux-ssh-authorized-keys-backdoor-detection.md)
 -   [Go 主机安全面试：Linux Shell Profile 启动脚本持久化检测](go-hids-linux-shell-profile-persistence-detection.md)
 -   [Go 主机安全面试：Linux 勒索加密与批量文件改写检测](go-hids-linux-ransomware-file-encryption-detection.md)
+-   [Go 主机安全面试：Linux SSH 隧道与端口转发检测](go-hids-linux-ssh-tunnel-port-forward-detection.md)
