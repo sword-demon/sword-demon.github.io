@@ -51,3 +51,4 @@ comment: false
 -   [Go 主机安全面试：Linux 勒索加密与批量文件改写检测](go-hids-linux-ransomware-file-encryption-detection.md)
 -   [Go 主机安全面试：Linux SSH 隧道与端口转发检测](go-hids-linux-ssh-tunnel-port-forward-detection.md)
 -   [Go 主机安全面试：Linux 凭据文件访问与外传检测](go-hids-linux-credential-file-access-detection.md)
+-   [Go 主机安全面试：Linux 云元数据凭据窃取与 IMDS 异常访问检测](go-hids-linux-cloud-metadata-credential-theft-detection.md)
