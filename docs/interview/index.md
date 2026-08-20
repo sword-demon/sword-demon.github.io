@@ -52,3 +52,4 @@ comment: false
 -   [Go 主机安全面试：Linux SSH 隧道与端口转发检测](go-hids-linux-ssh-tunnel-port-forward-detection.md)
 -   [Go 主机安全面试：Linux 凭据文件访问与外传检测](go-hids-linux-credential-file-access-detection.md)
 -   [Go 主机安全面试：Linux 云元数据凭据窃取与 IMDS 异常访问检测](go-hids-linux-cloud-metadata-credential-theft-detection.md)
+-   [Go 主机安全面试：Linux 临时目录落地执行检测](go-hids-linux-temp-directory-execution-detection.md)
