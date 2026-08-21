@@ -73,3 +73,7 @@ sidebarSort: 1
 - [Treap（树堆）](treap.md)
 - [单调栈](monotonic-stack.md)
 - [Minimax 算法与 Alpha-Beta 剪枝](minimax-and-alpha-beta.md)
+- [Prim 最小生成树算法](prims-algorithm.md)
+- [桶排序（Bucket Sort）](bucket-sort.md)
+- [最近公共祖先（LCA）](lowest-common-ancestor.md)
+- [倍增算法（Binary Lifting）](binary-lifting.md)
