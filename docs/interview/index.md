@@ -54,3 +54,4 @@ comment: false
 -   [Go 主机安全面试：Linux 云元数据凭据窃取与 IMDS 异常访问检测](go-hids-linux-cloud-metadata-credential-theft-detection.md)
 -   [Go 主机安全面试：Linux 临时目录落地执行检测](go-hids-linux-temp-directory-execution-detection.md)
 -   [Go 主机安全面试：Linux C2 Beacon 周期性外联检测](go-hids-linux-c2-beacon-detection.md)
+-   [Go 主机安全面试：Linux 主机事件丢失与采集链路排障](go-hids-linux-event-loss-troubleshooting.md)
