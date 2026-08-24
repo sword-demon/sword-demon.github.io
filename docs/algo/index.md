@@ -77,3 +77,4 @@ sidebarSort: 1
 - [桶排序（Bucket Sort）](bucket-sort.md)
 - [最近公共祖先（LCA）](lowest-common-ancestor.md)
 - [倍增算法（Binary Lifting）](binary-lifting.md)
+- [莫队算法（Mo's Algorithm）](mo-s-algorithm.md)
