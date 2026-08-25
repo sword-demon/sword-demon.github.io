@@ -62,7 +62,7 @@ export default defineConfig({
         activeMatch: "/algo/",
       },
       {
-        text: "技术栈学习",
+        text: "技术栈学习笔记",
         items: [
           { text: "Go语言基础", link: "/views/go/" },
           { text: "Go核心", link: "/views/go-core/" },
