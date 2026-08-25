@@ -56,3 +56,4 @@ comment: false
 -   [Go 主机安全面试：Linux C2 Beacon 周期性外联检测](go-hids-linux-c2-beacon-detection.md)
 -   [Go 主机安全面试：Linux 主机事件丢失与采集链路排障](go-hids-linux-event-loss-troubleshooting.md)
 -   [Go 主机安全面试：Linux 进程伪装与命令行欺骗检测](go-hids-linux-process-masquerading-detection.md)
+-   [Go 主机安全面试：Linux 防火墙与路由篡改检测](go-hids-linux-firewall-route-tamper-detection.md)
