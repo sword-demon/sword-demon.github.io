@@ -1,14 +1,12 @@
 ---
-
-## title: java运行机制
-
+title: java运行机制
 date: 2026-08-26 15:03:01
 categories:
-
-- Java
-  tags:
-- java
-- jvm
+  - Java
+tags:
+  - java
+  - jvm
+---
 
 # Java 程序的运行机制
 
