@@ -5,6 +5,6 @@ layout: page
 catalogue: true
 path: java
 desc: Java 深度学习
-sidebar: false
+sidebar: true
 article: false
 ---
