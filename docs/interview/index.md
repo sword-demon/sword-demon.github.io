@@ -24,6 +24,7 @@ comment: false
 -   [Go 主机安全面试：规则引擎性能与攻击链关联](go-edr-rule-engine-attack-chain.md)
 -   [Go 主机安全面试：事件上报可靠性与背压控制](go-edr-event-upload-backpressure.md)
 -   [Go 主机安全面试：AI 辅助规则生成与告警解释](go-edr-ai-rule-generation-alert-explain.md)
+-   [Go 主机安全面试：白盒测试、POC 回放与客户问题分析](go-edr-whitebox-poc-customer-analysis.md)
 -   [Go 主机安全面试：SSH 登录爆破与账号异常检测](go-hids-ssh-login-bruteforce.md)
 -   [Go 主机安全面试：auditd 系统调用审计与命令溯源](go-hids-auditd-syscall-command-audit.md)
 -   [Go 主机安全面试：systemd 服务基线与异常启动项检测](go-hids-systemd-service-baseline.md)
