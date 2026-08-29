@@ -36,7 +36,7 @@ export const teekConfig = defineTeekConfig({
   },
   blogger: {
     avatar: "https://sword-demon.github.io/vue-blog/logo.jpg",
-    slogan: "无解的游戏,哈哈哈哈哈哈",
+    slogan: "无解的游戏，哈哈哈哈哈哈",
     shape: "circle-rotate",
     name: "wxvirus",
     description: "一个后端开发者",
@@ -105,5 +105,23 @@ export const teekConfig = defineTeekConfig({
         link: "https://yezhang24.github.io/",
       },
     ],
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // 将第三方库拆分到单独的 chunk
+            vendor: ["vuepress-theme-teek", "vitepress"],
+            // 将标记图渲染库单独拆分
+            legend: ["vitepress-plugin-legend"],
+            // Giscus 评论组件单独拆分
+            giscus: ["@giscus/client"],
+          },
+        },
+      },
+      // 调整 chunk size 警告限制，避免这些警告干扰开发
+      chunkSizeWarningLimit: 1000, // 从默认 500KB 调整为 1000KB
+    },
   },
 });
