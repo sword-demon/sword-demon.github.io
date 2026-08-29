@@ -110,18 +110,39 @@ export const teekConfig = defineTeekConfig({
     build: {
       rollupOptions: {
         output: {
-          manualChunks: {
-            // 将第三方库拆分到单独的 chunk
-            vendor: ["vuepress-theme-teek", "vitepress"],
-            // 将标记图渲染库单独拆分
-            legend: ["vitepress-plugin-legend"],
-            // Giscus 评论组件单独拆分
-            giscus: ["@giscus/client"],
+          // 智能代码分割策略
+          manualChunks: (id) => {
+            // VitePress 核心
+            if (id.includes("node_modules/vitepress")) {
+              return "vendor-vitepress";
+            }
+            // Teek 主题
+            if (id.includes("node_modules/vitepress-theme-teek")) {
+              return "vendor-teek";
+            }
+            // Markmap 相关
+            if (id.includes("node_modules/@markmap")) {
+              return "vendor-markmap";
+            }
+            // Mermaid
+            if (id.includes("node_modules/mermaid")) {
+              return "vendor-mermaid";
+            }
+            // Giscus 评论组件
+            if (id.includes("node_modules/@giscus")) {
+              return "vendor-giscus";
+            }
+            // 其他第三方库归一化到 vendor
+            if (id.includes("node_modules")) {
+              return "vendor";
+            }
           },
+          // 设置 chunk 大小警告限制为 1500KB
+          assetInlineLimit: 4096, // 将内联资源限制从 4KB 提升到 4MB
         },
       },
-      // 调整 chunk size 警告限制，避免这些警告干扰开发
-      chunkSizeWarningLimit: 1000, // 从默认 500KB 调整为 1000KB
+      // 调整 chunk size 警告限制，避免干扰开发体验
+      chunkSizeWarningLimit: 1500, // 从默认 500KB 调整为 1500KB
     },
   },
 });

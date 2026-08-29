@@ -14,15 +14,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-
+      # 必须先安装 pnpm，再 setup-node
+      # 因为 setup-node 检测到 pnpm-lock.yaml 后需要找到 pnpm 可执行文件来处理缓存
       - name: Install pnpm
         uses: pnpm/action-setup@v5
         with:
           run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
 
       - name: Install Deps
         run: pnpm install --frozen-lockfile
