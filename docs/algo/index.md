@@ -78,3 +78,4 @@ sidebarSort: 1
 - [最近公共祖先（LCA）](lowest-common-ancestor.md)
 - [倍增算法（Binary Lifting）](binary-lifting.md)
 - [莫队算法（Mo's Algorithm）](mo-s-algorithm.md)
+- [红黑树（Red-Black Tree）](red-black-tree.md)
