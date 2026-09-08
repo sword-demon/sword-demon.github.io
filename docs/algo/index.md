@@ -80,3 +80,5 @@ sidebarSort: 1
 - [莫队算法（Mo's Algorithm）](mo-s-algorithm.md)
 - [红黑树（Red-Black Tree）](red-black-tree.md)
 - [摩尔投票算法（Boyer-Moore Voting）](boyer-moore-voting.md)
+- [Tarjan 强连通分量算法](tarjan-scc.md)
+- [Z 函数（Z-Algorithm）](z-algorithm.md)

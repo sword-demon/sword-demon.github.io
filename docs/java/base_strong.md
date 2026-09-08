@@ -5,6 +5,10 @@ date: 2026-07-21
 
 # 基础加强
 
+## 思维导图概览内容
+
+<PreviewMarkmapPath />
+
 ## 异常机制
 
 **异常机制的本质**
@@ -64,3 +68,42 @@ public class Test {
 所有的异常对象都是派生于`Throwable`类的一个实例。如果内置的异常类不能够满足需要，还可以创建自己的异常类。
 
 所有的异常的根类是`java.lang.Throwable`，它下面又派生了 2 个子类：`Error`和`Exception`，我们通常只能管`Exception`。
+
+
+
+## 布尔型(boolean)
+
+1. boolean 类型有 2 个常量值，true 和 false
+2. 在内存中占用一个字节【布尔数组】或 4 个字节【一般时候都是 4 个字节】，不可以使用 0 或非 0的整数替代 true 和 false，这点和 C 语言不一样
+
+```java
+public class TestBoolean {
+  public static void main(String[] args) {
+    boolean b1 = true;
+    boolean b2 = false;
+    
+    if (b1) {
+      System.out.println("b1是true!");
+    } else {
+      System.out.println("b1是false!");
+    }
+  }
+}
+```
+
+> 尽量避免写`b1 == true`来判断，虽然是正确的，但是不推荐。
+
+
+
+## 方法的重载
+
+> 一个类中可以定义多个名称相同，但参数列表不同的方法。
+
+构成方法重载的条件
+
+1. 形参列表不同的含义
+   1. 形参类型不同
+   2. 形参个数不同
+   3. 形参顺序不同
+2. 只有返回值不同，不构成方法的重载
+3. 只有形参的名称不同，不构成方法的重载
