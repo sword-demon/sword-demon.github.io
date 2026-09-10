@@ -12,6 +12,7 @@ comment: false
 -   [Go 主机安全面试：HIDS 事件采集到检测链路](go-hids-event-pipeline.md)
 -   [Go 主机安全面试：事件标准化与实体关系建模](go-hids-entity-normalization-relationship-modeling.md)
 -   [Go 主机安全面试：检测规则热更新与灰度回滚](go-edr-rule-hot-reload-canary-rollback.md)
+-   [Go 主机安全面试：Linux cgroup v2 资源滥用与容器异常行为检测](go-hids-linux-cgroup-v2-resource-abuse-detection.md)
 -   [Go 主机安全面试：Linux udev 规则持久化与设备事件触发检测](go-hids-linux-udev-rule-persistence-detection.md)
 -   [Go 主机安全面试：Web RCE 到反弹 Shell 检测](go-edr-reverse-shell-detection.md)
 -   [Go 主机安全面试：eBPF 采集进程执行与网络连接](go-hids-ebpf-exec-connect.md)
