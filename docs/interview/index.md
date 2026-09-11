@@ -64,3 +64,4 @@ comment: false
 -   [Go 主机安全面试：Linux 防火墙与路由篡改检测](go-hids-linux-firewall-route-tamper-detection.md)
 -   [Go 主机安全面试：Linux DNS 配置与 hosts 劫持检测](go-hids-linux-dns-hosts-hijack-detection.md)
 -   [Go 主机安全面试：Windows IFEO 调试器劫持与辅助功能后门检测](go-edr-windows-ifeo-accessibility-backdoor-detection.md)
+-   [Go 主机安全面试：Windows 事件日志清理与审计策略篡改检测](go-edr-windows-eventlog-audit-policy-tamper-detection.md)
