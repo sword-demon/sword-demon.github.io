@@ -163,3 +163,377 @@ JSP 首次访问时会被容器翻译并编译成 Servlet，之后由这个 Serv
 ### 8. 如何防止 SQL 注入？
 
 使用 `PreparedStatement` 的参数绑定，不拼接用户输入；同时限制数据库账号权限，并对输入做业务校验。
+
+## 十一、Tomcat 架构与请求处理流程
+
+Tomcat 是最常用的 Servlet 容器实现，理解它的架构有助于理解整个 JavaEE 应用是怎么运转的，也是后端面试的高频考点。
+
+```mermaid
+flowchart TB
+    B[浏览器] --> Co[Connector]
+    Co --> Eng[Engine]
+    Eng --> H[Host]
+    H --> Ctx[Context]
+    Ctx --> W[Wrapper]
+    W --> Srv[Servlet]
+```
+
+核心组件：
+
+- Server：整个 Tomcat 实例，一个 JVM 只有一个。
+- Service：包含一个或多个 Connector 与一个 Engine。
+- Connector：接收客户端连接并解析 HTTP，可以是 BIO、NIO、APR 三种模式。
+- Container：Engine > Host > Context > Wrapper 四层容器，负责具体处理请求。
+- Wrapper：每个 Servlet 对应一个 Wrapper，是请求分发的最小单元。
+
+### 11.1 请求处理流程
+
+```
+连接 -> Acceptor -> Poller(NIO Selector) -> Executor
+-> Http11Processor -> CoyoteAdapter -> Engine
+-> Host -> Context -> Wrapper -> FilterChain -> Servlet.service()
+```
+
+一次请求会经过多个组件协作处理，最终才到达业务 Servlet。
+
+### 11.2 Connector 三种 IO 模型
+
+| 模型 | 线程模型 | 适用场景 |
+|---|---|---|
+| BIO | 一连接一线程 | 已废弃 |
+| NIO | 多路复用（默认） | 并发量中等偏上，推荐 |
+| APR | JNI + 本地库 | 对性能要求极致的场景 |
+
+NIO 模式下，Acceptor 接收连接、注册到 Poller 的 Selector，Poller 监测到读事件后交给 Executor 线程池处理。
+
+### 11.3 类加载机制（打破双亲委派）
+
+```mermaid
+flowchart TB
+    Boot[JVM Bootstrap] --> Ext[ExtClassLoader]
+    Ext --> App[AppClassLoader]
+    App --> Cmn[Tomcat Common]
+    Cmn --> W1[WebApp1]
+    Cmn --> W2[WebApp2]
+```
+
+Tomcat 自定义 `WebAppClassLoader`，先从 Web 应用自身目录加载类，没找到再委托父加载器。这一打破双亲委派的设计是为了实现不同 Web 应用之间的类隔离，让每个应用可以使用不同版本的依赖。
+
+### 11.4 Tomcat 性能优化要点
+
+- Connector 调优：`maxThreads`、`acceptCount`、`maxConnections`、`enableLookups=false`。
+- 启用 HTTP/2，开启压缩，配置 `compressableMimeType`。
+- JVM 调优：合理设置堆大小、新生代比例，使用 G1/ZGC 收集器。
+- 数据库连接池参数调优（最大连接数、超时时间）。
+- 静态资源交给 Nginx / CDN，不走 Servlet 容器。
+
+## 十二、HTTP 协议深入
+
+### 12.1 HTTP 演进
+
+- HTTP/1.0：每个请求独立 TCP 连接（短连接）。
+- HTTP/1.1：默认长连接（`Connection: keep-alive`），支持管线化、Chunked、Host 头、`OPTIONS` 预检。
+- HTTP/2：二进制分帧、多路复用、HPACK 头部压缩、服务器推送，从协议层解决 HTTP/1.1 的队头阻塞。
+- HTTP/3：基于 QUIC（UDP）+ TLS 1.3，从传输层解决 TCP 队头阻塞，握手更快。
+
+### 12.2 HTTPS 握手流程
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: ClientHello（加密套件、随机数）
+    S->>C: ServerHello + 证书
+    C->>S: 验证证书，用公钥加密 pre-master secret
+    S->>C: Session Ticket
+    Note over C,S: 后续通信使用对称密钥加密
+```
+
+HTTPS = HTTP + TLS/SSL，默认 443 端口，需要 CA 证书。握手阶段的非对称加密用于协商对称密钥，实际数据传输使用对称加密。
+
+### 12.3 跨域（CORS）
+
+同源策略要求 协议 + 域名 + 端口 三者一致，否则浏览器会拦截响应。
+
+服务端放行跨域需要响应头：
+
+- `Access-Control-Allow-Origin`
+- `Access-Control-Allow-Methods`
+- `Access-Control-Allow-Headers`
+- `Access-Control-Allow-Credentials`
+
+简单请求直接发送，复杂请求（自定义头、`Content-Type=application/json` 等）会先发 `OPTIONS` 预检请求。
+
+### 12.4 CSRF 防御
+
+- 校验 `Origin` / `Referer` 头部是否合法。
+- 请求携带 CSRF Token，服务端校验。
+- Cookie 设置 `SameSite=Strict` 或 `SameSite=Lax`。
+- 关键操作要求二次验证或重新输入密码。
+
+## 十三、Servlet 进阶
+
+### 13.1 ServletConfig vs ServletContext
+
+| 维度 | ServletConfig | ServletContext |
+|---|---|---|
+| 作用范围 | 单个 Servlet | 整个 Web 应用 |
+| 来源 | `init()` 参数或 `@WebInitParam` | 全局参数或编程方式 |
+| 是否共享 | 不共享 | 所有 Servlet 共享 |
+| 典型用途 | 注入当前 Servlet 配置 | 缓存全局配置、做组件通信 |
+
+### 13.2 Servlet 3.0 注解
+
+```java
+@WebServlet(urlPatterns = "/hello", loadOnStartup = 1,
+        initParams = @WebInitParam(name = "greeting", value = "Hello"))
+public class HelloServlet extends HttpServlet { /* ... */ }
+
+@WebFilter(urlPatterns = "/*", filterName = "encoding",
+        initParams = @WebInitParam(name = "charset", value = "UTF-8"))
+public class EncodingFilter implements Filter { /* ... */ }
+
+@WebListener
+public class AppListener implements ServletContextListener { /* ... */ }
+```
+
+`@WebServlet` 对应一个 Wrapper，`@WebFilter` 注册到容器 Filter 链，`@WebListener` 注册为生命周期监听器。
+
+### 13.3 异步 Servlet（处理耗时任务）
+
+容器线程池是宝贵的，长时间阻塞会拖垮整个应用。Servlet 3.0 提供异步处理能力：
+
+```java
+@WebServlet(urlPatterns = "/async", asyncSupported = true)
+public class AsyncServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        AsyncContext ctx = req.startAsync();
+        ctx.setTimeout(30_000);
+        ctx.start(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                ctx.getResponse().getWriter().write("done");
+            } catch (Exception e) {
+                ctx.getResponse().getWriter().write("error");
+            } finally {
+                ctx.complete();
+            }
+        });
+    }
+}
+```
+
+通过 `AsyncContext` 把耗时任务交给业务线程池，容器线程可以被释放去处理其他请求，提升吞吐量。
+
+### 13.4 转发与重定向原理
+
+| 对比 | 转发 `forward` | 重定向 `sendRedirect` |
+|---|---|---|
+| 请求次数 | 一次 | 两次 |
+| URL | 不变 | 变化 |
+| request 共享 | 共享 | 不共享 |
+| 跳转到外部地址 | 不能（仅当前 Web 应用内） | 可以（任意 URL） |
+| 浏览器参与 | 不感知 | 浏览器重新发起请求 |
+
+## 十四、Session 与分布式会话
+
+### 14.1 四种分布式 Session 方案
+
+| 方案 | 实现 | 优点 | 缺点 |
+|---|---|---|---|
+| Session 复制 | Tomcat 集群间广播 | 实现简单 | 广播风暴、性能差 |
+| Session 粘性 | Nginx `ip_hash` | 无侵入 | 单点风险、扩容受限 |
+| 集中存储 | 写入 Redis / DB | 易扩展 | 引入外部依赖 |
+| 客户端 Token | 不存服务端，Token + 签名 | 天然适合分布式 | Token 失效与续签复杂 |
+
+生产环境最常用的是 **Spring Session + Redis** 或 **JWT 替代 Session**。
+
+### 14.2 JWT 结构
+
+```
+Header.Payload.Signature
+```
+
+- Header：声明签名算法（如 HMAC SHA256）。
+- Payload：携带用户信息（`sub`、`iat`、`exp` 等）。
+- Signature：服务端用密钥对前两段签名后的结果。
+
+JWT 的优势是无状态、适合分布式；缺点是 Token 一旦签发无法主动失效，常配合 Refresh Token 使用。
+
+### 14.3 Session 失效场景
+
+- 服务端超时：默认 30 分钟无访问。
+- 调用 `session.invalidate()`。
+- 应用重启（除非启用 Session 持久化）。
+- 客户端关闭浏览器，JSESSIONID 丢失，但服务端 Session 仍在。
+
+## 十五、JDBC 进阶
+
+### 15.1 PreparedStatement 预编译
+
+- 服务端预编译（MySQL 需 `useServerPrepStmts=true`）：相同 SQL 只编译一次，复用执行计划，性能更好。
+- 客户端预编译：只做占位符替换，没有真正的预编译。
+- 参数通过 `?` 占位符绑定，作为数据传递而非 SQL 片段，是防 SQL 注入的核心机制。
+
+### 15.2 事务 ACID
+
+- Atomicity 原子性：事务内操作要么全部成功要么全部回滚。
+- Consistency 一致性：事务前后数据满足业务约束。
+- Isolation 隔离性：并发事务之间互不干扰。
+- Durability 持久性：事务提交后数据永久生效。
+
+### 15.3 四种隔离级别
+
+| 隔离级别 | 脏读 | 不可重复读 | 幻读 |
+|---|---|---|---|
+| Read Uncommitted | ✔ | ✔ | ✔ |
+| Read Committed | ✘ | ✔ | ✔ |
+| Repeatable Read（MySQL 默认） | ✘ | ✘ | ✔ |
+| Serializable | ✘ | ✘ | ✘ |
+
+### 15.4 主流连接池对比
+
+| 连接池 | 性能 | 监控能力 | 特点 |
+|---|---|---|---|
+| HikariCP | 极高 | 一般 | Spring Boot 默认 |
+| Druid | 高 | 强（SQL 监控、防御注入） | 阿里出品，国产项目首选 |
+| Tomcat JDBC | 中 | 一般 | Tomcat 自带 |
+| DBCP | 中 | 弱 | Apache 老牌 |
+
+### 15.5 批处理
+
+```java
+try (Connection c = ds.getConnection();
+     PreparedStatement ps = c.prepareStatement("INSERT INTO t(name) VALUES (?)")) {
+    for (int i = 0; i < 1000; i++) {
+        ps.setString(1, "name-" + i);
+        ps.addBatch();
+    }
+    int[] rows = ps.executeBatch();
+}
+```
+
+`addBatch()` + `executeBatch()` 把多条 INSERT 一次提交，比循环单条插入快很多。MySQL 打开 `rewriteBatchedStatements=true` 能把多语句重写为一条多值 INSERT。
+
+## 十六、JSP 深入
+
+### 16.1 九大内置对象
+
+| 对象 | 类型 | 作用 |
+|---|---|---|
+| request | HttpServletRequest | 一次请求 |
+| response | HttpServletResponse | 一次响应 |
+| session | HttpSession | 一次会话 |
+| application | ServletContext | 整个应用 |
+| config | ServletConfig | Servlet 配置 |
+| pageContext | PageContext | 当前页面 |
+| out | JspWriter | 输出 |
+| page | Object | 当前 JSP 实例（this） |
+| exception | Throwable | 错误对象（仅错误页可用） |
+
+### 16.2 处理流程
+
+```
+.jsp -> JSP 编译器 -> .java（继承 HttpServlet） -> .class -> Servlet 执行
+```
+
+第一次访问时翻译编译，之后直接执行编译后的 Servlet。生产环境通常做 JSP 预编译避免首次访问慢。
+
+### 16.3 为什么现在少用 JSP
+
+- 前后端分离成为主流，视图交给 Vue / React 等前端框架。
+- JSP 强依赖 Servlet 容器，云原生部署（K8s + Nginx）需要额外适配。
+- JSP 页面内嵌 Java 代码难以维护。
+- SEO 已有专门的 SSR 框架（Next.js、Nuxt.js）。
+
+但 JSP 仍是面试考点，因为它是理解「Servlet 生成 HTML」的过渡。
+
+## 十七、面试高频补充题
+
+### 1. Tomcat 是怎么接收并处理请求的？
+
+NIO 模式下，Acceptor 把连接注册到 Poller 的 Selector，Poller 检测到读事件后把请求交给 Executor 线程池处理。请求经过 Connector 解析后，按 Engine > Host > Context > Wrapper 的层级匹配，最终调用目标 Servlet 的 `service()`。
+
+### 2. HTTP 与 HTTPS 的区别？
+
+- HTTPS = HTTP + TLS/SSL，数据加密传输、可认证身份、防篡改。
+- HTTPS 默认 443 端口，需要 CA 证书。
+- HTTPS 首次握手有额外 RTT 开销，后续通信使用对称加密。
+
+### 3. 302、303、307、308 的区别？
+
+- 302：临时重定向，方法可能被改写为 GET（多数浏览器会改写）。
+- 303：明确要求用 GET 访问资源。
+- 307：临时重定向，保持原 HTTP 方法。
+- 308：永久重定向，保持原 HTTP 方法。
+
+### 4. GET 请求为什么有长度限制？
+
+- HTTP 协议本身没有规定 URL 长度。
+- 浏览器和 Web 服务器出于安全与性能做了限制。
+- Tomcat 默认 `maxHttpHeaderSize` 为 8KB。
+- POST 用请求体传参，相对不受限，受 `maxPostSize` 控制。
+
+### 5. 如何解决请求参数中文乱码？
+
+- POST：调用 `req.setCharacterEncoding("UTF-8")`，必须放在首次读参数之前。
+- GET：Tomcat 8 及以上默认 `URIEncoding=UTF-8`；更早版本需要手工 `new String(param.getBytes("ISO-8859-1"), "UTF-8")`。
+- Spring 中通常配 `CharacterEncodingFilter` 一次性解决。
+
+### 6. Filter 与 Spring Interceptor 的区别？
+
+- Filter 属于 Servlet 规范，能拦截所有进入容器的请求（包括静态资源）。
+- Interceptor 是 Spring MVC 提供，只能拦截 `DispatcherServlet` 已经接管的 Controller 请求。
+- 执行顺序：Filter -> Interceptor -> Controller。
+- Filter 处理的是字节层面，Interceptor 拿到的已经是 `HandlerMethod`。
+
+### 7. JDBC 与 ORM 框架区别？
+
+- JDBC：Java 标准 API，灵活但样板代码多，需手工处理结果集与异常。
+- MyBatis：半自动 ORM，SQL 自己写，专注结果集到对象的映射。
+- Hibernate：全自动 ORM，可使用 HQL / Criteria 自动生成 SQL。
+
+### 8. 分布式 Session 怎么实现？
+
+最常见是 **Spring Session + Redis**。也可使用 JWT 替代 Session，Token 自包含用户信息，天然适合分布式。
+
+### 9. 为什么现在少用 JSP？
+
+- 前后端分离成为主流，前端用 Vue / React 渲染视图。
+- JSP 强依赖 Servlet 容器，云原生部署受限。
+- JSP 页面内嵌 Java 代码不利于工程化。
+- SEO 已有专门的 SSR 方案。
+
+### 10. Tomcat 类加载为什么要打破双亲委派？
+
+为了让不同 Web 应用之间实现类隔离。每个 Web 应用独立打包，可能使用不同版本的依赖。Tomcat 自定义 `WebAppClassLoader` 先从 Web 应用目录加载类，没找到再委托父加载器，避免类冲突。
+
+### 11. JDBC 批处理如何优化？
+
+`PreparedStatement.addBatch()` + `executeBatch()` 一次提交多条 SQL；MySQL 配合 `rewriteBatchedStatements=true` 能把多语句重写为多值 INSERT，性能提升明显。
+
+### 12. Session、Cookie、Token 三者关系？
+
+- Cookie 是浏览器存储机制，会随请求自动携带到同源服务端。
+- Session 是服务端的会话机制，通过 Cookie 中的 JSESSIONID 关联。
+- Token 是无状态凭证，常放 HTTP `Authorization` 头或 Cookie 中。
+- 分布式环境下，Token（如 JWT）常被用来替代 Session。
+
+### 13. 异步 Servlet 解决了什么问题？
+
+Servlet 容器线程是宝贵的，耗时操作（远程调用、长查询）会阻塞容器线程。异步 Servlet 把请求处理交给业务线程池，容器线程可以被释放去处理其他请求，提高吞吐量。
+
+### 14. 转发能跳转到外部地址吗？
+
+不能。`RequestDispatcher.forward()` 只能在同一 Web 应用内部跳转。重定向可以跳到任意 URL，包括外部域名。
+
+### 15. 如何保证 Session 的安全性？
+
+- Cookie 设置 `HttpOnly` 防 JS 读取。
+- Cookie 设置 `Secure` 强制 HTTPS。
+- `SameSite=Strict` / `Lax` 防 CSRF。
+- 登录后重新生成 `JSESSIONID`，防 Session 固定。
+- 设置合理的超时时间。
+- 服务端 Session 数据脱敏存储。
+
