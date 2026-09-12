@@ -8,3 +8,4 @@ docs/.vitepress/cache/
 .cursor/
 .claude/
 .codex/
+.workbuddy/
