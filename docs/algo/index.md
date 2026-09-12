@@ -82,3 +82,4 @@ sidebarSort: 1
 - [摩尔投票算法（Boyer-Moore Voting）](boyer-moore-voting.md)
 - [Tarjan 强连通分量算法](tarjan-scc.md)
 - [Z 函数（Z-Algorithm）](z-algorithm.md)
+- [后缀数组（Suffix Array）](suffix-array.md)
