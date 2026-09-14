@@ -83,3 +83,4 @@ sidebarSort: 1
 - [Tarjan 强连通分量算法](tarjan-scc.md)
 - [Z 函数（Z-Algorithm）](z-algorithm.md)
 - [后缀数组（Suffix Array）](suffix-array.md)
+- [Bellman-Ford 算法（含负权边与负环检测）](bellman-ford.md)
