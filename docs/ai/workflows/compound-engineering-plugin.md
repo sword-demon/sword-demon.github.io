@@ -45,7 +45,362 @@ $ce-compound
 
 在 Codex 里，技能调用使用 `$skill-name`。第一次在项目里使用时，可以先运行 `$ce-setup`，让插件检查能力并生成项目配置。我的博客仓库把文章放在 `docs/`，因此会特别关注插件产物目录是否和现有文档结构冲突，必要时通过 `docs_root` 统一位置。
 
-## 这几天最有用的几个经验
+## 在不同 AI 宿主上的安装方法
+
+Compound Engineering 支持 14 种 Agent 宿主平台。以下是主流平台的真实安装步骤：
+
+### Claude Code（推荐）
+
+```bash
+# 进入项目后直接在终端执行
+/plugin marketplace add EveryInc/compound-engineering-plugin
+/plugin install compound-engineering
+
+# 验证安装
+/plugin list
+
+# 首次使用，运行设置命令
+/ce-setup
+```
+
+**调用方式：** 在 Claude Code 对话中输入 `/ce-brainstorm`、`/ce-plan` 等斜杠命令
+
+---
+
+### Cursor（最易用）
+
+**方式一：通过插件市场**
+
+在 Cursor 的 Agent 聊天框中输入：
+
+```
+/add-plugin compound-engineering
+```
+
+或者在插件市场中搜索 "compound engineering" 并安装。
+
+**方式二：手动添加**
+
+在 Cursor Agent 聊天中直接输入：
+
+```
+/add-plugin EveryInc/compound-engineering-plugin
+```
+
+**验证安装：**
+
+```
+# 在对话中输入
+/ce-help
+
+# 应该看到所有可用的 CE 命令列表
+```
+
+**调用方式：**
+
+- 在 AI 聊天中输入 `/ce-brainstorm`、`/ce-plan` 等
+- 或使用快捷键唤起 AI（默认 Cmd+K），然后输入命令
+
+---
+
+### Codex App（需要自定义市场）
+
+Codex 的内置插件市场还没有 Compound Engineering，需要手动添加自定义市场：
+
+1. 在 Codex App 左侧边栏打开 **Plugins**
+2. 点击 **Create** 旁边的箭头，选择 **Add marketplace**
+3. 填入以下信息：
+
+| 字段         | 值                                     |
+| ------------ | -------------------------------------- |
+| Source       | `EveryInc/compound-engineering-plugin` |
+| Git ref      | `main`                                 |
+| Sparse paths | 留空                                   |
+
+4. 点击 **Add marketplace**
+5. 搜索 "Compound Engineering"，安装 `compound-engineering-plugin`
+6. **重启 Codex**
+
+**命令行方式（Codex CLI）：**
+
+```bash
+# 注册市场
+codex plugin marketplace add EveryInc/compound-engineering-plugin
+
+# 安装插件
+codex plugin add compound-engineering@compound-engineering-plugin
+
+# 或者通过图形界面
+# 运行 /plugins → 找到 Compound Engineering 市场 → 选择插件 → Install
+```
+
+**特殊场景 - 多配置文件：**
+
+如果你的 Codex 使用了不同 profile（比如工作用、学习用）：
+
+```bash
+# 为特定 profile 安装（例如 work 配置文件）
+CODEX_HOME="$HOME/.codex/profiles/work" codex plugin marketplace add EveryInc/compound-engineering-plugin
+CODEX_HOME="$HOME/.codex/profiles/work" codex plugin add compound-engineering@compound-engineering-plugin
+```
+
+**调用方式：** 在 Codex 对话中使用 `$skill-name` 格式，如 `$ce-brainstorm`、`$lfg`
+
+---
+
+### Kimi Code CLI
+
+Kimi 原生支持直接从 GitHub 安装：
+
+```bash
+# 直接安装
+/plugins install https://github.com/EveryInc/compound-engineering-plugin
+
+# 或通过自定义市场
+/plugins marketplace https://raw.githubusercontent.com/EveryInc/compound-engineering-plugin/main/.kimi-plugin/marketplace.json
+```
+
+**重要：** 安装或更新后，运行 `/reload` 或启动新的 Kimi 会话才能加载技能。
+
+---
+
+### Cline
+
+Cline 通过 SKILL.md 目录按需加载技能：
+
+**全局安装（所有项目可用）：**
+
+```bash
+# 先克隆仓库
+git clone https://github.com/EveryInc/compound-engineering-plugin
+
+# 运行安装脚本
+./compound-engineering-plugin/.cline/scripts/install-skills.sh --global
+```
+
+**仅当前项目可用：**
+
+```bash
+./compound-engineering-plugin/.cline/scripts/install-skills.sh --project
+```
+
+**重要：** 安装后启动新的 Cline 任务才能看到技能。
+
+---
+
+### Grok Build CLI (grok)
+
+xAI 的 Grok Build CLI 可以直接从仓库安装：
+
+```bash
+# 直接安装（追踪最新版本）
+grok plugin install EveryInc/compound-engineering-plugin
+
+# 验证安装
+grok plugin list
+
+# 更新到最新版
+grok plugin update
+```
+
+**可选：通过市场浏览**
+
+```bash
+grok plugin marketplace add EveryInc/compound-engineering-plugin
+grok plugin install compound-engineering
+```
+
+**提示：** 添加 `--trust` 参数可以跳过安装确认。
+
+---
+
+### Devin CLI
+
+Devin 原生支持直接从 GitHub 安装：
+
+```bash
+# 安装插件
+devin plugins install EveryInc/compound-engineering-plugin
+
+# 验证并查看技能详情
+devin plugins list
+devin plugins info compound-engineering
+
+# 更新到最新版
+devin plugins update compound-engineering
+```
+
+**重要：** 插件在会话启动时加载，安装或更新后需启动新的 Devin 会话。
+
+---
+
+### 其他平台
+
+#### GitHub Copilot
+
+**VS Code 插件：**
+
+1. 运行 Chat: Install Plugin from Source（从 VS Code 命令面板）
+2. 输入 repo：`EveryInc/compound-engineering-plugin`
+3. 选择 `compound-engineering`
+
+**Copilot CLI：**
+
+```bash
+/copilot plugin marketplace add EveryInc/compound-engineering-plugin
+/copilot plugin install compound-engineering@compound-engineering-plugin
+```
+
+#### Factory Droid
+
+```bash
+droid plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
+droid plugin install compound-engineering@compound-engineering-plugin
+```
+
+#### Qwen Code
+
+```bash
+qwen extensions install EveryInc/compound-engineering-plugin:compound-engineering
+```
+
+#### OpenCode
+
+编辑 `opencode.json`，在 plugin 数组中添加：
+
+```json
+{
+  "plugin": [
+    "compound-engineering@git+https://github.com/EveryInc/compound-engineering-plugin.git"
+  ]
+}
+```
+
+重启 OpenCode 即可。
+
+#### Pi
+
+```bash
+# 安装主插件
+pi install git:github.com/EveryInc/compound-engineering-plugin
+
+# 推荐的辅助包（用于子 agent 调度）
+pi install npm:pi-subagents
+
+# 更好的阻塞问题处理
+pi install npm:pi-ask-user
+```
+
+#### oh-my-pi (omp)
+
+```bash
+# 添加市场
+omp plugin marketplace add EveryInc/compound-engineering-plugin
+
+# 安装插件
+omp plugin install compound-engineering@compound-engineering-plugin
+
+# 启用自动更新（可选）
+omp config set marketplace.autoUpdate auto
+```
+
+**重要：** 运行 `/reload-plugins` 或启动新的 omp 会话才能加载技能。
+
+#### Antigravity CLI (agy)
+
+Google 的 Gemini CLI 已被 Antigravity CLI 替代：
+
+```bash
+# 直接从 GitHub 安装（不需要克隆）
+agy plugin install https://github.com/EveryInc/compound-engineering-plugin
+
+# 验证安装
+agy plugin list
+
+# 本地开发模式（可选）
+git clone https://github.com/EveryInc/compound-engineering-plugin
+agy plugin install ./compound-engineering-plugin
+```
+
+---
+
+## 通用建议和常见问题
+
+### 首次使用流程
+
+无论用哪个平台，建议按这个顺序开始：
+
+```bash
+# 1. 安装插件后先运行设置命令
+/ce-setup   # 或在 Codex 中使用 $ce-setup
+
+# 这会做三件事：
+# - 检查 API 密钥和环境变量
+# - 生成项目配置文件 `.compound-engineering/config.yaml`
+# - 列出所有可用技能
+
+# 2. 查看完整技能列表
+/ce-help    # 或在 Codex 中使用 $ce-help
+
+# 3. 开始第一条循环（六步走）
+/ce-brainstorm <描述你的需求>
+/ce-plan
+/ce-work
+/ce-simplify-code
+/ce-code-review
+/ce-compound
+```
+
+### 配置文件位置
+
+插件默认输出到这些目录（可在 `.compound-engineering/config.yaml` 中修改）：
+
+- `docs/solutions/` - 知识沉淀
+- `docs/plans/` - 设计文档
+- `docs/reviews/` - 审查记录
+
+如果你的项目已有 `docs/` 结构，可以通过 `docs_root` 配置将所有产物集中到一个子目录。
+
+### 常见问题速查
+
+| 问题                   | 解决方案                                                  |
+| ---------------------- | --------------------------------------------------------- |
+| 找不到 `/ce-xxx` 命令  | 确认插件已正确安装，运行 `/plugin list` 查看是否显示      |
+| API 密钥无效           | 检查环境变量设置，CLI 通常会提示缺失的 key                |
+| 权限不足无法写入文件   | 确保对项目目录有写权限                                    |
+| 输出目录与现有结构冲突 | 修改 `.compound-engineering/config.yaml` 中的 `docs_root` |
+| 技能列表为空           | 重新运行 `/ce-setup`，或检查网络能否访问 GitHub           |
+| 安装后看不到新技能     | 重启 IDE 或运行 reload 命令                               |
+| 想升级插件             | 大多数平台使用 `update` 命令，详见各平台说明              |
+
+### 平台选择建议
+
+根据你的使用习惯选择：
+
+- **终端重度用户** → Claude Code（命令行友好，适合脚本化）
+- **追求易用性** → Cursor（可视化强，容易上手）
+- **OpenAI 生态** → Codex（API 可靠，支持多 profile）
+- **需要批量操作** → Kimi / Cline（SKILL.md 灵活加载）
+- **尝鲜新工具** → Grok / Devin（原生支持好）
+
+不同平台的插件是通用的，只是调用方式和配置略有差异。你可以在一个平台编写 Plan，然后在另一个平台执行 Work，只要确保输出目录一致即可。
+
+### 关于 Bun
+
+很多人会问：_"我需要装 Bun 吗？"_
+
+**回答：不需要！** 🚫
+
+Bun 只需要用于：
+
+- 仓库本地开发
+- 转换器维护
+
+**日常使用完全不需要 Bun**，各个平台的安装命令都是独立的。
+
+---
+
+## 给 SDD + Vibe Coding 玩家的快速上手
 
 ### 先让模型画出问题边界
 
