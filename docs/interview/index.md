@@ -67,3 +67,4 @@ comment: false
 -   [Go 主机安全面试：Windows IFEO 调试器劫持与辅助功能后门检测](go-edr-windows-ifeo-accessibility-backdoor-detection.md)
 -   [Go 主机安全面试：Windows 事件日志清理与审计策略篡改检测](go-edr-windows-eventlog-audit-policy-tamper-detection.md)
 -   [Go 主机安全面试：Windows 进程注入与远程线程检测](go-edr-windows-process-injection-detection.md)
+-   [Go 主机安全面试：Windows Named Pipe 与 SMB 横向移动检测](go-edr-windows-named-pipe-lateral-movement-detection.md)
