@@ -409,3 +409,29 @@ public static Integer valueOf(int i) {
 
 
 
+## 字符串相关类
+
+`String`类代表的是不可变的字符序列
+
+`StringBuilder`和`StringBuffer`类代表的是可变的字符序列
+
+**可变还是不可变都是`final`**来决定的
+
+**底层都是`unicode`**字符集
+
+
+
+```java
+public final class String {
+  /** The value is used for character storage. */
+  private final char value[];
+}
+```
+
+
+
+### StringBuilder 和 StringBuffer
+
+- StringBuffer：线程安全，做同步检查，效率低
+- StringBuilder：线程不安全，不做线程同步检查，效率高，一般使用它
+
