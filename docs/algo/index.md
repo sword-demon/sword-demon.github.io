@@ -84,3 +84,4 @@ sidebarSort: 1
 - [Z 函数（Z-Algorithm）](z-algorithm.md)
 - [后缀数组（Suffix Array）](suffix-array.md)
 - [Bellman-Ford 算法（含负权边与负环检测）](bellman-ford.md)
+- [后缀自动机（Suffix Automaton）](suffix-automaton.md)

@@ -407,8 +407,6 @@ public static Integer valueOf(int i) {
 - `boolean`、`byte`、`short`、`char` 等包装类也有类似的小数值缓存机制
 - Java 通过缓存减少内存占用，提高性能
 
-
-
 ## 字符串相关类
 
 `String`类代表的是不可变的字符序列
@@ -419,8 +417,6 @@ public static Integer valueOf(int i) {
 
 **底层都是`unicode`**字符集
 
-
-
 ```java
 public final class String {
   /** The value is used for character storage. */
@@ -428,10 +424,132 @@ public final class String {
 }
 ```
 
-
-
 ### StringBuilder 和 StringBuffer
 
 - StringBuffer：线程安全，做同步检查，效率低
 - StringBuilder：线程不安全，不做线程同步检查，效率高，一般使用它
 
+```java
+public class Test {
+  public static void main(String[] args) {
+    String str = "abc";
+    StringBuilder sb = new StringBuilder("abc");
+    StringBuffer sb2 = new StringBuffer("abc");
+  }
+}
+```
+
+常用方法列表
+
+- 重载的`public StringBuilder append(...)`方法，`append`方法，可以为该`StringBuilder`对象添加字符序列，**仍然返回自身对象**
+- 方法`public StringBuilder delete(int start, int end)`可以删除从`start`开始到`end-1`为止的一段字符序列，**仍然返回自身对象**
+- `public StringBuilder deleteCharAt(int index)`，移除此序列指定位置上的`char`，**仍然返回自身对象**
+- `public StringBuilder insert(...)`，可以为该`StringBuilder`对象在指定位置插入字符序列，**仍然返回自身对象**
+- `public StringBuilder reverse()`，用于将字符序列逆序，**仍然返回自身对象**
+
+## 不可变字符序列陷阱
+
+```java
+String str = "";
+
+long num1 = Runtime.getRuntime().freeMemory(); // 获取系统剩余内存空间
+long time1 = System.currentTimeMillis(); // 获取系统的当前时间
+for (int i = 0; i < 5000; i++) {
+  str = str + i; // 相当于产生了 5000 个对象
+}
+```
+
+```java
+StringBuilder sb = new StringBuilder("");
+for (int i = 0; i < 5000; i++) {
+  sb.append(i);
+}
+```
+
+遇到拼接的情况就用`StringBuilder`。上面会占用很大的内存空间。
+
+## 时间处理类
+
+我们把1970年 1 月 1 日 00:00:00 作为基准时间，每个度量单位是毫秒，1 秒的千分之一。
+
+我们用`long`类型的变量来表示时间，从基准时间前后几亿年都能表示。
+
+这个“时刻数值”是所有时间类的核心值，年月日都是根据这个“数值”计算出来的。
+
+- `java.util.Date`
+  - `java.sql.Date`
+  - `java.sql.Time`
+  - `java.sql.TimeStamp`
+- `java.util.Calendar`
+  - `java.util.GregorianCalendar`
+- `java.text.DateFormat`
+  - `java.text.SimpleDateFormat`
+
+- `Date`分配一个`Date`对象，并初始化次对象为系统当前的日期和时间，可以精确到毫秒
+- `boolean equals(Object obj)`比较 2 个日期的想等性，比较的是毫秒数
+
+- DateFormat 是抽象类
+- SimpleDateFormat 是子类
+
+```java
+DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); // 格式化,格式可变，字母一般不变
+
+String str = "2026-10-1 10:10:10"; // 真实的字符串
+
+Date guoqing = format.parse(str); // 这里需要抛出异常 ParseException
+```
+
+**如果字符串`str`里的格式和`format`的格式不匹配，比如`2026,10,1 10:10:10`，这样就会出现异常**
+
+```java
+DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+Date date = new Date();
+
+String str = format.format(date); // 将时间转换为格式化后的字符串
+```
+
+### SimpleDateFormat 模式字符含义
+
+`SimpleDateFormat`使用特定的字母来表示不同的时间单位：
+
+| 模式字符 | 含义          | 示例值   |
+| -------- | ------------- | -------- |
+| `y`      | 年            | `2026`   |
+| `M`      | 月            | `10`     |
+| `d`      | 日            | `1`      |
+| `h`      | 小时 (1~12)   | `10`     |
+| `H`      | 小时 (0~23)   | `22`     |
+| `m`      | 分钟          | `30`     |
+| `s`      | 秒            | `45`     |
+| `S`      | 毫秒          | `123`    |
+| `E`      | 星期          | `星期二` |
+| `a`      | 上午/下午标记 | `上午`   |
+
+**格式化示例：**
+
+```java
+SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS E");
+Date date = new Date(); // 假设当前时间是 2026 年 10 月 1 日 22:30:45.123，星期二
+
+String str = format.format(date);
+// 输出：2026-10-01 22:30:45.123 星期二
+```
+
+**注意事项：**
+
+1. **区分大小写**：`HH`表示 24 小时制（0~23），`hh`表示 12 小时制（1~12）
+2. **不可变字符**：大写字母如`Y`, `M`, `d`, `H`, `m`, `s`等代表实际的时间单位
+3. **特殊字符转义**：需要用单引号包裹的字符，如`'`年 `'月 `'日 `
+4. **线程不安全**：`SimpleDateFormat`不是线程安全的，多线程环境下应使用局部变量或`synchronized`
+5. **Java 8+ 新 API**：推荐使用`java.time`包中的`DateTimeFormatter`替代`SimpleDateFormat`
+
+**带转义字符的示例：**
+
+```java
+SimpleDateFormat format = new SimpleDateFormat("'当前时间：'yyyy 年 MM 月 dd 日 HH:mm:ss");
+Date date = new Date();
+
+String str = format.format(date);
+// 输出：当前时间：2026 年 10 月 01 日 22:30:45
+```
