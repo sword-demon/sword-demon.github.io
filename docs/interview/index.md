@@ -68,3 +68,4 @@ comment: false
 -   [Go 主机安全面试：Windows 事件日志清理与审计策略篡改检测](go-edr-windows-eventlog-audit-policy-tamper-detection.md)
 -   [Go 主机安全面试：Windows 进程注入与远程线程检测](go-edr-windows-process-injection-detection.md)
 -   [Go 主机安全面试：Windows Named Pipe 与 SMB 横向移动检测](go-edr-windows-named-pipe-lateral-movement-detection.md)
+-   [Go 主机安全面试：Linux 内存驻留后门与异常映射检测](go-hids-linux-memory-resident-backdoor-detection.md)
