@@ -218,23 +218,21 @@ public class Test {
 
 ```mermaid
 sequenceDiagram
+    %% Memory analysis sequence diagram for Integer objects
     participant Stack as 栈 (Stack Frame)
     participant Heap as 堆 (Heap)
 
-    Note over Stack, Heap: 执行：Integer i = new Integer(50);
-    rect(rgb(240, 248, 255))
-        Heap->>Heap: 创建 new Integer(50) 对象
-        Note right of Heap: 堆内存中分配对象
-        Stack->>Stack: i 引用
-        Note left of Stack: i -> 指向对象地址
-    end
+    Note over Stack,Heap: 执行：Integer i = new Integer(50);
+    Heap->>Heap: 创建 new Integer(50) 对象
+    Note right of Stack: i 引用 -> 指向堆内存对象
 
-    rect(rgb(255, 250, 240))
-        Note over Stack, Heap: 执行：Integer j = Integer.valueOf(10);
-        Heap->>Heap: valueOf() 可能返回缓存对象 (如果 -128~127)
-        Note right of Heap: 堆中可能复用缓存对象
-        Stack->>Stack: j 引用
-        Note left of Stack: j -> 指向缓存对象地址
+    Note over Stack,Heap: 执行：Integer j = Integer.valueOf(10);
+    alt 数值在缓存范围 (-128~127)
+        Heap->>Heap: valueOf() 返回缓存对象
+        Note right of Stack: j 引用 -> 指向缓存对象
+    else 数值超出缓存范围
+        Heap->>Heap: valueOf() 创建新对象
+        Note right of Stack: j 引用 -> 指向新对象
     end
 ```
 
@@ -264,7 +262,6 @@ classDiagram
 
     note for HeapObject1 "堆中新创建的对象"
     note for IntegerCache "valueOf() 可能返回缓存对象 (-128~127)"
-
 ```
 
 `valueOf`源码里有对应的缓存的过程。
@@ -349,24 +346,25 @@ System.out.println(x3.equals(x4)); // true 值相等
 
 ```mermaid
 sequenceDiagram
+    %% Integer Cache mechanism workflow
     participant Code as 代码执行
     participant Cache as IntegerCache
     participant Heap as 堆内存
 
-    Note over Code, Heap: 执行 Integer x = valueOf(100)
-    rect(rgb(200, 230, 255))
-        Code->>Cache: 检查 100 是否在 [-128, 127]
-        Cache-->>Code: Yes (在缓存范围内)
-        Code->>Cache: 从缓存池中获取对象
+    Note over Code,Heap: 执行 Integer x = valueOf(100)
+    alt 100 在缓存范围 [-128, 127]
+        Code->>Cache: 检查是否在缓存内
+        Cache-->>Code: Yes
+        Code->>Cache: 从缓存池获取
         Cache-->>Code: 返回同一引用
     end
 
-    rect(rgb(230, 200, 200))
-        Note over Code, Heap: 执行 Integer y = valueOf(1000)
-        Code->>Cache: 检查 1000 是否在 [-128, 127]
-        Cache-->>Code: No (超出缓存范围)
+    Note over Code,Heap: 执行 Integer y = valueOf(1000)
+    alt 1000 超出缓存范围
+        Code->>Cache: 检查是否在缓存内
+        Cache-->>Code: No
         Code->>Heap: new Integer(1000)
-        Heap-->>Code: 返回新对象引用
+        Heap-->>Code: 返回新对象
     end
 ```
 
@@ -553,3 +551,27 @@ Date date = new Date();
 String str = format.format(date);
 // 输出：当前时间：2026 年 10 月 01 日 22:30:45
 ```
+
+```java
+Date now = new Data();
+DateFormat f1 = new SimpleDateFormat("今年的第 D 天，第w周"); // 小写的 w
+String nowStr = f1.format(now);
+System.out.println(nowStr); // 公历来计算的
+```
+
+---
+
+`Calendar`类是一个抽象类，为我们提供了关于日期计算的功能，比如：年、月、日、时、分、秒的展示和计算。
+
+**注意月份的表示是从 0 到 11 表示的，0 代表 1 月，12 月是 11，因此大多数人习惯于使用单词而不是使用数字来表示月份，这样程序也容易阅读**
+
+```java
+GregorianCalendar calendar = new GregorianCalendar(2049, 9, 1, 22, 10, 50);
+int year = calendar.get(Calendar.YEAR); // 2049
+int month = calendar.get(Calendar.MONTH) + 1; // 月 10 月
+int day = calendar.get(Calendar.DAY_OF_MONTH);
+int week = calendar.get(Calendar.DAY_OF_WEEK) - 1; // 星期几，需要-1
+```
+
+
+
