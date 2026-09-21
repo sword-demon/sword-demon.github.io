@@ -146,3 +146,56 @@ docker exec -it 容器id redis-cli
 ```
 
 可以尝试一些`redis`的常用的命令来测试一下是否成功。
+
+
+
+## Nacos2.x 安装
+
+> 生产环境让运维人员配置，不暴露到公网。
+
+**开源版本的 Nacos server 配置中，不会对客户端鉴权，即任何能访问 nacos server 的客户，都可以直接获取 Nacos 中存储的配置，这样肯定会有安全隐患。需要先开启 Nacos server 的鉴权，在 Nacos server 上修改 `application.properties`中的`nacos.core.auth.enabled`值为`true`即可。**
+
+```bash
+docker run -d \
+-e NACOS_AUTH_ENABLE=true \
+-e MODE=standalone \
+-e JVM_XMS=128m \
+-e JVM_XMX=128m \
+-e JVM_XMN=128m \
+-p 8848:8848 \
+-e SPRING_DATASOURCE_PLATFORM=mysql \
+-e MYSQL_SERVICE_HOST=ip \
+-e MYSQL_SERVICE_PORT=3306 \
+-e MYSQL_SERVICE_USER=root \
+-e MYSQL_SERVICE_PASSWORD=admin888 \
+-e MYSQL_SERVICE_DB_NAME=nacos_config \
+-e MYSQL_SERVICE_DB_PARAM='characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false' \
+--restart=always \
+--privileged=true \
+-v /home/data/nacos/logs:/home/nacos/logs \
+--name my_nacos_auth \
+nacos/nacos-server:2.0.2
+```
+
+如果是服务器里，则还需要对应的网络安全组里开放对应的 8848 端口 ，如果是企业内网使用，则不需要对外暴露。
+
+安装完成后，使用对应的`ip:8848/nacos`进行访问，默认的账号和密码都是`nacos`
+
+
+
+## RabbitMQ 安装
+
+```bash
+docker run -d --name my_rabbit -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=password -p 15672:15672 -p 5672:5672 rabbitmq:3.8.15-management
+```
+
+**网络安全组记得开放端口**
+
+- 4369 `erlang`发现口
+- 5672 `client`通信端口
+- 15672 管理界面 UI 端口
+- 25672 `server`间内部通信口
+
+
+
+访问管理界面：`ip:15672`，账号为`admin`，密码为`password` 

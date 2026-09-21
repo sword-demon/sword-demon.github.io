@@ -86,3 +86,4 @@ sidebarSort: 1
 - [Bellman-Ford 算法（含负权边与负环检测）](bellman-ford.md)
 - [后缀自动机（Suffix Automaton）](suffix-automaton.md)
 - [快速幂算法（Binary Exponentiation）](fast-exponentiation.md)
+- [二分图与匈牙利算法（Bipartite Matching）](bipartite-matching.md)
