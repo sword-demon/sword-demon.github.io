@@ -87,3 +87,4 @@ sidebarSort: 1
 - [后缀自动机（Suffix Automaton）](suffix-automaton.md)
 - [快速幂算法（Binary Exponentiation）](fast-exponentiation.md)
 - [二分图与匈牙利算法（Bipartite Matching）](bipartite-matching.md)
+- [欧拉路径与欧拉回路（Eulerian Path）](eulerian-path.md)
