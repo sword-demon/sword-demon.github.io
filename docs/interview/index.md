@@ -70,3 +70,4 @@ comment: false
 -   [Go 主机安全面试：Windows Named Pipe 与 SMB 横向移动检测](go-edr-windows-named-pipe-lateral-movement-detection.md)
 -   [Go 主机安全面试：Linux 内存驻留后门与异常映射检测](go-hids-linux-memory-resident-backdoor-detection.md)
 -   [Go 主机安全面试：Linux eBPF Rootkit 与异常内核探针检测](go-hids-linux-ebpf-rootkit-detection.md)
+-   [Go 主机安全面试：Windows BYOVD 与可疑驱动加载检测](go-edr-windows-byovd-driver-load-detection.md)
