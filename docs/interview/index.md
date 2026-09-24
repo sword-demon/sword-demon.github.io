@@ -71,3 +71,4 @@ comment: false
 -   [Go 主机安全面试：Linux 内存驻留后门与异常映射检测](go-hids-linux-memory-resident-backdoor-detection.md)
 -   [Go 主机安全面试：Linux eBPF Rootkit 与异常内核探针检测](go-hids-linux-ebpf-rootkit-detection.md)
 -   [Go 主机安全面试：Windows BYOVD 与可疑驱动加载检测](go-edr-windows-byovd-driver-load-detection.md)
+-   [Go 主机安全面试：Linux fanotify 与 Web 后门落地检测](go-hids-linux-fanotify-webshell-drop-detection.md)
