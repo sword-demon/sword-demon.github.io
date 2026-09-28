@@ -88,3 +88,6 @@ sidebarSort: 1
 - [快速幂算法（Binary Exponentiation）](fast-exponentiation.md)
 - [二分图与匈牙利算法（Bipartite Matching）](bipartite-matching.md)
 - [欧拉路径与欧拉回路（Eulerian Path）](eulerian-path.md)
+- [基数排序（Radix Sort）](radix-sort.md)
+- [最长回文子序列（Longest Palindromic Subsequence）](longest-palindromic-subsequence.md)
+- [笛卡尔树（Cartesian Tree）](cartesian-tree.md)

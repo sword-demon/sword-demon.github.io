@@ -64,8 +64,8 @@ export default defineConfig({
       {
         text: "技术栈学习笔记",
         items: [
-          { text: "Go语言基础", link: "/views/go/" },
-          { text: "Go核心", link: "/views/go-core/" },
+          { text: "Go 语言基础", link: "/views/go/" },
+          { text: "Go 核心", link: "/views/go-core/" },
           { text: "kratos微服务", link: "/kratos/" },
           { text: "Go-zero框架", link: "/views/go-zero/" },
           { text: "运维技术", link: "/views/deploy/" },
@@ -79,6 +79,7 @@ export default defineConfig({
           { text: "网络编程", link: "/views/socket/" },
           { text: "WebChat项目学习", link: "/webchat/" },
           { text: "Java 深度学习", link: "/java/" },
+          { text: "PHP/Laravel", link: "/php/" },
         ],
       },
       {
