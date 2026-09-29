@@ -75,3 +75,4 @@ comment: false
 -   [Go 主机安全面试：Linux io_uring 异步 I/O 滥用检测](go-hids-linux-io-uring-abuse-detection.md)
 -   [Go 主机安全面试：Windows 访问令牌模拟与提权检测](go-edr-windows-access-token-impersonation-detection.md)
 -   [Go 主机安全面试：Linux sysctl 内核参数篡改检测](go-hids-linux-sysctl-kernel-parameter-tamper-detection.md)
+-   [Go 主机安全面试：Linux Keyring 凭据滥用检测](go-hids-linux-keyring-credential-abuse-detection.md)
