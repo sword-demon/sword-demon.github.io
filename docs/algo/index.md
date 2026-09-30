@@ -91,3 +91,5 @@ sidebarSort: 1
 - [基数排序（Radix Sort）](radix-sort.md)
 - [最长回文子序列（Longest Palindromic Subsequence）](longest-palindromic-subsequence.md)
 - [笛卡尔树（Cartesian Tree）](cartesian-tree.md)
+- [链表算法精讲（反转 / 中点 / 环 / 相交 / 合并 / 排序）](linked-list-algorithms.md)
+- [树链剖分（Heavy-Light Decomposition）](heavy-light-decomposition.md)
