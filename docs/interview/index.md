@@ -77,3 +77,4 @@ comment: false
 -   [Go 主机安全面试：Linux sysctl 内核参数篡改检测](go-hids-linux-sysctl-kernel-parameter-tamper-detection.md)
 -   [Go 主机安全面试：Linux Keyring 凭据滥用检测](go-hids-linux-keyring-credential-abuse-detection.md)
 -   [Go 主机安全面试：Agent 采集能力探测与降级设计](go-edr-collector-capability-degradation.md)
+-   [Go 主机安全面试：Windows COM 劫持与注册表持久化检测](go-edr-windows-com-hijacking-detection.md)
