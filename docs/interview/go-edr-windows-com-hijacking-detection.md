@@ -1,6 +1,6 @@
 ---
 title: Go主机安全面试：Windows COM 劫持与注册表持久化检测
-date: 2026-10-07 17:20:00
+date: 2026-10-07 17:11:35
 categories:
 - Interview
 tags:
