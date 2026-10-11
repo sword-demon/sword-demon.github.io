@@ -99,3 +99,7 @@ sidebarSort: 1
 - [斜堆（Skew Heap）](skew-heap.md)
 - [替罪羊树（Scapegoat Tree）](scapegoat-tree.md)
 - [B+树](b-plus-tree.md)
+- [HyperLogLog 基数估计](hyperloglog.md)
+- [回文树（Eertree / Palindromic Tree）](palindromic-tree.md)
+- [二叉树的序列化与反序列化](binary-tree-serialize.md)
+- [Count-Min Sketch 频率估计](count-min-sketch.md)
