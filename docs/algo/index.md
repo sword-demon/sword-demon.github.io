@@ -103,3 +103,4 @@ sidebarSort: 1
 - [回文树（Eertree / Palindromic Tree）](palindromic-tree.md)
 - [二叉树的序列化与反序列化](binary-tree-serialize.md)
 - [Count-Min Sketch 频率估计](count-min-sketch.md)
+- [分治算法（Divide and Conquer）](divide-and-conquer.md)
