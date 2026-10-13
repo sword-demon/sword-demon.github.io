@@ -81,3 +81,4 @@ comment: false
 -   [Go 主机安全面试：Linux SSH Agent Socket 凭据代理滥用检测](go-hids-linux-ssh-agent-socket-abuse-detection.md)
 -   [Go 主机安全面试：Linux Landlock 沙箱与异常访问检测](go-hids-linux-landlock-sandbox-detection.md)
 -   [Go 主机安全面试：Linux 文件描述符转移与敏感资源复用检测](go-hids-linux-fd-transfer-abuse-detection.md)
+-   [Go 主机安全面试：Linux 挂载命名空间与路径遮蔽检测](go-hids-linux-mount-namespace-path-obfuscation.md)
