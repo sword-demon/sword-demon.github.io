@@ -83,3 +83,4 @@ comment: false
 -   [Go 主机安全面试：Linux 文件描述符转移与敏感资源复用检测](go-hids-linux-fd-transfer-abuse-detection.md)
 -   [Go 主机安全面试：Linux 挂载命名空间与路径遮蔽检测](go-hids-linux-mount-namespace-path-obfuscation.md)
 -   [Go 主机安全面试：Linux D-Bus 服务激活与 IPC 持久化检测](go-hids-linux-dbus-service-activation-detection.md)
+-   [Go 主机安全面试：Linux binfmt_misc 解释器劫持与持久化检测](go-hids-linux-binfmt-misc-interpreter-hijack-detection.md)
