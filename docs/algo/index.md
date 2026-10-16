@@ -104,3 +104,7 @@ sidebarSort: 1
 - [二叉树的序列化与反序列化](binary-tree-serialize.md)
 - [Count-Min Sketch 频率估计](count-min-sketch.md)
 - [分治算法（Divide and Conquer）](divide-and-conquer.md)
+- [打家劫舍系列（House Robber I/II/III）](house-robber.md)
+- [数位 DP（Digit DP）](digit-dp.md)
+- [栈与队列设计题精讲（最小栈/用栈实现队列/用队列实现栈/循环队列）](stack-queue-design.md)
+- [带权并查集（Weighted Union-Find）](weighted-union-find.md)
