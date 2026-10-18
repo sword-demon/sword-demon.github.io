@@ -108,3 +108,5 @@ sidebarSort: 1
 - [数位 DP（Digit DP）](digit-dp.md)
 - [栈与队列设计题精讲（最小栈/用栈实现队列/用队列实现栈/循环队列）](stack-queue-design.md)
 - [带权并查集（Weighted Union-Find）](weighted-union-find.md)
+- [可持久化线段树（主席树 / Persistent Segment Tree）](persistent-segment-tree.md)
+- [伸展树（Splay Tree）](splay-tree.md)
