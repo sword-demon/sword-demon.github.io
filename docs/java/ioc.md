@@ -121,3 +121,69 @@ public class XxxApplicationContextUtilsB implements ApplicationListener<ContextR
 
 1. 工程业务开发需要合适的数据结构
 2. 学会代码封装，把一类信息放在一个`java`类中
+
+
+
+## Spring Security 技能解析
+
+### 认证与授权
+
+#### 认证
+
+- 验证用户的身份，判断用户是否合法
+- 支持多种认证方式，如表单登录、HTTP 基本认证、OAuth2 认证等
+
+#### 授权
+
+- 根据用户的角色和权限，决定用户是否有权限访问某个资源
+- 使用基于角色的访问控制 RBAC模型来实现授权管理
+
+### 核心组件
+
+- SecurityFilterChain
+  - 定义了 Spring Security 的过滤器链，对请求进行拦截和处理
+- AuthenticationManager
+  - 负责用户的认证操作，调用`UserDetailService`加载用户信息
+- `UserDetailService`
+  - 用于加载用户信息，实现该接口可以自定义用户信息的加载方式
+
+### 密码加密
+
+使用`Spring Security`提供的密码编码器，如`BCryptPasswordEncoder`对用户密码进行加密，提高密码的安全性。
+
+### 防止 CSRF 攻击
+
+Spring Security 提供了内置的 CSRF 的保护机制
+
+### 
+
+## SpringBoot 技能解析
+
+### 自动配置原理
+
+- 解释 SpringBoot 如何通过自动配置机制，根据项目的依赖和配置文件，自动配置`spring`应用的各种组件
+
+### 起步依赖
+
+各种起步依赖，如：
+
+- spring-boot-starter-web
+- `spring-boot-starter-data-jpa`
+
+方便快速搭建项目
+
+### 配置文件管理
+
+- 使用`application.properties`或者`application.yml`配置文件来配置`SpringBoot`应用的各种属性
+- 支持多环境配置，如开发环境、测试环境、生产环境
+
+### 嵌入式服务器
+
+SpringBoot 支持嵌入式服务器，如`Tomcat`、`Jetty`等，可以将应用打包成可执行的`JAR`文件，方便部署和运行。
+
+### Actuator 监控
+
+使用`SpringBoot Actuator`对应用的运行状态进行监控，如查看应用的监控状态、内存使用情况、线程信息等。
+
+
+

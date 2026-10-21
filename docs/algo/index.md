@@ -110,3 +110,6 @@ sidebarSort: 1
 - [带权并查集（Weighted Union-Find）](weighted-union-find.md)
 - [可持久化线段树（主席树 / Persistent Segment Tree）](persistent-segment-tree.md)
 - [伸展树（Splay Tree）](splay-tree.md)
+- [置换与轮换（Permutation Cycles）](permutation-cycles.md)
+- [岛屿问题（Number of Islands & Max Area of Island）](island-problems.md)
+- [素数筛法（埃氏筛与欧拉线性筛）](prime-sieve.md)
