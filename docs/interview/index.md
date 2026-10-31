@@ -88,3 +88,4 @@ comment: false
 -   [Go 主机安全面试：Windows Defender 排除项篡改与防护降级检测](go-edr-windows-defender-exclusion-tamper-detection.md)
 -   [Go 主机安全面试：Linux 抽象 Unix Socket 后门通信检测](go-hids-linux-abstract-unix-socket-backdoor-detection.md)
 -   [Go 主机安全面试：Linux 原始套接字与混杂模式滥用检测](go-hids-linux-raw-packet-promiscuous-mode-detection.md)
+-   [Go 主机安全面试：Linux pidfd 进程引用与 PID 复用归因检测](go-hids-linux-pidfd-process-reference-attribution-detection.md)
