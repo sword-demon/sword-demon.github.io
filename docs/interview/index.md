@@ -91,3 +91,4 @@ comment: false
 -   [Go 主机安全面试：Linux pidfd 进程引用与 PID 复用归因检测](go-hids-linux-pidfd-process-reference-attribution-detection.md)
 -   [Go 主机安全面试：Linux polkit 授权规则持久化与提权检测](go-hids-linux-polkit-rules-privilege-persistence-detection.md)
 -   [Go 主机安全面试：Linux userfaultfd 页故障委托与异常使用检测](go-hids-linux-userfaultfd-page-fault-abuse-detection.md)
+-   [Go 主机安全面试：Linux 文件句柄越权访问与 open_by_handle_at 检测](go-hids-linux-open-by-handle-at-escape-detection.md)
