@@ -94,3 +94,4 @@ comment: false
 -   [Go 主机安全面试：Linux 文件句柄越权访问与 open_by_handle_at 检测](go-hids-linux-open-by-handle-at-escape-detection.md)
 -   [Go 主机安全面试：Linux perf_event_open 性能监控滥用与检测](go-hids-linux-perf-event-open-abuse-detection.md)
 -   [Go 主机安全面试：Linux TIOCSTI 终端输入注入与提权链路检测](go-hids-linux-tiocsti-tty-injection-detection.md)
+-   [Go 主机安全面试：Linux inotify 监控覆盖与溢出恢复](go-hids-linux-inotify-watch-overflow-recovery.md)
