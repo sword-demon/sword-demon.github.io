@@ -95,3 +95,4 @@ comment: false
 -   [Go 主机安全面试：Linux perf_event_open 性能监控滥用与检测](go-hids-linux-perf-event-open-abuse-detection.md)
 -   [Go 主机安全面试：Linux TIOCSTI 终端输入注入与提权链路检测](go-hids-linux-tiocsti-tty-injection-detection.md)
 -   [Go 主机安全面试：Linux inotify 监控覆盖与溢出恢复](go-hids-linux-inotify-watch-overflow-recovery.md)
+-   [Go 主机安全面试：Linux core_pattern 崩溃处理器劫持与提权检测](go-hids-linux-core-pattern-coredump-handler-hijack-detection.md)
