@@ -97,3 +97,4 @@ comment: false
 -   [Go 主机安全面试：Linux inotify 监控覆盖与溢出恢复](go-hids-linux-inotify-watch-overflow-recovery.md)
 -   [Go 主机安全面试：Linux core_pattern 崩溃处理器劫持与提权检测](go-hids-linux-core-pattern-coredump-handler-hijack-detection.md)
 -   [Go 主机安全面试：Windows AMSI 绕过与脚本扫描链降级检测](go-edr-windows-amsi-bypass-scan-degradation-detection.md)
+-   [Go 主机安全面试：Windows 防火墙规则篡改与防护降级检测](go-edr-windows-firewall-wfp-rule-tamper-detection.md)
