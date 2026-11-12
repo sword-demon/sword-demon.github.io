@@ -99,3 +99,4 @@ comment: false
 -   [Go 主机安全面试：Windows AMSI 绕过与脚本扫描链降级检测](go-edr-windows-amsi-bypass-scan-degradation-detection.md)
 -   [Go 主机安全面试：Windows 防火墙规则篡改与防护降级检测](go-edr-windows-firewall-wfp-rule-tamper-detection.md)
 -   [Go 主机安全面试：Windows DPAPI 主密钥与凭据解密滥用检测](go-edr-windows-dpapi-masterkey-credential-abuse-detection.md)
+-   [Go 主机安全面试：Windows NTFS 备用数据流（ADS）载荷隐藏与检测](go-edr-windows-ntfs-ads-alternate-datastream-payload-detection.md)
