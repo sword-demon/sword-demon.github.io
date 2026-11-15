@@ -135,3 +135,5 @@ sidebarSort: 1
 - [差分约束系统精讲（Difference Constraints）](difference-constraints.md)
 - [K-D Tree 精讲（二维空间索引与最近邻搜索）](kd-tree.md)
 - [逆波兰表达式与调度场算法](rpn-shunting-yard.md)
+- [0-1 BFS 精讲（双端队列最短路）](0-1-bfs.md)
+- [状态机 DP 精讲（股票买卖系列）](state-machine-dp.md)

@@ -30,6 +30,21 @@ sidebar: auto
 
 ## 文档导航
 
+### 本次 JD 专项：150 道面试题与参考回答
+
+围绕 Laravel + MySQL + UniApp，以及 MES、E-DHR、ERP 对接、OA 流程、设备联网、测试上线和技术文档整理。每题包含参考回答与追问要点，适合先自答再核对；场景案例不代表已经交付的个人经历。
+
+| 篇目 | 题号 | 重点 |
+| --- | --- | --- |
+| [Laravel 与后端开发](./jd/laravel-php-interview.md) | 01—25 | PHP 基础、请求链路、权限、队列、事务、安全 |
+| [MySQL、并发与报表](./jd/mysql-concurrency-interview.md) | 26—50 | 数据建模、索引、锁、扣料防重、统计口径、恢复 |
+| [系统集成与设备联网](./jd/integration-device-interview.md) | 51—75 | ERP/OA/MES 对接、幂等、重试、对账、工业协议 |
+| [MES、E-DHR 与 OA](./jd/mes-edhr-oa-interview.md) | 76—100 | 工单、批次、质量、电子记录、签名、审批流程 |
+| [UniApp、小程序与 APP](./jd/uniapp-mobile-interview.md) | 101—125 | 登录、扫码、离线队列、冲突恢复、真机与发布 |
+| [测试、上线与需求协作](./jd/delivery-troubleshooting-interview.md) | 126—150 | 并发测试、软件验证、故障排查、受控发布、项目表达 |
+
+建议按题号顺序阅读。时间有限时，可先查看[自测与复习安排](./jd/delivery-troubleshooting-interview.md#自测与复习安排)，再针对薄弱部分补习下方原有专题。
+
 ### 基础篇
 
 - [PHP 核心面试题](./basic/php-core-questions.md) - PHP 语言特性、面向对象、内存管理
