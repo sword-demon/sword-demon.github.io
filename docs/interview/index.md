@@ -102,3 +102,4 @@ comment: false
 -   [Go 主机安全面试：Windows NTFS 备用数据流（ADS）载荷隐藏与检测](go-edr-windows-ntfs-ads-alternate-datastream-payload-detection.md)
 -   [Go 主机安全面试：Linux LSM 强制访问控制降级与策略篡改检测](go-hids-linux-lsm-mac-policy-degradation-detection.md)
 -   [Go 主机安全面试：Windows 卷影副本（VSS）删除与恢复能力破坏检测](go-edr-windows-vss-shadow-copy-deletion-detection.md)
+-   [Go 主机安全面试：Windows 启动链完整性与 Bootkit 检测](go-edr-windows-boot-chain-bootkit-detection.md)
