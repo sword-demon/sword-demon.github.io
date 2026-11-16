@@ -14,8 +14,8 @@ sidebar: auto
 
 ### 技术栈
 
-- **后端**: PHP 7.4+ / 8.x + Laravel框架
-- **数据库**: MySQL 5.7+ / 8.x (优化、事务、锁机制)
+- **后端**: PHP 8.x + Laravel 框架. JD 专项以 Laravel 12 文档为核查基线, 具体兼容范围与维护日期见后端篇; 旧版本仅作为存量系统迁移背景.
+- **数据库**: MySQL 8.x (优化、事务、锁机制). JD 专项区分 MySQL 8.0 的功能引入版本与 8.4 的行为说明, 不将旧版本兼容性等同于仍受维护.
 - **前端/移动端**: UniApp（微信小程序、APP开发）
 - **系统集成**: RESTful API、第三方系统对接
 - **运维**: Linux、Docker、Nginx
@@ -30,18 +30,20 @@ sidebar: auto
 
 ## 文档导航
 
-### 本次 JD 专项：150 道面试题与参考回答
+### 本次 JD 专项：180 道面试题与参考回答
 
-围绕 Laravel + MySQL + UniApp，以及 MES、E-DHR、ERP 对接、OA 流程、设备联网、测试上线和技术文档整理。每题包含参考回答与追问要点，适合先自答再核对；场景案例不代表已经交付的个人经历。
+围绕 Laravel + MySQL + UniApp, 以及 MES、E-DHR、ERP 对接、OA 流程、设备联网、测试上线和技术文档整理. 六篇各 30 题, 合计 **180 题**; 每题包含参考回答与追问或场景要点, 适合先自答再核对. 场景案例不代表已经交付的个人经历, 教学计算不作为企业实测数据.
+
+本轮资料核对日期为 **2026-11-16**. 每篇附可核查事实表、5 道进阶题、**专业术语表**和来源链接; 区分官方定义、工程建议及法规适用边界, 版本与维护日期以对应篇目的说明为准.
 
 | 篇目 | 题号 | 重点 |
 | --- | --- | --- |
-| [Laravel 与后端开发](./jd/laravel-php-interview.md) | 01—25 | PHP 基础、请求链路、权限、队列、事务、安全 |
-| [MySQL、并发与报表](./jd/mysql-concurrency-interview.md) | 26—50 | 数据建模、索引、锁、扣料防重、统计口径、恢复 |
-| [系统集成与设备联网](./jd/integration-device-interview.md) | 51—75 | ERP/OA/MES 对接、幂等、重试、对账、工业协议 |
-| [MES、E-DHR 与 OA](./jd/mes-edhr-oa-interview.md) | 76—100 | 工单、批次、质量、电子记录、签名、审批流程 |
-| [UniApp、小程序与 APP](./jd/uniapp-mobile-interview.md) | 101—125 | 登录、扫码、离线队列、冲突恢复、真机与发布 |
-| [测试、上线与需求协作](./jd/delivery-troubleshooting-interview.md) | 126—150 | 并发测试、软件验证、故障排查、受控发布、项目表达 |
+| [Laravel 与后端开发](./jd/laravel-php-interview.md) | 01—30 | 请求链路、权限、事务、队列互斥、版本维护、Octane 生命周期 |
+| [MySQL、并发与报表](./jd/mysql-concurrency-interview.md) | 31—60 | 索引、扣料防重、约束、锁超时、长事务、持久性与恢复 |
+| [系统集成与设备联网](./jd/integration-device-interview.md) | 61—90 | ERP/OA/MES 对接、幂等对账、Modbus、MQTT 会话、OPC UA、重试预算 |
+| [MES、E-DHR 与 OA](./jd/mes-edhr-oa-interview.md) | 91—120 | 生产质量、电子记录、签名审批、QMSR、CSA、OEE 与数据完整性 |
+| [UniApp、小程序与 APP](./jd/uniapp-mobile-interview.md) | 121—150 | 登录扫码、离线队列、存储配额、附件持久化、请求取消、跨端性能 |
+| [测试、上线与需求协作](./jd/delivery-troubleshooting-interview.md) | 151—180 | 验证排障、受控发布、DORA、SLO、分位数、兼容迁移、恢复演练 |
 
 建议按题号顺序阅读。时间有限时，可先查看[自测与复习安排](./jd/delivery-troubleshooting-interview.md#自测与复习安排)，再针对薄弱部分补习下方原有专题。
 
