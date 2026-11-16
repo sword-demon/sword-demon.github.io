@@ -137,3 +137,4 @@ sidebarSort: 1
 - [逆波兰表达式与调度场算法](rpn-shunting-yard.md)
 - [0-1 BFS 精讲（双端队列最短路）](0-1-bfs.md)
 - [状态机 DP 精讲（股票买卖系列）](state-machine-dp.md)
+- [进制转换与 Base-N 编码精讲（Base Conversion）](base-conversion.md)
