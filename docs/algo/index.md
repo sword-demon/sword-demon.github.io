@@ -138,3 +138,4 @@ sidebarSort: 1
 - [0-1 BFS 精讲（双端队列最短路）](0-1-bfs.md)
 - [状态机 DP 精讲（股票买卖系列）](state-machine-dp.md)
 - [进制转换与 Base-N 编码精讲（Base Conversion）](base-conversion.md)
+- [默克尔树精讲（Merkle Tree）：从区块校验到 IPFS 的数据完整性证明](merkle-tree.md)
