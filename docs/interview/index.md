@@ -106,3 +106,4 @@ comment: false
 -   [Go 主机安全面试：Windows WDAC / AppLocker 应用控制策略降级与绕过检测](go-edr-windows-wdac-applocker-policy-degradation-detection.md)
 -   [Go 主机安全面试：Linux 软件包完整性校验与包管理器 Hook 篡改检测](go-hids-linux-package-integrity-hook-tamper-detection.md)
 -   [Go 主机安全面试：Linux 动态链接器路径劫持与 ld.so.cache 投毒检测](go-hids-linux-ld-so-cache-poisoning-detection.md)
+-   [Go 主机安全面试：Linux 系统时间篡改与事件时间线可信度检测](go-hids-linux-clock-tampering-detection.md)
