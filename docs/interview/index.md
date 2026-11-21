@@ -108,3 +108,4 @@ comment: false
 -   [Go 主机安全面试：Linux 动态链接器路径劫持与 ld.so.cache 投毒检测](go-hids-linux-ld-so-cache-poisoning-detection.md)
 -   [Go 主机安全面试：Linux 系统时间篡改与事件时间线可信度检测](go-hids-linux-clock-tampering-detection.md)
 -   [Go 主机安全面试：Linux 审计规则集篡改与 auditd 采集能力削弱检测](go-hids-linux-audit-rule-tamper-detection.md)
+-   [Go 主机安全面试：Windows ETW 采集链路与 ETW 篡改降级检测](go-edr-windows-etw-collection-tamper-detection.md)
