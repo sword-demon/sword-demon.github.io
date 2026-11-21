@@ -402,7 +402,7 @@ open http://my-project.test
 
 ### 数据库配置(.env)
 
-```env
+```txt
 # MySQL(Herd 默认)
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
