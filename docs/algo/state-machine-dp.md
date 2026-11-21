@@ -1168,6 +1168,6 @@ Idle → Walk → Run → Jump → Attack → Hurt → Dead。
 - [状态压缩动态规划（Bitmask DP）](bitmask-dp.md) —— 状态机 DP 的"二进制版"
 - [Kadane 算法（最大子数组和）](kadane.md) —— 股票问题的"一次交易"版本，其实就是最大子数组和
 - [贪心算法](greedy-algorithm.md) —— 对比看：为什么股票问题不能贪心
-- [0-1 BFS 精讲（双端队列最短路）](0-1-bfs.md) —— 另一种"状态建模"思路：把状态变成图上的节点
+- [0-1 BFS 精讲（双端队列最短路）](zero-one-bfs.md) —— 另一种"状态建模"思路：把状态变成图上的节点
 - [DP 优化精讲（斜率优化 / 分治优化 / Knuth 优化）](dp-optimization.md) —— 当 `O(n²)` 太慢时的进阶武器
 - [滑动窗口](sliding-window.md) —— 另一个"双指针维护区间"的经典套路

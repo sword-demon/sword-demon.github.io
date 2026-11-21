@@ -69,7 +69,7 @@ export const teekConfig = defineTeekConfig({
     sidebarOption: {
       initItems: false,
       ignoreIndexMd: true,
-      ignoreList: ["assets"],
+      ignoreList: ["assets", "about"],
     },
   },
   friend: {
