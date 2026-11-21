@@ -64,10 +64,7 @@ export default defineConfig({
       {
         text: "技术栈学习笔记",
         items: [
-          { text: "Go 语言基础", link: "/views/go/" },
-          { text: "Go 核心", link: "/views/go-core/" },
-          { text: "kratos微服务", link: "/kratos/" },
-          { text: "Go-zero框架", link: "/views/go-zero/" },
+          { text: "Go语言", link: "/go/" },
           { text: "运维技术", link: "/views/deploy/" },
           { text: "Rust语言", link: "/views/rust/" },
           { text: "Java技术", link: "/views/java/" },

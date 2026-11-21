@@ -34,7 +34,6 @@ categories:
 -   [go 包管理](go-package.md)
 -   [go 错误处理](go-error.md)
 -   [单元测试](go-module-unit.md)
--   [go 面试题](go-interview.md)
 -   [gRPC 和 protobuf](grpc-protobuf.md)
 -   [context](go-context.md)
 -   [gRPC 拦截器](grpc-intereceptor.md)

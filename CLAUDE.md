@@ -29,13 +29,13 @@ Requirements: Node.js >= 20, pnpm.
 
 All content lives under `docs/`. Each top-level subdirectory is a topic section mapped to a nav bar item:
 
-- `docs/views/` — Technology stack notes (go, go-core, go-zero, deploy, rust, java, redis, rabbitmq, vue3, react, adonisjs, socket)
+- `docs/views/` — Technology stack notes (deploy, rust, java, redis, rabbitmq, vue3, react, adonisjs, socket)
+- `docs/go/` — Go language notes (base, core, go-zero, kratos)
 - `docs/algo/` — Algorithms & data structures (~43 articles)
 - `docs/ai/` — AI tools notes (hermes, skills, tools, workflows)
 - `docs/linux/` — Linux, C kernel, processes
 - `docs/posts/` — Essays and misc
 - `docs/interview/` — Interview prep
-- `docs/kratos/` — Kratos microservice framework
 - `docs/python/base/` — Python basics
 - `docs/flutter/` — Flutter setup
 - `docs/guide/` — Site usage guide
