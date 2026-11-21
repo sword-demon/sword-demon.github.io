@@ -61,6 +61,7 @@ sidebar: auto
 
 ### 实战篇
 
+- [电商多商品订单支付技术方案设计](./jd/multi-product-order-payment-design.md) - 多商品跨店结算、库存原子预扣、父子订单与支付回调设计
 - [工厂数字化项目实战](./projects/factory-digitalization-case-study.md) - MES系统从需求到上线全流程
 - [医疗器械合规系统设计](./projects/medical-compliance-system.md) - E-DHR 系统审计追踪实现
 - [设备联网与数据采集](./projects/device-connectivity-data-collection.md) - PLC/SCADA 设备对接方案

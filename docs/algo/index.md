@@ -139,3 +139,5 @@ sidebarSort: 1
 - [状态机 DP 精讲（股票买卖系列）](state-machine-dp.md)
 - [进制转换与 Base-N 编码精讲（Base Conversion）](base-conversion.md)
 - [默克尔树精讲（Merkle Tree）：从区块校验到 IPFS 的数据完整性证明](merkle-tree.md)
+- [模拟退火精讲（Simulated Annealing）：从爬山算法到全局最优的随机搜索](simulated-annealing.md)
+- [最小路径覆盖精讲（DAG Minimum Path Cover）：从拆点建图到字典序最小方案](min-path-cover.md)
