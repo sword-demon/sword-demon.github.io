@@ -57,9 +57,13 @@ Go 落地思路：
 - 开启 pprof heap，采样率不要一上来就调到 512Ki 全量，线上先用默认的 512Ki 就够抓"谁在分配"。
 
 ```go
-// 指标快照：区分"存活"和"占用"
-var ms runtime.MemStats
-runtime.ReadMemStats(&ms)
+// memSnapshot 区分"当前存活"和"已向 OS 申请"两个口径
+func memSnapshot() runtime.MemStats {
+	var ms runtime.MemStats
+	runtime.ReadMemStats(&ms)
+	return ms
+}
+
 // ms.HeapAlloc    当前存活堆
 // ms.HeapSys      向 OS 申请过的堆
 // ms.HeapReleased 已归还 OS 的堆
@@ -84,14 +88,16 @@ Go 落地思路：
 - 采集完成后把 profile 文件落到受控目录并上报，或提供按需拉取接口。
 
 ```go
-// dump 前先触发一次 GC，让 inuse_space 更接近真实存活量
-runtime.GC()
-f, err := os.Create("/var/lib/edr-agent/heap.pprof")
-if err != nil {
-    return err
+// dumpHeap 先触发一次 GC，让 inuse_space 更接近真实存活量
+func dumpHeap(path string) error {
+	runtime.GC()
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return pprof.Lookup("heap").WriteTo(f, 0)
 }
-defer f.Close()
-return pprof.Lookup("heap").WriteTo(f, 0)
 ```
 
 ### 3. 事件风暴下 GC 压力大，怎么在不丢事件的前提下降低 GC 开销？
@@ -111,22 +117,35 @@ Go 落地思路：
 - 配合 `debug.SetGCPercent` 稍微提高 GOGC（如 200~400）减少 GC 次数，前提是 `GOMEMLIMIT` 已经把堆封顶——两者配合才是完整方案。
 
 ```go
-// 软上限 + 相对宽松的 GOGC：GC 次数下降，但堆不会无限涨
-debug.SetMemoryLimit(limitBytes)
-debug.SetGCPercent(300)
+// tuneRuntime 设置软上限 + 相对宽松的 GOGC：GC 次数下降，但堆不会无限涨
+func tuneRuntime(limitBytes int64) {
+	debug.SetMemoryLimit(limitBytes)
+	debug.SetGCPercent(300)
+}
 ```
 
 - 事件结构体里避免放 `[]byte` + `string` 双份拷贝：原始 payload 只在需要时保留，标准化字段用 `string` 存一次即可。
 - 批量上报的 buffer 用 `sync.Pool` 归还复用，避免每批新分配。
 
 ```go
+// Event 标准化后的最小事件模型
+type Event struct {
+	Type string
+}
+
 var bufPool = sync.Pool{New: func() any { return new(bytes.Buffer) }}
 
+// encodeBatch 复用 buffer，但返回副本：buf 归还后会被下一次调用覆写
 func encodeBatch(events []Event) ([]byte, error) {
-    buf := bufPool.Get().(*bytes.Buffer)
-    defer func() { buf.Reset(); bufPool.Put(buf) }()
-    // ... 写入 buf
-    return buf.Bytes(), nil
+	buf := bufPool.Get().(*bytes.Buffer)
+	defer func() { buf.Reset(); bufPool.Put(buf) }()
+	for _, e := range events {
+		buf.WriteString(e.Type)
+		buf.WriteByte('\n')
+	}
+	out := make([]byte, buf.Len())
+	copy(out, buf.Bytes())
+	return out, nil
 }
 ```
 
@@ -148,19 +167,20 @@ Go 落地思路：
 - 定时任务（扫描、巡检）用 `time.Ticker` + `select { case <-ctx.Done(): return }`，保证能被取消。
 
 ```go
-func (a *Agent) RunScan(ctx context.Context) error {
-    ticker := time.NewTicker(a.scanInterval)
-    defer ticker.Stop()
-    for {
-        select {
-        case <-ctx.Done():
-            return ctx.Err()
-        case <-ticker.C:
-            if err := a.scanOnce(ctx); err != nil {
-                a.log.Error("scan failed", "err", err)
-            }
-        }
-    }
+// RunScan 周期性巡检，必须能被 ctx 取消，否则会成为 goroutine 泄漏源
+func RunScan(ctx context.Context, interval time.Duration, scan func(context.Context) error) error {
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-ticker.C:
+			if err := scan(ctx); err != nil && ctx.Err() == nil {
+				log.Printf("scan failed: %v", err)
+			}
+		}
+	}
 }
 ```
 
@@ -181,15 +201,21 @@ Go 落地思路：
 - 开启时打日志记录开启人和时间，关闭后立刻销毁 listener。
 
 ```go
-// Unix socket + 严格权限，避免 pprof 暴露到网络
-_ = os.Remove("/var/lib/edr-agent/pprof.sock")
-ln, err := net.Listen("unix", "/var/lib/edr-agent/pprof.sock")
-if err != nil {
-    return err
+// StartPprof 使用 Unix socket + 严格权限，避免 pprof 暴露到网络
+func StartPprof(sockPath string) (*http.Server, error) {
+	_ = os.Remove(sockPath)
+	ln, err := net.Listen("unix", sockPath)
+	if err != nil {
+		return nil, err
+	}
+	if err := os.Chmod(sockPath, 0o600); err != nil {
+		ln.Close()
+		return nil, err
+	}
+	srv := &http.Server{Handler: http.HandlerFunc(httppprof.Index)}
+	go srv.Serve(ln)
+	return srv, nil
 }
-_ = os.Chmod("/var/lib/edr-agent/pprof.sock", 0o600)
-srv := &http.Server{Handler: pprof.Index}
-go srv.Serve(ln)
 ```
 
 ### 6. 怎么区分"GC 压力大"和"真的 CPU 被业务逻辑吃掉了"？
@@ -209,11 +235,20 @@ Go 落地思路：
 - 采集时给 profile 加注释标记当时正在跑的任务（扫描 / 上报 / GC 压力事件），便于事后对齐。
 
 ```go
-f, _ := os.Create("cpu.pprof")
-pprof.StartCPUProfile(f)
-time.Sleep(30 * time.Second)
-pprof.StopCPUProfile()
-f.Close()
+// DumpCPUProfile 定时采样，而不是常开，避免 profiling 自身干扰生产
+func DumpCPUProfile(path string, dur time.Duration) error {
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	if err := pprof.StartCPUProfile(f); err != nil {
+		return err
+	}
+	time.Sleep(dur)
+	pprof.StopCPUProfile()
+	return nil
+}
 ```
 
 - 定位到热点后再优化：比如进程扫描里的哈希计算，改为流式 + 限制并发 + 缓存结果，而不是无脑加核。
@@ -232,18 +267,18 @@ f.Close()
 Go 落地思路：
 
 ```go
-// 流式哈希，内存占用与文件大小无关
+// fileHash 流式哈希，内存占用与文件大小无关；不要用 os.ReadFile 一次性读入
 func fileHash(path string) (string, error) {
-    f, err := os.Open(path)
-    if err != nil {
-        return "", err
-    }
-    defer f.Close()
-    h := sha256.New()
-    if _, err := io.Copy(h, f); err != nil {
-        return "", err
-    }
-    return hex.EncodeToString(h.Sum(nil)), nil
+	f, err := os.Open(path)
+	if err != nil {
+		return "", err
+	}
+	defer f.Close()
+	h := sha256.New()
+	if _, err := io.Copy(h, f); err != nil {
+		return "", err
+	}
+	return hex.EncodeToString(h.Sum(nil)), nil
 }
 ```
 
@@ -266,12 +301,23 @@ Go 落地思路：
 - 降级通过一个全局的 `atomic.Bool` 控制采集层的写入策略，采集路径读一次即可，无需加锁。
 
 ```go
+// Priority 事件优先级，降级时按优先级从低到高丢弃
+type Priority int
+
+const (
+	PriorityLow Priority = iota
+	PriorityHigh
+)
+
 var degraded atomic.Bool
 
-// 采集侧只需要读一个原子变量
-if degraded.Load() && event.Priority == Low {
-    metrics.Dropped.WithLabelValues(event.Type, "degraded").Inc()
-    return
+// ShouldDrop 采集侧只需要读一个原子变量，不需要加锁
+func ShouldDrop(degradedMode bool, priority Priority, dropFn func()) bool {
+	if !degradedMode || priority != PriorityLow {
+		return false
+	}
+	dropFn()
+	return true
 }
 ```
 
@@ -306,16 +352,21 @@ Go 落地思路：
 
 ```go
 func TestAgentNoGoroutineLeak(t *testing.T) {
-    before := runtime.NumGoroutine()
-    ctx, cancel := context.WithCancel(context.Background())
-    go agent.Run(ctx)
-    time.Sleep(2 * time.Second)
-    cancel()
-    time.Sleep(500 * time.Millisecond)
-    after := runtime.NumGoroutine()
-    if after > before+5 {
-        t.Fatalf("goroutine leak: before=%d after=%d", before, after)
-    }
+	before := runtime.NumGoroutine()
+	ctx, cancel := context.WithCancel(context.Background())
+	done := make(chan struct{})
+	go func() {
+		defer close(done)
+		_ = RunScan(ctx, time.Second, func(context.Context) error { return nil })
+	}()
+	time.Sleep(2 * time.Second)
+	cancel()
+	<-done
+	time.Sleep(500 * time.Millisecond)
+	after := runtime.NumGoroutine()
+	if after > before+5 {
+		t.Fatalf("goroutine leak: before=%d after=%d", before, after)
+	}
 }
 ```
 
