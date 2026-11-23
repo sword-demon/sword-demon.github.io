@@ -110,3 +110,4 @@ comment: false
 -   [Go 主机安全面试：Linux 审计规则集篡改与 auditd 采集能力削弱检测](go-hids-linux-audit-rule-tamper-detection.md)
 -   [Go 主机安全面试：Windows ETW 采集链路与 ETW 篡改降级检测](go-edr-windows-etw-collection-tamper-detection.md)
 -   [Go 主机安全面试：Agent 内存占用、GC 调优与线上定位](go-edr-agent-memory-gc-pprof-toubleshooting.md)
+-   [Go 主机安全面试：Linux 引导链劫持与 kexec 内核替换检测](go-hids-linux-boot-chain-kexec-hijack-detection.md)
