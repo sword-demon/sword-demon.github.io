@@ -143,3 +143,4 @@ sidebarSort: 1
 - [最小路径覆盖精讲（DAG Minimum Path Cover）：从拆点建图到字典序最小方案](min-path-cover.md)
 - [雪花算法精讲（Snowflake）：从「自增 ID 撑不住分库分表」到 64 位分布式唯一 ID 的位运算拆解](snowflake.md)
 - [快速沃尔什变换精讲（FWT / FMT）：把「位运算卷积」从 O(n²) 压到 O(n log n)](fwt-bitwise-convolution.md)
+- [布谷哈希精讲（Cuckoo Hashing）：把「哈希冲突」从链表变成一场「挤地铁」](cuckoo-hashing.md)
