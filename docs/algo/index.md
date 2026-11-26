@@ -144,3 +144,4 @@ sidebarSort: 1
 - [雪花算法精讲（Snowflake）：从「自增 ID 撑不住分库分表」到 64 位分布式唯一 ID 的位运算拆解](snowflake.md)
 - [快速沃尔什变换精讲（FWT / FMT）：把「位运算卷积」从 O(n²) 压到 O(n log n)](fwt-bitwise-convolution.md)
 - [布谷哈希精讲（Cuckoo Hashing）：把「哈希冲突」从链表变成一场「挤地铁」](cuckoo-hashing.md)
+- [PageRank 精讲：从「先有鸡还是先有蛋」到幂迭代求解](pagerank.md)
