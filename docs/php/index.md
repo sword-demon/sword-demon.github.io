@@ -2,7 +2,7 @@
 title: PHP/Laravel 开发面试指南
 date: 2026-09-29 10:00:00
 categories: [面试，PHP]
-tags: [Laravel, MySQL, UniApp, MES, ERP, OA]
+tags: [Laravel, MySQL, UniApp, MES, ERP, OA, AI]
 sidebar: auto
 ---
 
@@ -47,6 +47,21 @@ sidebar: auto
 
 建议按题号顺序阅读。时间有限时，可先查看[自测与复习安排](./jd/delivery-troubleshooting-interview.md#自测与复习安排)，再针对薄弱部分补习下方原有专题。
 
+### AI 系列：Laravel 与 PHP 生态的 AI 能力（181—260 题）
+
+在原有 180 题之上补齐 AI 方向的专项, 面向"把大模型接进既有 MES / E-DHR 系统"以及"用 AI 辅助日常开发"两类场景. 四篇各 20 题, 合计 **80 题**, 题号接续 181—260; 同样包含参考回答与追问要点, 并区分官方文档口径与工程推导.
+
+本轮资料核对日期为 **2026-11-26**. 涉及版本与供应商能力的部分以对应篇目的官方资料为准, 具体 API 与配置项请对照项目实际安装的版本.
+
+| 篇目 | 题号 | 重点 |
+| --- | --- | --- |
+| [Laravel AI SDK 与大模型集成](./jd/laravel-ai-sdk-interview.md) | 181—200 | Agent 编排、结构化输出、工具调用、会话存储、流式协议、人工审批 |
+| [PHP AI 生态与 MCP 工具协议](./jd/php-ai-ecosystem-mcp-interview.md) | 201—220 | Prism、多供应商抽象、MCP SDK、Laravel Boost、向量存储、PHP 8.3—8.5 |
+| [AI 辅助 PHP/Laravel 开发](./jd/ai-assisted-php-development-interview.md) | 221—240 | 上下文供给、产出验收、供应链与合规、效率度量、团队落地 |
+| [AI 功能上线的工程化与安全合规](./jd/ai-production-engineering-interview.md) | 241—260 | 注入与越权、降级与幂等、可观测与成本、灰度与回归、供应商条款 |
+
+建议按题号顺序阅读。AI 系列的四篇互相引用, 也可以按"我在面试中被问到了什么"挑读: 投后端岗重点读 181—200, 投平台或架构岗重点读 201—220 与 241—260, 关心日常研发效率的读 221—240.
+
 ### 基础篇
 
 - [PHP 核心面试题](./basic/php-core-questions.md) - PHP 语言特性、面向对象、内存管理
@@ -78,7 +93,8 @@ sidebar: auto
 1. **技术笔试**：PHP 语法、SQL 优化、Laravel 使用
 2. **专业面试**：系统设计、问题排查、性能优化
 3. **业务理解**：MES/ERP/OA业务流程、设备对接场景
-4. **综合素质**：沟通能力、项目管理、文档编写
+4. **AI 专项**：大模型接入、Agent 编排、提示注入与越权防护、降级与成本控制
+5. **综合素质**：沟通能力、项目管理、文档编写
 
 ::: info 提示
 建议按照 "基础 → 进阶 → 实战" 的顺序逐步学习，每个模块都包含理论知识点和实战案例。
