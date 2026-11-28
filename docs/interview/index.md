@@ -113,3 +113,4 @@ comment: false
 -   [Go 主机安全面试：Linux 引导链劫持与 kexec 内核替换检测](go-hids-linux-boot-chain-kexec-hijack-detection.md)
 -   [Go 主机安全面试：Windows Sysmon 部署状态与配置篡改检测](go-edr-windows-sysmon-config-tamper-detection.md)
 -   [Go 主机安全面试：Windows 注册表全局劫持检测（AppInit_DLLs / AppCertDlls / Winlogon）](go-edr-windows-registry-global-hijack-detection.md)
+-   [Go 主机安全面试：Linux systemd generator 启动期持久化检测](go-hids-linux-systemd-generator-persistence-detection.md)
